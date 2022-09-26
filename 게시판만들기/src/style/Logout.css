@@ -1,0 +1,35 @@
+.logout {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.logout > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 300px;
+  height: 200px;
+  padding: 20px;
+  border-radius: 15px;
+  font-family: 'Dongle', sans-serif;
+  font-size: 40px;
+}
+@media screen and (max-width: 900px) {
+  .logout > div {
+    left: 320px;
+  }
+}
+.logout > div > div {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+.logout > div > div > button {
+  width: 100px;
+  height: 50px;
+}
