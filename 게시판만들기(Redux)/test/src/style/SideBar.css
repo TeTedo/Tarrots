@@ -1,0 +1,77 @@
+.SideBar {
+  min-width: 220px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  box-shadow: 5px 0px 5px;
+  padding-right: 20px;
+}
+
+.SideBar a {
+  text-decoration-line: none;
+  list-style: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  font-size: 20px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 5px gray;
+  border-radius: 10px;
+  margin: 3px 0;
+}
+.SideBar .not:hover {
+  background-color: gray;
+  border-radius: 10px;
+  color: white;
+}
+.SideBar a > li {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selected {
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: black;
+  color: white !important;
+}
+.sideBar_profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sideBar_profile > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.sideBar_profile > div {
+  margin-left: 10px;
+}
+.sideBar_login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sideBar_login > a {
+  border: 1px solid black;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  font-size: 15px;
+  font-weight: bold;
+}
+.sideBar_login > a:hover {
+  background-color: black;
+  color: white;
+}
+.sideBar_profile > div > div:first-child {
+  font-size: 20px;
+  font-weight: bold;
+}

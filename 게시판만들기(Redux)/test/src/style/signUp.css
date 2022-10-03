@@ -1,0 +1,48 @@
+.signUp {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+.signUp > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 500px;
+  padding: 20px;
+  border-radius: 15px;
+  font-family: 'Dongle', sans-serif;
+  font-size: 30px;
+}
+@media screen and (max-width: 900px) {
+  .signUp > div {
+    left: 320px;
+  }
+}
+.signUp > div > input {
+  width: 80%;
+  height: 30px;
+  margin: 5px 0;
+}
+.signUp > div > button {
+  height: 50px;
+  margin-top: 50px;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  font-family: 'Dongle', sans-serif;
+  font-size: 30px;
+}
+.signUp > div > button:hover {
+  font-family: 'Dongle', sans-serif;
+  background: linear-gradient(30deg, skyblue 20%, white 50%, skyblue);
+  color: black;
+  font-weight: bold;
+  font-size: 30px;
+}
