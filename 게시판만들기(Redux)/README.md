@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# <div align="center">**Community**</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### This is my first project to develop basic react skills.
 
-## Available Scripts
+#### **Date** : 2022.9.22 ~ 2022.9.23
+
+#### **Dev** : [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTeTedo&count_bg=%230D00FF&title_bg=%23000000&icon=darkreader.svg&icon_color=%23FF0000&title=hits&edge_flat=false)](https://github.com/TeTedo)(TeTedO)
+
+## Features
+
+- [**Usage**](#Usage)
+  - [Scripts](#Scripts)
+    - [npm install](#npm-install)
+    - [npm start](#npm-start)
+- [**Used Tech**](#Used-Tech)
+- [**Preview**](#Preview)
+  - [NavBar](#NavBar)
+  - [Sign up](#Sign-up)
+  - [Login](#Login)
+  - [Profile](#Profile)
+  - [Post](#Post)
+  - [Main](#Main)
+
+---
+
+## Usage
+
+Project with React.
+
+### Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+`npm install`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To install the dependencies package.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`npm start`
 
-### `npm test`
+Runs the app in http://localhost:3000
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Used Tech
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/font awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=black"> <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/react router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=black">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Preview
 
-### `npm run eject`
+### **NavBar**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![NavBar](https://user-images.githubusercontent.com/107897812/193993760-8c0c21b4-e529-4fd3-b69b-975e7901e0d9.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+There are 4 menu in NavBar. Also, there is hover effect.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![NavBarHover](https://user-images.githubusercontent.com/107897812/193994370-53ec0231-f944-4e0b-976c-37e4e803aa0e.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To move clicked page, i used useLocation react Hook.
 
-## Learn More
+```Javascript
+const SideBar_list = ({ img, path, name }) => {
+  const location = useLocation();
+  return (
+    <Link to={path} className={location.pathname === path ? 'selected' : 'not'}>
+      <i className={img}></i>
+      <li>{name}</li>
+    </Link>
+  );
+};
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **Sign up**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Signup](https://user-images.githubusercontent.com/107897812/193994683-3639b0cd-5d7e-412c-b4ea-fd80dc2e343c.png)
 
-### Code Splitting
+To sign up, input ID, NickName, PW.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+There is input for profile image, but it doesn't work.
 
-### Analyzing the Bundle Size
+### **Login**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![Login](https://user-images.githubusercontent.com/107897812/193996495-fb3c1a96-8006-4edb-9d18-57ec8e409631.png)
 
-### Making a Progressive Web App
+To login, input your ID, PW.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![Login](https://user-images.githubusercontent.com/107897812/193999095-fda21b6f-864c-4bb5-bea1-f315a0bc6d6e.png)
 
-### Advanced Configuration
+After login, you can see that the menu is different with before. Also login button is changed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### **Profile**
 
-### Deployment
+![profile](https://user-images.githubusercontent.com/107897812/194000958-444cac6a-5efb-4f6e-bea6-c2d96bf4f92f.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+You can change your nickname and password in Profile page.
 
-### `npm run build` fails to minify
+### **Post**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![PostBefore](https://user-images.githubusercontent.com/107897812/193999482-c6161b5a-9c6c-400d-b68b-d00c0f54f02b.png)
+
+Before login, you can't access Post,Profile page.
+
+![post 1](https://user-images.githubusercontent.com/107897812/193999925-f3111d70-372e-45d5-9322-b2c44624cb35.png)
+
+After login, you can access page.
+
+You can input the title and text.
+
+![post](https://user-images.githubusercontent.com/107897812/193999963-a4dcb4f7-2ab3-4c69-843b-107f73d29691.png)
+
+Then, your post is reisterd.
+
+### **Main**
+
+![Main](https://user-images.githubusercontent.com/107897812/194000304-e39f99f2-bf52-468e-93ea-5e9101c1ceb3.png)
+
+In main page, you can see all of the posts and enter the post.
