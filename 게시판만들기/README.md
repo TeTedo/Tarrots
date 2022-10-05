@@ -17,6 +17,7 @@
   - [NavBar](#NavBar)
   - [Sign up](#Sign-up)
   - [Login](#Login)
+  - [Profile](#Profile)
   - [Post](#Post)
   - [Main](#Main)
 
@@ -87,6 +88,12 @@ To login, input your ID, PW.
 ![Login](https://user-images.githubusercontent.com/107897812/193999095-fda21b6f-864c-4bb5-bea1-f315a0bc6d6e.png)
 
 After login, you can see that the menu is different with before. Also login button is changed.
+
+### **Profile**
+
+![profile](https://user-images.githubusercontent.com/107897812/194000958-444cac6a-5efb-4f6e-bea6-c2d96bf4f92f.png)
+
+You can change your nickname and password in Profile page.
 
 ### **Post**
 
