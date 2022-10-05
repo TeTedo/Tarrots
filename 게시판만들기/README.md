@@ -8,8 +8,6 @@
 
 ## Features
 
----
-
 - [**Usage**](#Usage)
   - [Scripts](#Scripts)
     - [npm install](#npm-install)
@@ -17,9 +15,9 @@
 - [**Used Tech**](#Used-Tech)
 - [**Preview**](#Preview)
 
-## Usage
-
 ---
+
+## Usage
 
 Project with React.
 
@@ -36,5 +34,3 @@ To install the dependencies package.
 Runs the app in http://localhost:3000
 
 ## Used Tech
-
----
