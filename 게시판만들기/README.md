@@ -18,8 +18,6 @@
   - [Sign up](#Sign-up)
   - [Login](#Login)
   - [Post](#Post)
-  - [Modify](#Modify)
-  - [Delete](#Delete)
   - [Main](#Main)
 
 ---
@@ -52,7 +50,7 @@ Runs the app in http://localhost:3000
 
 ### **NavBar**
 
-<img src="https://user-images.githubusercontent.com/107897812/193993760-8c0c21b4-e529-4fd3-b69b-975e7901e0d9.png" width="400" height="200">
+![NavBar](https://user-images.githubusercontent.com/107897812/193993760-8c0c21b4-e529-4fd3-b69b-975e7901e0d9.png)
 
 There are 4 menu in NavBar. Also, there is hover effect.
 
@@ -86,10 +84,28 @@ There is input for profile image, but it doesn't work.
 
 To login, input your ID, PW.
 
+![Login](https://user-images.githubusercontent.com/107897812/193999095-fda21b6f-864c-4bb5-bea1-f315a0bc6d6e.png)
+
+After login, you can see that the menu is different with before. Also login button is changed.
+
 ### **Post**
 
-### **Modify**
+![PostBefore](https://user-images.githubusercontent.com/107897812/193999482-c6161b5a-9c6c-400d-b68b-d00c0f54f02b.png)
 
-### **Delete**
+Before login, you can't access Post,Profile page.
+
+![post 1](https://user-images.githubusercontent.com/107897812/193999925-f3111d70-372e-45d5-9322-b2c44624cb35.png)
+
+After login, you can access page.
+
+You can input the title and text.
+
+![post](https://user-images.githubusercontent.com/107897812/193999963-a4dcb4f7-2ab3-4c69-843b-107f73d29691.png)
+
+Then, your post is reisterd.
 
 ### **Main**
+
+![Main](https://user-images.githubusercontent.com/107897812/194000304-e39f99f2-bf52-468e-93ea-5e9101c1ceb3.png)
+
+In main page, you can see all of the posts and enter the post.
