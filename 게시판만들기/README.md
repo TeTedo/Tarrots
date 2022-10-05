@@ -52,7 +52,7 @@ Runs the app in http://localhost:3000
 
 ### **NavBar**
 
-<img src="https://user-images.githubusercontent.com/107897812/193993760-8c0c21b4-e529-4fd3-b69b-975e7901e0d9.png" width="300" height="600">
+<img src="https://user-images.githubusercontent.com/107897812/193993760-8c0c21b4-e529-4fd3-b69b-975e7901e0d9.png" width="400" height="200">
 
 There are 4 menu in NavBar. Also, there is hover effect.
 
