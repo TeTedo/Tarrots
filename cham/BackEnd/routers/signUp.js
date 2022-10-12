@@ -6,7 +6,7 @@ router.post("/signUp", async (req, res) => {
   const randomProfile = ~~(Math.random() * 7) + 1;
   await User.create({
     ...req.body,
-    profile_img: path.join(__dirname, "..", "public/images", `defaultImage${randomProfile}.jpg`),
+    profile_img: path.join("/imgs", `defaultImage${randomProfile}.jpg`),
     type: "C",
   });
 
