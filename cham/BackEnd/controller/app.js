@@ -31,6 +31,11 @@ app.use(
 //json형태의 파일을 읽을수 있게
 app.use(express.json());
 
+//라우터 불러오기, 사용
+const singUp = require("../routers/signUp");
+const login = require("../routers//login");
+app.use(singUp, login);
+
 app.listen(8000, () => {
   console.log("server start");
 });

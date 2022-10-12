@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documenttitle</title>
+    <link href="https://fonts.font.im/css?family=MedievalSharp" rel="stylesheet">
+    <style>
+        *{
+      
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+      
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000000;
+        }
+        .box{
+      
+            width: 150px;
+            height: 150px;
+            position: relative;
+        }
+        .circle{
+      
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            animation: turn 3s linear infinite;
+        }
+        @keyframes turn{
+      
+            100%{
+      
+                transform: rotateZ(360deg);
+            }
+        }
+        .circle span{
+      
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+        }
+     
+        .circle span:nth-child(1){
+      
+            border-radius: 50%;
+            border-top: 15px rgb(243, 6, 6) solid;
+            filter: drop-shadow(0 0 15px rgb(255, 0, 0));
+            
+        }
+        .circle span:nth-child(2){
+      
+            border-radius: 50%;
+            border-top: 15px rgb(0, 110, 255) solid;
+            transform: rotateZ(120deg);
+            filter: drop-shadow(0 0 15px  rgb(0, 132, 255));
+          
+        }
+        .circle span:nth-child(3){
+      
+            border-radius: 50%;
+            border-top: 15px rgb(0, 255, 42) solid;
+            transform: rotateZ(240deg);
+            filter: drop-shadow(0 0 15px  rgb(30, 255, 0));
+        }
+       .box h5{
+      
+        font-family: 'MedievalSharp', cursive;
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           line-height: 150px;
+           text-align: center;
+           font-size: 23px;
+           color: rgb(4, 174, 253);
+           letter-spacing: 1.5px;
+           
+           animation: bian 12s linear infinite;
+           text-shadow: 0 0 10px rgb(4, 174, 253),
+                          0 0 50px rgb(4, 174, 253);
+       }
+       @keyframes bian{
+      
+ 
+           50%{
+      
+            text-shadow: 0 0 10px rgb(4, 174, 253);
+               filter: hue-rotate(360deg);
+           }
+       }
+    </style>
+<header>
+</header>
+    <body>
+    <div class="box">
+           <div class="circle">
+        <span></span>
+        <span></span>
+        <span></span>
+           </div>
+        <h5>NIGHT</h5>
+        </div>
+    </body>
+</html>

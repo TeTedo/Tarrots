@@ -39,7 +39,7 @@ class User extends Sequelize.Model {
         },
         login: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
         },
         type: {
           type: Sequelize.STRING,
