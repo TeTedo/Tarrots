@@ -3,7 +3,6 @@ const login = (state = { status: false }, action) => {
 
   switch (type) {
     case "LOGIN":
-      console.log(payload);
       return { ...state, status: true, user_id: payload.user_id, profile_img: payload.profile_img };
     case "LOGOUT":
       return { ...state, status: false, user_id: "" };

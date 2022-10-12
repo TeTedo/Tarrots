@@ -18,15 +18,15 @@ const login = ({ user_id, user_pw }) => {
       data: { user_id, user_pw },
     });
 
-    if (userData) {
+    if (userData.data.user_id) {
       dispatch({
         type: "LOGIN",
-        payload: {
-          user_id: userData.data.user_id,
-          profile_img: userData.data.profile_img,
-        },
+        payload: { ...userData.data },
       });
     }
+
+    if (userData.data === "아이디") alert("올바른 아이디를 입력해주세요.");
+    if (userData.data === "비밀번호") alert("올바른 비밀번호를 입력해주세요.");
   };
 };
 

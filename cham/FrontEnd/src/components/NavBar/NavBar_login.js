@@ -5,7 +5,6 @@ const NavBar_login = () => {
   const loginStatus = useSelector((state) => state.login.status);
   const userData = useSelector((state) => state.login);
   const { profile_img } = userData;
-  console.log(userData);
   return (
     <div className="navBar_btns">
       {loginStatus ? (
