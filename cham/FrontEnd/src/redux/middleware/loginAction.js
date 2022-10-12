@@ -29,5 +29,11 @@ const login = ({ user_id, user_pw }) => {
     if (userData.data === "비밀번호") alert("올바른 비밀번호를 입력해주세요.");
   };
 };
-
+const loginCheck = () => {
+  return async (dispatch, getState) => {
+    const loginData = await axios({
+      method: "get",
+    });
+  };
+};
 export const loginAction = { signup, login };
