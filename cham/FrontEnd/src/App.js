@@ -13,9 +13,9 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes>
-        <Route exact path="/" element={<Main />} />
-        <Route exact path="/shop" element={<Shop />} />
-        <Route exact path="/travel" element={<Travel />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/travel" element={<Travel />} />
         <Route path="/auction" element={<Auction />} />
         <Route path="/game" element={<Game />} />
       </Routes>
