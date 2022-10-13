@@ -1,9 +1,12 @@
 import React from "react";
-import ShopSlide from "./Shop/ShopSlide";
+import Slide from "./Slide";
+import ShopMain from "./Shop/ShopMain";
+import "../styles/Shop/Shop.css";
 const Shoppage = () => {
   return (
-    <div>
-      <ShopSlide></ShopSlide>
+    <div className="shop">
+      <Slide></Slide>
+      <ShopMain></ShopMain>
     </div>
   );
 };

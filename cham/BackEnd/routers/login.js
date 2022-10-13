@@ -77,7 +77,7 @@ router.post("/loginCheck", (req, res) => {
           );
 
           const userData = await User.findOne({
-            where: { user_id: acc_decoded?.userId },
+            where: { user_id: ref_decoded.userId },
           });
           console.log("토큰 교체 완료");
           res.send({
@@ -90,12 +90,13 @@ router.post("/loginCheck", (req, res) => {
       });
     } else {
       const userData = await User.findOne({
-        where: { user_id: acc_decoded?.userId },
+        where: { user_id: acc_decoded.userId },
       });
       res.send({
         access_token,
         user_id: acc_decoded,
         profile_img: userData.dataValues.profile_img,
+        refresh_token,
       });
     }
   });
