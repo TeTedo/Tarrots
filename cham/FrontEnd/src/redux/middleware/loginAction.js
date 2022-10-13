@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { Cookie } from "../../util/cookie";
 const signup = ({ user_id, user_pw, name, nick_name, mobile_number, email, address }) => {
   return async (dispatch, getState) => {
     const data = await axios({
@@ -30,10 +30,28 @@ const login = ({ user_id, user_pw }) => {
   };
 };
 const loginCheck = () => {
+  const { getCookie } = Cookie;
   return async (dispatch, getState) => {
-    const loginData = await axios({
-      method: "get",
-    });
+    if (window.localStorage.getItem("login") === "true") {
+      const userData = await axios({
+        method: "post",
+        url: "http://localhost:8000/loginCheck",
+        data: {
+          access_token: getCookie("access"),
+          refresh_token: getCookie("refresh"),
+        },
+      });
+      // 로그인 검사 성공했을때
+      if (userData.data) {
+        dispatch({ type: "LOGIN", payload: { ...userData.data } });
+      }
+      // 로그인 검사 실패시
+      else {
+        dispatch({ type: "LOGOUT" });
+      }
+    } else {
+      dispatch({ type: "LOGOUT" });
+    }
   };
 };
-export const loginAction = { signup, login };
+export const loginAction = { signup, login, loginCheck };

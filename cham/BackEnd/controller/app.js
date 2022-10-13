@@ -25,6 +25,12 @@ app.use(
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      httpOnly: true,
+      sameSite: "none",
+      maxAge: 5300000,
+      secure: true,
+    },
   })
 );
 

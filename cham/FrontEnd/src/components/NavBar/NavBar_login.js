@@ -10,8 +10,8 @@ const NavBar_login = () => {
       {loginStatus ? (
         <>
           <img src={profile_img} className="navBar_btns_image" />
-          {/* <NavBar_login_btn text="MY PAGE" />
-          <NavBar_login_btn text="LOGOUT" /> */}
+          <NavBar_login_btn text="MY PAGE" />
+          <NavBar_login_btn text="LOGOUT" />
         </>
       ) : (
         <>

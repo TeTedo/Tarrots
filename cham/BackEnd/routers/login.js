@@ -41,9 +41,7 @@ router.post("/login", async (req, res) => {
             }
           );
 
-          req.session.access_token = access_token;
-          req.session.refresh_token = refresh_token;
-          res.send({ ...data });
+          res.send({ ...data, refresh_token, access_token });
         } else {
           res.send("비밀번호");
         }
@@ -52,6 +50,55 @@ router.post("/login", async (req, res) => {
     .catch(() => {
       res.send("아이디");
     });
+});
+
+router.post("/loginCheck", (req, res) => {
+  const { access_token, refresh_token } = req.body;
+  jwt.verify(access_token, process.env.ACCSESS_TOKEN, async (err, acc_decoded) => {
+    if (err) {
+      console.log("썩은토큰");
+      jwt.verify(refresh_token, process.env.REFRESH_TOKEN, async (error, ref_decoded) => {
+        if (error) {
+          // 로그인 만료
+          console.log("로그인 안되있음");
+          res.send(false);
+        } else {
+          // accesstoken 다시 만들기
+          const accessToken = jwt.sign(
+            {
+              alg: ref_decoded.alg,
+              typ: ref_decoded.typ,
+              userId: ref_decoded.userId,
+            },
+            process.env.ACCSESS_TOKEN,
+            {
+              expiresIn: "10m",
+            }
+          );
+
+          const userData = await User.findOne({
+            where: { user_id: acc_decoded?.userId },
+          });
+          console.log("토큰 교체 완료");
+          res.send({
+            user_id: ref_decoded.userId,
+            access_token: accessToken,
+            refresh_token,
+            profile_img: userData.dataValues.profile_img,
+          });
+        }
+      });
+    } else {
+      const userData = await User.findOne({
+        where: { user_id: acc_decoded?.userId },
+      });
+      res.send({
+        access_token,
+        user_id: acc_decoded,
+        profile_img: userData.dataValues.profile_img,
+      });
+    }
+  });
 });
 
 module.exports = router;
