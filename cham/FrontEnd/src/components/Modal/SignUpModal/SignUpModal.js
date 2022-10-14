@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { loginAction } from "../../redux/middleware/loginAction";
 import {
   ModalWrap,
   Wrap,
@@ -12,14 +13,23 @@ import {
   BtnWrap,
   LastBtn,
 } from "./ModalStyledComponents";
-const ModalBase = ({ closeModal, children }) => {
+import { useDispatch } from "react-redux";
+const SignUpModal = ({ closeModal, setModal }) => {
   const inputWrap = useRef(null);
   const [index, setIndex] = useState(0);
+  const dispatch = useDispatch();
   const moveLeft = () => {
     if (index !== 0) setIndex(index - 1);
   };
   const moveRight = () => {
     if (index !== inputWrap.current.children.length - 1) setIndex(index + 1);
+  };
+  const signup = (e) => {
+    // input 값들 받아오기
+    const input = Object.values(inputWrap.current.children).map((v) => v.value);
+    const [user_id, user_pw, name, nick_name, mobile_number, email, address] = input;
+    dispatch(loginAction.signup({ user_id, user_pw, name, nick_name, mobile_number, email, address }));
+    setModal(false);
   };
   return (
     <ModalWrap onClick={closeModal}>
@@ -44,7 +54,9 @@ const ModalBase = ({ closeModal, children }) => {
             <Input placeholder="Mobile-number" style={{ display: index === 4 ? "block" : "none" }} />
             <Input placeholder="E-mail" style={{ display: index === 5 ? "block" : "none" }} />
             <Input placeholder="Address" style={{ display: index === 6 ? "block" : "none" }} />
-            <LastBtn style={{ display: index === 7 ? "block" : "none" }}>Sign Up!!</LastBtn>
+            <LastBtn style={{ display: index === 7 ? "block" : "none" }} onClick={signup}>
+              Sign Up!!
+            </LastBtn>
           </InputWrap>
           <BtnWrap>
             <Btn onClick={moveLeft}>
@@ -60,4 +72,4 @@ const ModalBase = ({ closeModal, children }) => {
   );
 };
 
-export default ModalBase;
+export default SignUpModal;

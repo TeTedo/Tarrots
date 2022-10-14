@@ -17,8 +17,8 @@ const Slide = ({ component: Component, length }) => {
   const dragEnd = (e) => {
     e.preventDefault();
     slideWrapper.current.style.transition = "1s";
-    setDrag = false;
-    if (Math.abs(posX - e.clientX) > 200) {
+
+    if (Math.abs(posX - e.clientX) > 200 && setDrag) {
       if (posX > e.clientX && index < length - 1) {
         setIndex((state) => state + 1);
       }
@@ -36,6 +36,7 @@ const Slide = ({ component: Component, length }) => {
     } else {
       slideWrapper.current.style.left = -slideWrapper.current.children[0].getBoundingClientRect().width * index + "px";
     }
+    setDrag = false;
   };
   const drag = (e) => {
     e.preventDefault();
@@ -51,6 +52,7 @@ const Slide = ({ component: Component, length }) => {
   const makeLabel = new Array(Number(length))
     .fill(0)
     .map((v, idx) => <label style={{ backgroundColor: index === idx ? `hsl(0, 100%, 50%)` : "black" }} key={idx} />);
+
   return (
     <div className="slide" onMouseDown={dragStart} onMouseUp={dragEnd} onMouseMove={drag} onMouseLeave={dragEnd}>
       <div className="slide_wrap">

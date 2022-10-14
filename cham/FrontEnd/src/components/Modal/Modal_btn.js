@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Modal from "../Modal/Modal";
-const NavBar_login_btn = ({ text }) => {
+import Modal from "./Modal";
+const Modal_btn = ({ text, className }) => {
   const [modal, setModal] = useState(false);
   const showModal = () => {
-    setModal(!modal);
+    setModal(true);
   };
   return (
     <>
-      <button className="navBar_btns__" onClick={showModal}>
+      <button className={className} onClick={showModal}>
         {text}
       </button>
       {modal ? <Modal type={text} setModal={setModal} /> : ""}
@@ -15,4 +15,4 @@ const NavBar_login_btn = ({ text }) => {
   );
 };
 
-export default NavBar_login_btn;
+export default Modal_btn;

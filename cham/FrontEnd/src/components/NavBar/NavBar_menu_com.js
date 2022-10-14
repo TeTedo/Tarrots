@@ -5,7 +5,7 @@ const NavBar_menu_com = ({ path, name }) => {
   const location = useLocation();
 
   return (
-    <Link to={path} className={location.pathname === path ? "selected" : ""}>
+    <Link to={path} className={location.pathname.includes(path) && path !== "/" ? "selected" : ""}>
       <span>{name}</span>
     </Link>
   );

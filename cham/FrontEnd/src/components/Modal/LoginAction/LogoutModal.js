@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalWrap, Wrap, Title, Content, LastBtn } from "./ModalStyledComponents";
+import { ModalWrap, Wrap, Title, Content, LastBtn } from "../ModalStyledComponents";
 import { useDispatch } from "react-redux";
 const ModalBase = ({ closeModal, setModal }) => {
   const dispatch = useDispatch();

@@ -43,7 +43,7 @@ const loginCheck = () => {
       });
       // 로그인 검사 성공했을때
       if (userData.data) {
-        dispatch({ type: "LOGIN", payload: { ...userData.data } });
+        dispatch({ type: "LOGIN", payload: { ...userData.data, user_id: userData.data.user_id.userId } });
       }
       // 로그인 검사 실패시
       else {

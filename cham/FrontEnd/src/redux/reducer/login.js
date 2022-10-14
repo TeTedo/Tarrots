@@ -20,7 +20,7 @@ const login = (state = { status: false }, action) => {
       removeCookie("refresh");
       removeCookie("access");
       window.localStorage.setItem("login", false);
-      return { ...state, status: false };
+      return { ...state, status: false, user_id: "", profile_img: "" };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class User extends Sequelize.Model {
+class Slide extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
@@ -50,19 +50,13 @@ class User extends Sequelize.Model {
         sequelize: sequelize,
         timestamps: true,
         underscored: true,
-        modelName: "User",
-        tableName: "users",
+        modelName: "Slide",
+        tableName: "slides",
         charset: "utf8",
         collate: "utf8_general_ci",
       }
     );
   }
-  static associate(db) {
-    db.User.hasMany(db.ShopList, {
-      foreignKey: "user_id",
-      sourceKey: "user_id",
-    });
-  }
 }
 
-module.exports = User;
+module.exports = Slide;

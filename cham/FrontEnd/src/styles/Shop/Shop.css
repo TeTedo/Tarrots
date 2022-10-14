@@ -3,11 +3,9 @@
   width: 100%;
   height: calc(100vh - 100px);
 }
-
 .shopMain {
   width: 100%;
   height: 100%;
-  background-color: white;
 }
 .shop_slide_com {
   min-width: 100%;

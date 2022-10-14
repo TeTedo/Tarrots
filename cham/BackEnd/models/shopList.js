@@ -1,48 +1,43 @@
 const Sequelize = require("sequelize");
 
-class User extends Sequelize.Model {
+class ShopList extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
         user_id: {
           type: Sequelize.STRING(16),
           allowNull: false,
-          primaryKey: true,
-        },
-        user_pw: {
-          type: Sequelize.STRING,
-          allowNull: false,
         },
         name: {
-          type: Sequelize.STRING(10),
-          allowNull: false,
-        },
-        nick_name: {
-          type: Sequelize.STRING(10),
-          allowNull: false,
-        },
-        mobile_number: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        email: {
+        introduction: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        address: {
+        image: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        profile_img: {
+        category: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        grade: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        review: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        price: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        permission: {
           type: Sequelize.TEXT,
-          allowNull: false,
-        },
-        login: {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-        },
-        type: {
-          type: Sequelize.STRING,
           allowNull: false,
         },
       },
@@ -50,19 +45,19 @@ class User extends Sequelize.Model {
         sequelize: sequelize,
         timestamps: true,
         underscored: true,
-        modelName: "User",
-        tableName: "users",
+        modelName: "ShopList",
+        tableName: "shopLists",
         charset: "utf8",
         collate: "utf8_general_ci",
       }
     );
   }
   static associate(db) {
-    db.User.hasMany(db.ShopList, {
+    db.ShopList.belongsTo(db.User, {
       foreignKey: "user_id",
-      sourceKey: "user_id",
+      targetKey: "user_id",
     });
   }
 }
 
-module.exports = User;
+module.exports = ShopList;

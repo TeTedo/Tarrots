@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
             }
           );
 
-          res.send({ ...data, refresh_token, access_token });
+          res.send({ user_id: data.user_id, refresh_token, access_token, profile_img: data.profile_img });
         } else {
           res.send("비밀번호");
         }

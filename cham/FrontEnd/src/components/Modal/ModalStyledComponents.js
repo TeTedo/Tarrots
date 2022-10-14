@@ -6,8 +6,9 @@ const ModalWrap = styled.div`
   height: 100%;
   left: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.3);
   z-index: 999;
+  backdrop-filter: blur(5px);
 `;
 
 const Wrap = styled.div`
@@ -100,10 +101,50 @@ const LastBtn = styled.div`
   color: white;
   border-radius: 12px;
   margin: 0 10px;
+  font-weight: bold;
   :hover {
     background-color: white;
     color: green;
     cursor: pointer;
   }
 `;
-export { ModalWrap, Wrap, Content, Title, LabelWrap, Label, Input, InputWrap, Btn, BtnWrap, LastBtn };
+const Category = styled.span`
+  font-size: 20px;
+  font-weight: bold;
+  color: green;
+  margin-right: 20px;
+`;
+const Select = styled.select``;
+const Option = styled.option``;
+const ImgLabel = styled.label`
+  border: 1px solid black;
+  width: 100px;
+  height: 20px;
+  color: green;
+  font-weight: bold;
+  font-size: 15px;
+  display: flex;
+  text-align: center;
+`;
+const Preview = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+export {
+  ModalWrap,
+  Wrap,
+  Content,
+  Title,
+  LabelWrap,
+  Label,
+  Input,
+  InputWrap,
+  Btn,
+  BtnWrap,
+  LastBtn,
+  Select,
+  Option,
+  Category,
+  ImgLabel,
+  Preview,
+};

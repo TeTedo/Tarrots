@@ -1,13 +1,14 @@
 import React from "react";
-import Slide from "./Slide";
-import ShopMain from "./Shop/ShopMain";
 import "../styles/Shop/Shop.css";
-import ShopSlideCom from "./Slide/ShopSlideCom";
-const Shoppage = () => {
+import MiniNavBar from "./MiniNavBar/MiniNavBar";
+const Shoppage = ({ component: Component }) => {
+  const page = ["/shop", "/shop/top", "/shop/bottom", "/shop/shoes"];
+  const name = ["MAIN", "TOP", "BOTTOM", "SHOES"];
+
   return (
-    <div className="shop">
-      <Slide component={ShopSlideCom} length="3"></Slide>
-      <ShopMain></ShopMain>
+    <div className="shopMain">
+      <MiniNavBar page={page} name={name} />
+      <Component page={page} name={name}></Component>
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import React from "react";
-import LoginModal from "./LoginModal";
+import LoginModal from "./LoginAction/LoginModal";
 import SignUpModal from "./SignUpModal";
-import LogoutModal from "./LogoutModal";
+import LogoutModal from "./LoginAction/LogoutModal";
+import UploadGoods from "./UploadGoods/UploadGoods";
 const Modal = ({ setModal, type }) => {
   const closeModal = (e) => {
     if (e.currentTarget === e.target) setModal(false);
@@ -13,6 +14,10 @@ const Modal = ({ setModal, type }) => {
       return <LoginModal closeModal={closeModal} setModal={setModal} />;
     case "LOGOUT":
       return <LogoutModal closeModal={closeModal} setModal={setModal} />;
+    case "물건올리기":
+      return <UploadGoods closeModal={closeModal} setModal={setModal} />;
+    default:
+      return;
   }
 };
 

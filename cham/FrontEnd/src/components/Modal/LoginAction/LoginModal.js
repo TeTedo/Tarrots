@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { loginAction } from "../../redux/middleware/loginAction";
+import { loginAction } from "../../../redux/middleware/loginAction";
+import { useDispatch } from "react-redux";
 import {
   ModalWrap,
   Wrap,
@@ -12,8 +13,7 @@ import {
   Btn,
   BtnWrap,
   LastBtn,
-} from "./ModalStyledComponents";
-import { useDispatch } from "react-redux";
+} from "../ModalStyledComponents";
 const SignUpModal = ({ closeModal, setModal }) => {
   const inputWrap = useRef(null);
   const [index, setIndex] = useState(0);
@@ -24,37 +24,27 @@ const SignUpModal = ({ closeModal, setModal }) => {
   const moveRight = () => {
     if (index !== inputWrap.current.children.length - 1) setIndex(index + 1);
   };
-  const signup = (e) => {
+  const login = (e) => {
     const input = Object.values(inputWrap.current.children).map((v) => v.value);
-    const [user_id, user_pw, name, nick_name, mobile_number, email, address] = input;
-    dispatch(loginAction.signup({ user_id, user_pw, name, nick_name, mobile_number, email, address }));
+    const [user_id, user_pw] = input;
+    dispatch(loginAction.login({ user_id, user_pw }));
     setModal(false);
   };
   return (
     <ModalWrap onClick={closeModal}>
       <Wrap>
-        <Title>Sign Up</Title>
+        <Title>Login</Title>
         <Content>
           <LabelWrap>
             <Label style={{ backgroundColor: index === 0 ? "green" : "black" }} />
             <Label style={{ backgroundColor: index === 1 ? "green" : "black" }} />
             <Label style={{ backgroundColor: index === 2 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 3 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 4 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 5 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 6 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 7 ? "green" : "black" }} />
           </LabelWrap>
           <InputWrap ref={inputWrap}>
             <Input placeholder="ID" style={{ display: index === 0 ? "block" : "none" }} />
             <Input placeholder="PassWord" style={{ display: index === 1 ? "block" : "none" }} />
-            <Input placeholder="Name" style={{ display: index === 2 ? "block" : "none" }} />
-            <Input placeholder="Nick Name" style={{ display: index === 3 ? "block" : "none" }} />
-            <Input placeholder="Mobile-number" style={{ display: index === 4 ? "block" : "none" }} />
-            <Input placeholder="E-mail" style={{ display: index === 5 ? "block" : "none" }} />
-            <Input placeholder="Address" style={{ display: index === 6 ? "block" : "none" }} />
-            <LastBtn style={{ display: index === 7 ? "block" : "none" }} onClick={signup}>
-              Sign Up!!
+            <LastBtn style={{ display: index === 2 ? "block" : "none" }} onClick={login}>
+              Login!!
             </LastBtn>
           </InputWrap>
           <BtnWrap>
