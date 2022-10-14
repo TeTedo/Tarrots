@@ -6,7 +6,9 @@ const path = require("path");
 router.post("/shop/uploads", imgUpload.single("file"), async (req, res) => {
   console.log(req.file);
   console.log(JSON.parse(req.body.data));
-  const { user_id, name, introduction, category, price } = req.body;
+  const { user_id, name, introduction, category, price } = JSON.parse(
+    req.body.data
+  );
   ShopList.create({
     user_id,
     name,

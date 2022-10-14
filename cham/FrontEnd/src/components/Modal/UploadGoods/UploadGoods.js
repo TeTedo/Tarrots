@@ -50,13 +50,14 @@ const UploadGoods = ({ closeModal, setModal }) => {
     dispatch(loginAction.loginCheck()).then(() => {
       if (localStorage.getItem("login") === "true") {
         const [name, image, introduction, price, category] = input;
-        formData.append("data", {
+        const data = JSON.stringify({
           user_id,
           name,
           introduction,
           price,
           category,
         });
+        formData.append("data", data);
         dispatch(
           shopAction.uploadGoodsToServer({
             config,
@@ -75,29 +76,71 @@ const UploadGoods = ({ closeModal, setModal }) => {
         <Title>UPLOAD GOODS</Title>
         <Content>
           <LabelWrap>
-            <Label style={{ backgroundColor: index === 0 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 1 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 2 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 3 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 4 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 5 ? "green" : "black" }} />
+            <Label
+              style={{ backgroundColor: index === 0 ? "green" : "black" }}
+            />
+            <Label
+              style={{ backgroundColor: index === 1 ? "green" : "black" }}
+            />
+            <Label
+              style={{ backgroundColor: index === 2 ? "green" : "black" }}
+            />
+            <Label
+              style={{ backgroundColor: index === 3 ? "green" : "black" }}
+            />
+            <Label
+              style={{ backgroundColor: index === 4 ? "green" : "black" }}
+            />
+            <Label
+              style={{ backgroundColor: index === 5 ? "green" : "black" }}
+            />
           </LabelWrap>
           <InputWrap ref={inputWrap}>
-            <Input placeholder="물건 이름" style={{ display: index === 0 ? "block" : "none" }} />
-            <Preview ref={previewTarget} style={{ display: index === 1 ? "block" : "none" }} />
-            <ImgLabel htmlFor="upLoadImg" style={{ display: index === 1 ? "block" : "none" }}>
+            <Input
+              placeholder="물건 이름"
+              style={{ display: index === 0 ? "block" : "none" }}
+            />
+            <Preview
+              ref={previewTarget}
+              style={{ display: index === 1 ? "block" : "none" }}
+            />
+            <ImgLabel
+              htmlFor="upLoadImg"
+              style={{ display: index === 1 ? "block" : "none" }}
+            >
               사진 올리기
             </ImgLabel>
-            <Input id="upLoadImg" type="file" style={{ display: "none" }} onChange={imgPreview} ref={uploadTarget} />
-            <Input placeholder="물건 설명" style={{ display: index === 2 ? "block" : "none" }} />
-            <Input placeholder="가격(숫자만 입력)" type="number" style={{ display: index === 3 ? "block" : "none" }} />
-            <Category style={{ display: index === 4 ? "block" : "none" }}>카테고리</Category>
-            <Select placeholder="Mobile-number" style={{ display: index === 4 ? "block" : "none" }}>
+            <Input
+              id="upLoadImg"
+              type="file"
+              style={{ display: "none" }}
+              onChange={imgPreview}
+              ref={uploadTarget}
+            />
+            <Input
+              placeholder="물건 설명"
+              style={{ display: index === 2 ? "block" : "none" }}
+            />
+            <Input
+              placeholder="가격(숫자만 입력)"
+              type="number"
+              style={{ display: index === 3 ? "block" : "none" }}
+            />
+            <Category style={{ display: index === 4 ? "block" : "none" }}>
+              카테고리
+            </Category>
+            <Select
+              placeholder="Mobile-number"
+              style={{ display: index === 4 ? "block" : "none" }}
+            >
               <Option>TOP</Option>
               <Option>BOTTOM</Option>
               <Option>SHOES</Option>
             </Select>
-            <LastBtn style={{ display: index === 5 ? "block" : "none" }} onClick={upLoadGoods}>
+            <LastBtn
+              style={{ display: index === 5 ? "block" : "none" }}
+              onClick={upLoadGoods}
+            >
               UPLOAD!!
             </LastBtn>
           </InputWrap>

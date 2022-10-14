@@ -1,6 +1,6 @@
 import React from "react";
 import LoginModal from "./LoginAction/LoginModal";
-import SignUpModal from "./SignUpModal";
+import SignUpModal from "./SignUpModal/SignUpModal";
 import LogoutModal from "./LoginAction/LogoutModal";
 import UploadGoods from "./UploadGoods/UploadGoods";
 const Modal = ({ setModal, type }) => {

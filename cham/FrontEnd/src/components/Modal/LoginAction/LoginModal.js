@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { loginAction } from "../../../redux/middleware/loginAction";
 import { useDispatch } from "react-redux";
 import {
@@ -36,14 +36,29 @@ const SignUpModal = ({ closeModal, setModal }) => {
         <Title>Login</Title>
         <Content>
           <LabelWrap>
-            <Label style={{ backgroundColor: index === 0 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 1 ? "green" : "black" }} />
-            <Label style={{ backgroundColor: index === 2 ? "green" : "black" }} />
+            <Label
+              style={{ backgroundColor: index === 0 ? "green" : "black" }}
+            />
+            <Label
+              style={{ backgroundColor: index === 1 ? "green" : "black" }}
+            />
+            <Label
+              style={{ backgroundColor: index === 2 ? "green" : "black" }}
+            />
           </LabelWrap>
           <InputWrap ref={inputWrap}>
-            <Input placeholder="ID" style={{ display: index === 0 ? "block" : "none" }} />
-            <Input placeholder="PassWord" style={{ display: index === 1 ? "block" : "none" }} />
-            <LastBtn style={{ display: index === 2 ? "block" : "none" }} onClick={login}>
+            <Input
+              placeholder="ID"
+              style={{ display: index === 0 ? "block" : "none" }}
+            />
+            <Input
+              placeholder="PassWord"
+              style={{ display: index === 1 ? "block" : "none" }}
+            />
+            <LastBtn
+              style={{ display: index === 2 ? "block" : "none" }}
+              onClick={login}
+            >
               Login!!
             </LastBtn>
           </InputWrap>
