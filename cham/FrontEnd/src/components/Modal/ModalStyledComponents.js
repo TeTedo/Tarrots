@@ -130,6 +130,39 @@ const Preview = styled.img`
   width: 50px;
   height: 50px;
 `;
+const PermissionWrap = styled.div`
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 12px;
+  border: 2px solid green;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+`;
+const PermissionContent = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  padding: 10px;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+const PermissionArgWrap = styled.div`
+  width: 100%;
+  height: 100px;
+  border: 1px solid black;
+`;
 export {
   ModalWrap,
   Wrap,
@@ -147,4 +180,7 @@ export {
   Category,
   ImgLabel,
   Preview,
+  PermissionWrap,
+  PermissionContent,
+  PermissionArgWrap,
 };

@@ -12,10 +12,23 @@ const Shop = () => {
       <Routes>
         <Route exact path="/" element={<Shoppage component={ShopMain} />} />;
         <Route exact path="/top" element={<Shoppage component={ShopTop} />} />;
-        <Route exact path="/bottom" element={<Shoppage component={ShopBottom} />} />;
-        <Route exact path="/shoes" element={<Shoppage component={ShopShoes} />} />;
+        <Route
+          exact
+          path="/bottom"
+          element={<Shoppage component={ShopBottom} />}
+        />
+        ;
+        <Route
+          exact
+          path="/shoes"
+          element={<Shoppage component={ShopShoes} />}
+        />
+        ;
       </Routes>
       <Modal_btn text={"물건올리기"} />
+      <Modal_btn text={"슬라이드올리기"} />
+      <Modal_btn text={"판매승인"} />
+      <Modal_btn text={"판매승인 확인"} />
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import previewImg from "../../../util/previewImg";
-import { shopAction } from "../../../redux/middleware/shopAction";
-import { loginAction } from "../../../redux/middleware/loginAction";
+import previewImg from "../../../../util/previewImg";
+import { shopAction } from "../../../../redux/middleware/shopAction";
+import { loginAction } from "../../../../redux/middleware/loginAction";
 import {
   ModalWrap,
   Wrap,
@@ -20,7 +20,7 @@ import {
   Category,
   ImgLabel,
   Preview,
-} from "../ModalStyledComponents";
+} from "../../ModalStyledComponents";
 const UploadGoods = ({ closeModal, setModal }) => {
   const inputWrap = useRef(null);
   const [index, setIndex] = useState(0);
