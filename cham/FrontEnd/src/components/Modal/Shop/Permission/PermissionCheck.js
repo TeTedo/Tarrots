@@ -1,100 +1,60 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ModalWrap,
-  Wrap,
   Title,
-  Content,
-  LabelWrap,
-  Label,
-  Input,
-  InputWrap,
-  Btn,
-  BtnWrap,
-  LastBtn,
+  PermissionWrap,
+  PermissionContent,
+  PermissionInfo,
+  PermissionInfoSpan,
 } from "../../ModalStyledComponents";
+import PermissionPagination from "./PermissionPagination";
+import PermissionCheckCom from "./PermissionCheckCom";
+import { useDispatch, useSelector } from "react-redux";
+import { shopAction } from "../../../../redux/middleware/shopAction";
+import { loginAction } from "../../../../redux/middleware/loginAction";
 const PermissionCheck = ({ closeModal, setModal }) => {
-  const inputWrap = useRef(null);
   const [index, setIndex] = useState(0);
-  const moveLeft = () => {
-    if (index !== 0) setIndex(index - 1);
-  };
-  const moveRight = () => {
-    if (index !== inputWrap.current.children.length - 1) setIndex(index + 1);
-  };
+  // 전체 개수
+
+  // 페이지당 개수
+  const num = 10;
+  const dispatch = useDispatch();
+  const user_id = useSelector((state) => state.login.user_id);
+  useEffect(() => {
+    dispatch(loginAction.loginCheck()).then(() => {
+      dispatch(shopAction.getPermissionCheck(user_id));
+    });
+  }, []);
+  const permissionData = useSelector((state) => state.shopPermission);
+  const dataLength = Object.keys(permissionData).length;
   return (
     <ModalWrap onClick={closeModal}>
-      <Wrap>
-        <Title>Sign Up</Title>
-        <Content>
-          <LabelWrap>
-            <Label
-              style={{ backgroundColor: index === 0 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 1 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 2 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 3 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 4 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 5 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 6 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 7 ? "green" : "black" }}
-            />
-          </LabelWrap>
-          <InputWrap ref={inputWrap}>
-            <Input
-              placeholder="ID"
-              style={{ display: index === 0 ? "block" : "none" }}
-            />
-            <Input
-              placeholder="PassWord"
-              style={{ display: index === 1 ? "block" : "none" }}
-            />
-            <Input
-              placeholder="Name"
-              style={{ display: index === 2 ? "block" : "none" }}
-            />
-            <Input
-              placeholder="Nick Name"
-              style={{ display: index === 3 ? "block" : "none" }}
-            />
-            <Input
-              placeholder="Mobile-number"
-              style={{ display: index === 4 ? "block" : "none" }}
-            />
-            <Input
-              placeholder="E-mail"
-              style={{ display: index === 5 ? "block" : "none" }}
-            />
-            <Input
-              placeholder="Address"
-              style={{ display: index === 6 ? "block" : "none" }}
-            />
-            <LastBtn style={{ display: index === 7 ? "block" : "none" }}>
-              Sign Up!!
-            </LastBtn>
-          </InputWrap>
-          <BtnWrap>
-            <Btn onClick={moveLeft}>
-              <i className="fa-sharp fa-solid fa-arrow-left"></i>
-            </Btn>
-            <Btn onClick={moveRight}>
-              <i className="fa-solid fa-arrow-right"></i>
-            </Btn>
-          </BtnWrap>
-        </Content>
-      </Wrap>
+      <PermissionWrap>
+        <Title>Permission</Title>
+        <PermissionContent>
+          <PermissionInfo>
+            <PermissionInfoSpan>이름</PermissionInfoSpan>
+            <PermissionInfoSpan>설명</PermissionInfoSpan>
+            <PermissionInfoSpan>가격</PermissionInfoSpan>
+            <PermissionInfoSpan>이미지</PermissionInfoSpan>
+            <PermissionInfoSpan>카테고리</PermissionInfoSpan>
+          </PermissionInfo>
+          {new Array(dataLength)
+            .fill(0)
+            .slice(index * num, index * num + num)
+            .map((v, idx) => (
+              <PermissionCheckCom
+                key={idx}
+                data={permissionData[idx]}
+              ></PermissionCheckCom>
+            ))}
+          <PermissionPagination
+            index={index}
+            pageLength={Math.ceil(dataLength / 10)}
+            setIndex={setIndex}
+          ></PermissionPagination>
+        </PermissionContent>
+      </PermissionWrap>
     </ModalWrap>
   );
 };

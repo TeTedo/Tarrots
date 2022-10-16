@@ -45,7 +45,6 @@ const UploadGoods = ({ closeModal, setModal }) => {
     //이미지 저장할 formdata 설정
     const formData = new FormData();
     const config = { header: { "content-type": "multipart/form-data" } };
-    console.log(uploadTarget.current.files[0]);
     formData.append("file", uploadTarget.current.files[0]);
     dispatch(loginAction.loginCheck()).then(() => {
       if (localStorage.getItem("login") === "true") {

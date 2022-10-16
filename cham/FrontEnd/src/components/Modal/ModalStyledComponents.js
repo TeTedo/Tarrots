@@ -160,9 +160,13 @@ const PermissionContent = styled.div`
 `;
 const PermissionArgWrap = styled.div`
   width: 100%;
-  height: 30px;
-  border: 1px solid black;
+  border: 1px solid green;
+  border-radius: 12px;
   margin-bottom: 10px;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const PaginationWrap = styled.div`
   width: 100%;
@@ -176,6 +180,24 @@ const Pagination = styled.span`
   height: 50px;
   margin: 0px 5px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const PermissionSpan = styled.span`
+  width: 80px;
+`;
+const PermissionInfo = styled.div`
+  width: 100%;
+  display: flex;
+`;
+const PermissionInfoSpan = styled.div`
+  width: 80px;
+  color: green;
+  font-weight: bold;
+  :nth-child(1) {
+    margin-left: 10px;
+  }
 `;
 export {
   ModalWrap,
@@ -199,4 +221,7 @@ export {
   PermissionArgWrap,
   PaginationWrap,
   Pagination,
+  PermissionSpan,
+  PermissionInfo,
+  PermissionInfoSpan,
 };

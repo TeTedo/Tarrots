@@ -1,11 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { PermissionArgWrap, PermissionSpan } from "../../ModalStyledComponents";
-import { shopAction } from "../../../../redux/middleware/shopAction";
-const PermissionCom = ({ data }) => {
-  const dispatch = useDispatch();
-  const result = (e) => {
-    dispatch(shopAction.permissionAction(e.target.textContent, data.id));
+const PermissionCheckCom = ({ data }) => {
+  const result = () => {
+    switch (data.permission) {
+      case "N":
+        return "미승인";
+      case "Y":
+        return "승인";
+      case "D":
+        return "거절";
+      default:
+        break;
+    }
   };
   return (
     <PermissionArgWrap>
@@ -20,10 +26,9 @@ const PermissionCom = ({ data }) => {
         />
       </PermissionSpan>
       <PermissionSpan>{data.category}</PermissionSpan>
-      <button onClick={result}>승인</button>
-      <button onClick={result}>거절</button>
+      <PermissionSpan>{result()}</PermissionSpan>
     </PermissionArgWrap>
   );
 };
 
-export default PermissionCom;
+export default PermissionCheckCom;
