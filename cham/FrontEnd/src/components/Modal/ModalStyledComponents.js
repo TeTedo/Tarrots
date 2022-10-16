@@ -160,8 +160,22 @@ const PermissionContent = styled.div`
 `;
 const PermissionArgWrap = styled.div`
   width: 100%;
-  height: 100px;
+  height: 30px;
   border: 1px solid black;
+  margin-bottom: 10px;
+`;
+const PaginationWrap = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Pagination = styled.span`
+  width: 50px;
+  height: 50px;
+  margin: 0px 5px;
+  cursor: pointer;
 `;
 export {
   ModalWrap,
@@ -183,4 +197,6 @@ export {
   PermissionWrap,
   PermissionContent,
   PermissionArgWrap,
+  PaginationWrap,
+  Pagination,
 };

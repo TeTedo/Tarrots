@@ -1,12 +1,11 @@
 import React, { useRef, useState } from "react";
 import {
   ModalWrap,
-  Wrap,
   Title,
-  Content,
   PermissionWrap,
   PermissionContent,
 } from "../../ModalStyledComponents";
+import PermissionPagination from "./PermissionPagination";
 import PermissionCom from "./PermissionCom";
 const Permission = ({ closeModal, setModal }) => {
   const inputWrap = useRef(null);
@@ -26,6 +25,11 @@ const Permission = ({ closeModal, setModal }) => {
             .map((v, idx) => (
               <PermissionCom key={idx}></PermissionCom>
             ))}
+          <PermissionPagination
+            index={index}
+            pageLength={Math.ceil(templength / 10)}
+            setIndex={setIndex}
+          ></PermissionPagination>
         </PermissionContent>
       </PermissionWrap>
     </ModalWrap>
