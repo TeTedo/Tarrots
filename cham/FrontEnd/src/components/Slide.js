@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/Slide/Slide.css";
-const Slide = ({ component: Component, length }) => {
+const Slide = ({ component: Component, length, data }) => {
   const [index, setIndex] = useState(0);
   const [left, setLeft] = useState(0);
   const slideWrapper = useRef(null);
@@ -27,14 +27,21 @@ const Slide = ({ component: Component, length }) => {
       }
       if (index === 0) {
         slideWrapper.current.style.left =
-          -slideWrapper.current.children[0].getBoundingClientRect().width * index + "px";
+          -slideWrapper.current.children[0].getBoundingClientRect().width *
+            index +
+          "px";
       }
       if (index === +length - 1) {
         slideWrapper.current.style.left =
-          -slideWrapper.current.children[0].getBoundingClientRect().width * index + "px";
+          -slideWrapper.current.children[0].getBoundingClientRect().width *
+            index +
+          "px";
       }
     } else {
-      slideWrapper.current.style.left = -slideWrapper.current.children[0].getBoundingClientRect().width * index + "px";
+      slideWrapper.current.style.left =
+        -slideWrapper.current.children[0].getBoundingClientRect().width *
+          index +
+        "px";
     }
     setDrag = false;
   };
@@ -46,18 +53,42 @@ const Slide = ({ component: Component, length }) => {
     }
   };
   useEffect(() => {
-    setLeft(() => -slideWrapper.current.children[0].getBoundingClientRect().width * index);
+    setLeft(
+      () =>
+        -slideWrapper.current.children[0].getBoundingClientRect().width * index
+    );
   }, [index]);
-  const makeCom = new Array(Number(length)).fill(0).map((v, idx) => <Component key={idx} />);
-  const makeLabel = new Array(Number(length))
+  const makeCom = new Array(Number(length))
     .fill(0)
-    .map((v, idx) => <label style={{ backgroundColor: index === idx ? `hsl(0, 100%, 50%)` : "black" }} key={idx} />);
-
+    .map((v, idx) => <Component key={idx} data={data[idx]} />);
+  const makeLabel = new Array(Number(length)).fill(0).map((v, idx) => (
+    <label
+      style={{
+        backgroundColor: index === idx ? `hsl(0, 100%, 50%)` : "black",
+      }}
+      key={idx}
+    />
+  ));
   return (
-    <div className="slide" onMouseDown={dragStart} onMouseUp={dragEnd} onMouseMove={drag} onMouseLeave={dragEnd}>
+    <div
+      className="slide"
+      onMouseDown={dragStart}
+      onMouseUp={dragEnd}
+      onMouseMove={drag}
+      onMouseLeave={dragEnd}
+      style={{
+        backgroundImage:
+          data && data[index]?.backgroundImg
+            ? `url(${data[index].backgroundImg.replace(/\\/g, "/")})`
+            : "",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="slide_wrap">
         <div className="slide_wrap__" ref={slideWrapper} style={{ left: left }}>
-          {makeCom}
+          {data ? makeCom : ""}
         </div>
         <div className="slide_label">{makeLabel}</div>
       </div>

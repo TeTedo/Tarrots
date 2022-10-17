@@ -9,5 +9,27 @@ const shopPermission = (state = {}, action) => {
       return state;
   }
 };
+const shopData = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "PERMISSION":
+      return { ...state, ...payload };
+    case "SHOPDATA":
+      return { ...payload };
+    default:
+      return state;
+  }
+};
+const shopSlide = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "GETSLIDE":
+      return { ...payload };
+    case "ADDSLIDE":
+      return { ...state, ...payload };
+    default:
+      return state;
+  }
+};
 
-export const shop = { shopPermission };
+export const shop = { shopPermission, shopData, shopSlide };

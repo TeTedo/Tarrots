@@ -22,6 +22,11 @@
   height: 80%;
   border-radius: 12px;
 }
+.shop_slide_com_top > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
 .shop_slide_com_bottom {
   width: 100%;
   height: 20%;

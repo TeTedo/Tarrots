@@ -1,159 +1,58 @@
-import React, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import previewImg from "../../../../util/previewImg";
-import { shopAction } from "../../../../redux/middleware/shopAction";
-import { loginAction } from "../../../../redux/middleware/loginAction";
+import React, { useEffect, useState } from "react";
 import {
   ModalWrap,
-  Wrap,
   Title,
-  Content,
-  LabelWrap,
-  Label,
-  Input,
-  InputWrap,
-  Btn,
-  BtnWrap,
-  LastBtn,
-  Select,
-  Option,
-  Category,
-  ImgLabel,
-  Preview,
+  PermissionWrap,
+  PermissionContent,
+  PermissionInfo,
+  PermissionInfoSpan,
 } from "../../ModalStyledComponents";
+import PermissionPagination from "../Permission/PermissionPagination";
+import { useDispatch, useSelector } from "react-redux";
+import { shopAction } from "../../../../redux/middleware/shopAction";
+import ShopSlideCom from "./ShopSlideCom";
+import Modal from "../../Modal";
 const ShopMainSlide = ({ closeModal, setModal }) => {
-  const inputWrap = useRef(null);
   const [index, setIndex] = useState(0);
-  const previewTarget = useRef();
-  const uploadTarget = useRef();
+  // 전체 개수
+  // 페이지당 개수
+  const num = 10;
   const dispatch = useDispatch();
-  const moveLeft = () => {
-    if (index !== 0) setIndex(index - 1);
-  };
-  const moveRight = () => {
-    if (index !== 5) setIndex(index + 1);
-  };
-  const imgPreview = (e) => {
-    previewImg(e.target, previewTarget.current);
-  };
-  const user_id = useSelector((state) => state.login.user_id);
-  const upLoadGoods = () => {
-    // input 값들 받아오기
-    const input = Object.values(inputWrap.current.children)
-      .map((v) => v.value)
-      .filter((v) => v);
-    //이미지 저장할 formdata 설정
-    const formData = new FormData();
-    const config = { header: { "content-type": "multipart/form-data" } };
-    console.log(uploadTarget.current.files[0]);
-    formData.append("file", uploadTarget.current.files[0]);
-    dispatch(loginAction.loginCheck()).then(() => {
-      if (localStorage.getItem("login") === "true") {
-        const [name, image, introduction, price, category] = input;
-        const data = JSON.stringify({
-          user_id,
-          name,
-          introduction,
-          price,
-          category,
-        });
-        formData.append("data", data);
-        dispatch(
-          shopAction.uploadGoodsToServer({
-            config,
-            formData,
-          })
-        );
-        setModal(false);
-      } else {
-        alert("로그인이 필요합니다.");
-      }
-    });
-  };
+  useEffect(() => {
+    dispatch(shopAction.getSlideData());
+  }, []);
+  const shopSlideData = useSelector((state) => state.shopSlide);
+  const dataLength = Object.keys(shopSlideData).length;
+  const [upLoad, setUpLoad] = useState(false);
   return (
     <ModalWrap onClick={closeModal}>
-      <Wrap>
-        <Title>UPLOAD GOODS</Title>
-        <Content>
-          <LabelWrap>
-            <Label
-              style={{ backgroundColor: index === 0 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 1 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 2 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 3 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 4 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 5 ? "green" : "black" }}
-            />
-          </LabelWrap>
-          <InputWrap ref={inputWrap}>
-            <Input
-              placeholder="물건 이름"
-              style={{ display: index === 0 ? "block" : "none" }}
-            />
-            <Preview
-              ref={previewTarget}
-              style={{ display: index === 1 ? "block" : "none" }}
-            />
-            <ImgLabel
-              htmlFor="upLoadImg"
-              style={{ display: index === 1 ? "block" : "none" }}
-            >
-              사진 올리기
-            </ImgLabel>
-            <Input
-              id="upLoadImg"
-              type="file"
-              style={{ display: "none" }}
-              onChange={imgPreview}
-              ref={uploadTarget}
-            />
-            <Input
-              placeholder="물건 설명"
-              style={{ display: index === 2 ? "block" : "none" }}
-            />
-            <Input
-              placeholder="가격(숫자만 입력)"
-              type="number"
-              style={{ display: index === 3 ? "block" : "none" }}
-            />
-            <Category style={{ display: index === 4 ? "block" : "none" }}>
-              카테고리
-            </Category>
-            <Select
-              placeholder="Mobile-number"
-              style={{ display: index === 4 ? "block" : "none" }}
-            >
-              <Option>TOP</Option>
-              <Option>BOTTOM</Option>
-              <Option>SHOES</Option>
-            </Select>
-            <LastBtn
-              style={{ display: index === 5 ? "block" : "none" }}
-              onClick={upLoadGoods}
-            >
-              UPLOAD!!
-            </LastBtn>
-          </InputWrap>
-          <BtnWrap>
-            <Btn onClick={moveLeft}>
-              <i className="fa-sharp fa-solid fa-arrow-left"></i>
-            </Btn>
-            <Btn onClick={moveRight}>
-              <i className="fa-solid fa-arrow-right"></i>
-            </Btn>
-          </BtnWrap>
-        </Content>
-      </Wrap>
+      <PermissionWrap>
+        {upLoad ? <Modal type={"슬라이드추가"} setModal={setUpLoad} /> : ""}
+        <Title>MANAGE SLIDE</Title>
+        <PermissionContent>
+          <PermissionInfo>
+            <PermissionInfoSpan>이름</PermissionInfoSpan>
+            <PermissionInfoSpan>설명</PermissionInfoSpan>
+            <PermissionInfoSpan>가격</PermissionInfoSpan>
+            <PermissionInfoSpan>배경</PermissionInfoSpan>
+            <PermissionInfoSpan>이미지</PermissionInfoSpan>
+            <button onClick={() => setUpLoad(true)} style={{ width: "50px" }}>
+              추가
+            </button>
+          </PermissionInfo>
+          {new Array(dataLength)
+            .fill(0)
+            .slice(index * num, index * num + num)
+            .map((v, idx) => (
+              <ShopSlideCom key={idx} data={shopSlideData[idx]}></ShopSlideCom>
+            ))}
+          <PermissionPagination
+            index={index}
+            pageLength={Math.ceil(dataLength / 10)}
+            setIndex={setIndex}
+          ></PermissionPagination>
+        </PermissionContent>
+      </PermissionWrap>
     </ModalWrap>
   );
 };

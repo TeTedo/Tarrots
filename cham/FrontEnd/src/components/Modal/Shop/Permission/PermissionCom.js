@@ -16,7 +16,7 @@ const PermissionCom = ({ data }) => {
         <img
           src={data.image}
           alt=""
-          style={{ width: "50px", height: "50px" }}
+          style={{ width: "50px", height: "50px", marginLeft: "15px" }}
         />
       </PermissionSpan>
       <PermissionSpan>{data.category}</PermissionSpan>

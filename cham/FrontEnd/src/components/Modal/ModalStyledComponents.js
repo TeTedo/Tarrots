@@ -114,7 +114,9 @@ const Category = styled.span`
   color: green;
   margin-right: 20px;
 `;
-const Select = styled.select``;
+const Select = styled.select`
+  width: 100%;
+`;
 const Option = styled.option``;
 const ImgLabel = styled.label`
   border: 1px solid black;
@@ -132,6 +134,7 @@ const Preview = styled.img`
 `;
 const PermissionWrap = styled.div`
   position: absolute;
+  z-index: 999;
   width: 700px;
   height: 700px;
   border-radius: 12px;
@@ -198,6 +201,30 @@ const PermissionInfoSpan = styled.div`
   :nth-child(1) {
     margin-left: 10px;
   }
+  text-align: center;
+`;
+const MyPageContent = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  padding: 10px;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const MyPageMiniNav = styled.div`
+  width: 100px;
+  height: 100%;
+  border: 1px solid black;
+`;
+const MyPageElem = styled.div`
+  width: 400px;
+  height: 100%;
+  border: 1px solid black;
 `;
 export {
   ModalWrap,
@@ -224,4 +251,7 @@ export {
   PermissionSpan,
   PermissionInfo,
   PermissionInfoSpan,
+  MyPageContent,
+  MyPageMiniNav,
+  MyPageElem,
 };
