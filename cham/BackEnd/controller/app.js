@@ -9,8 +9,8 @@ sequelize
   .then(() => {
     console.log("DB연결 완료");
   })
-  .catch(() => {
-    console.log("DB연결 에러");
+  .catch((err) => {
+    console.log("DB연결 에러 : ", err);
   });
 
 //리액트랑 백엔드 연동하기 위해cors 설정
@@ -43,8 +43,8 @@ app.use(
 );
 //라우터 불러오기, 사용
 const singUp = require("../routers/signUp");
-const login = require("../routers//login");
-const shop = require("../routers//shop");
+const login = require("../routers/login");
+const shop = require("../routers/shop");
 app.use(singUp, login, shop);
 
 app.listen(8000, () => {

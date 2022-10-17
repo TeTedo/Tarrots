@@ -57,6 +57,10 @@ class ShopList extends Sequelize.Model {
       foreignKey: "user_id",
       targetKey: "user_id",
     });
+    db.ShopList.hasMany(db.ShopSlideMain, {
+      foreignKey: "shop_id",
+      sourceKey: "id",
+    });
   }
 }
 
