@@ -1,11 +1,27 @@
 import axios from "axios";
 import { Cookie } from "../../util/cookie";
-const signup = ({ user_id, user_pw, name, nick_name, mobile_number, email, address }) => {
+const signup = ({
+  user_id,
+  user_pw,
+  name,
+  nick_name,
+  mobile_number,
+  email,
+  address,
+}) => {
   return async (dispatch, getState) => {
     const data = await axios({
       method: "post",
       url: "http://localhost:8000/signUp",
-      data: { user_id, user_pw, name, nick_name, mobile_number, email, address },
+      data: {
+        user_id,
+        user_pw,
+        name,
+        nick_name,
+        mobile_number,
+        email,
+        address,
+      },
     });
   };
 };
@@ -43,7 +59,10 @@ const loginCheck = () => {
       });
       // 로그인 검사 성공했을때
       if (userData.data) {
-        dispatch({ type: "LOGIN", payload: { ...userData.data, user_id: userData.data.user_id.userId } });
+        dispatch({
+          type: "LOGIN",
+          payload: { ...userData.data, user_id: userData.data.user_id.userId },
+        });
       }
       // 로그인 검사 실패시
       else {

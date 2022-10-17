@@ -15,7 +15,11 @@ const login = (state = { status: false }, action) => {
         sameSite: "none",
       });
       window.localStorage.setItem("login", true);
-      return { ...state, status: true, ...payload };
+      return {
+        ...state,
+        status: true,
+        ...payload,
+      };
     case "LOGOUT":
       removeCookie("refresh");
       removeCookie("access");

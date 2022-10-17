@@ -216,15 +216,31 @@ const MyPageContent = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const MyPageMiniNav = styled.div`
+const MiniNav = styled.div`
   width: 100px;
   height: 100%;
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 15px;
 `;
 const MyPageElem = styled.div`
   width: 400px;
   height: 100%;
-  border: 1px solid black;
+`;
+const MiniNavWrap = styled.div`
+  width: 100%;
+  height: 40px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 12px;
+  :hover {
+    color: green;
+    background-color: gray;
+  }
 `;
 export {
   ModalWrap,
@@ -252,6 +268,7 @@ export {
   PermissionInfo,
   PermissionInfoSpan,
   MyPageContent,
-  MyPageMiniNav,
+  MiniNav,
   MyPageElem,
+  MiniNavWrap,
 };

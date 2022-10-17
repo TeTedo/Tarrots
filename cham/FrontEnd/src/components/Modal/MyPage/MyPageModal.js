@@ -1,34 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ModalWrap,
   Title,
   PermissionWrap,
   MyPageContent,
-  MyPageMiniNav,
+  MiniNav,
   MyPageElem,
 } from "../ModalStyledComponents";
-
-import { useDispatch, useSelector } from "react-redux";
-import { shopAction } from "../../../redux/middleware/shopAction";
+import MyPageMiniNav from "./MyPageMiniNav";
+import { shopAction } from "redux/middleware/shopAction";
+import MyPageCart from "./Element/MyPageCart";
+import MyPageProfile from "./Element/MyPageProfile";
+import MyPageOrder from "./Element/MyPageOrder";
 const MyPageModal = ({ closeModal, setModal }) => {
   const [index, setIndex] = useState(0);
-  // 전체 개수
-
-  // 페이지당 개수
-  const num = 10;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(shopAction.getPermissionData());
-  }, []);
-  const permissionData = useSelector((state) => state.shopPermission);
-  const dataLength = Object.keys(permissionData).length;
+  const menu = ["PROFILE", "CART", "ORDER"];
+  const elem = [
+    <MyPageProfile key={0} />,
+    <MyPageCart key={1} />,
+    <MyPageOrder key={2} />,
+  ];
   return (
     <ModalWrap onClick={closeModal}>
       <PermissionWrap>
         <Title>MY PAGE</Title>
         <MyPageContent>
-          <MyPageMiniNav></MyPageMiniNav>
-          <MyPageElem></MyPageElem>
+          <MiniNav>
+            {menu.map((v, idx) => (
+              <MyPageMiniNav
+                text={v}
+                key={idx}
+                setIndex={setIndex}
+                index={index}
+                idx={idx}
+              />
+            ))}
+          </MiniNav>
+          <MyPageElem>
+            {elem.map((v, idx) => (idx === index ? v : ""))}
+          </MyPageElem>
         </MyPageContent>
       </PermissionWrap>
     </ModalWrap>
