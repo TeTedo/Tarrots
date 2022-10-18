@@ -251,6 +251,12 @@ const LabelInput = styled.label`
   justify-content: center;
   align-items: center;
 `;
+const ContentWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const LabelControl = styled.div`
   width: 30px;
   height: 30px;
@@ -260,6 +266,22 @@ const LabelControl = styled.div`
   font-size: 20px;
   font-weight: bold;
   color: green;
+  cursor: pointer;
+`;
+const MyPageWrap = styled.div`
+  position: absolute;
+  z-index: 999;
+  width: 800px;
+  height: 800px;
+  border-radius: 12px;
+  border: 2px solid green;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  color: black;
+  display: flex;
+  justify-content: center;
 `;
 export {
   CartInput,
@@ -293,4 +315,6 @@ export {
   MiniNav,
   MyPageElem,
   MiniNavWrap,
+  MyPageWrap,
+  ContentWrap,
 };

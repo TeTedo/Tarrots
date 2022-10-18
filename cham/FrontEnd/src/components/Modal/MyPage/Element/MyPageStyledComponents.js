@@ -47,10 +47,11 @@ const BtnWrap = styled.button`
 `;
 const PaginationElem = styled.div`
   width: 100%;
-  height: 45px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5px;
 `;
 const BuyBtn = styled.button`
   width: 100%;
@@ -71,6 +72,34 @@ const PaginationNum = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+`;
+const ComponentWrap = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  border: 2px solid green;
+`;
+const ComponentSpan = styled.span`
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Img = styled.img`
+  height: 40px;
+  width: 40px;
+`;
+const Nav = styled.div`
+  width: 100%;
+  display: flex;
+  margin-bottom: 5px;
+`;
+const NumCount = styled.span`
+  margin: 0px 5px;
+  cursor: pointer;
 `;
 export {
   Wrap,
@@ -82,4 +111,9 @@ export {
   PaginationElem,
   BuyBtn,
   PaginationNum,
+  ComponentWrap,
+  ComponentSpan,
+  Img,
+  Nav,
+  NumCount,
 };

@@ -6,6 +6,7 @@ import {
   MyPageContent,
   MiniNav,
   MyPageElem,
+  MyPageWrap,
 } from "../ModalStyledComponents";
 import MyPageMiniNav from "./MyPageMiniNav";
 import MyPageCart from "./Element/MyPageCart";
@@ -16,6 +17,8 @@ const MyPageModal = ({ closeModal, setModal }) => {
   const [index, setIndex] = useState(0);
   const [modify, setModify] = useState(false);
   const [modifyData, setModifyData] = useState(null);
+  const [buyConfirm, setBuyConfirm] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
   const menu = ["PROFILE", "CART", "ORDER"];
   const elem = [
     <MyPageProfile
@@ -23,17 +26,30 @@ const MyPageModal = ({ closeModal, setModal }) => {
       setModify={setModify}
       setModifyData={setModifyData}
     />,
-    <MyPageCart key={1} />,
+    <MyPageCart
+      key={1}
+      setBuyConfirm={setBuyConfirm}
+      setTotalPrice={setTotalPrice}
+    />,
     <MyPageOrder key={2} />,
   ];
   return (
     <ModalWrap onClick={closeModal}>
-      <PermissionWrap>
+      <MyPageWrap>
         {modify ? (
           <Modal
             type={"프로필수정확인"}
             setModal={setModify}
             data={modifyData}
+          />
+        ) : (
+          ""
+        )}
+        {buyConfirm ? (
+          <Modal
+            type={"장바구니물건구매"}
+            setModal={setBuyConfirm}
+            data={totalPrice}
           />
         ) : (
           ""
@@ -55,7 +71,7 @@ const MyPageModal = ({ closeModal, setModal }) => {
             {elem.map((v, idx) => (idx === index ? v : ""))}
           </MyPageElem>
         </MyPageContent>
-      </PermissionWrap>
+      </MyPageWrap>
     </ModalWrap>
   );
 };

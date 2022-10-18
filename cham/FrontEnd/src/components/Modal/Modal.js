@@ -12,6 +12,7 @@ import MyPageConfirm from "./MyPage/Element/Modal/MyPageConfirm";
 import GoodsPage from "./Shop/Goods/GoodsPage";
 import CartConfirm from "./Shop/Cart.js/CartConfirm";
 import BuyConfirm from "./Shop/Buy/BuyConfirm";
+import Buy from "./Shop/Buy/Buy";
 const Modal = ({ setModal, type, data }) => {
   const closeModal = (e) => {
     if (e.currentTarget === e.target) setModal(false);
@@ -55,6 +56,8 @@ const Modal = ({ setModal, type, data }) => {
       return (
         <BuyConfirm closeModal={closeModal} setModal={setModal} data={data} />
       );
+    case "장바구니물건구매":
+      return <Buy closeModal={closeModal} setModal={setModal} data={data} />;
     default:
       return;
   }

@@ -1,23 +1,42 @@
-import React, { useEffect } from "react";
-import { WholeWrap, BuyBtn } from "./MyPageStyledComponents";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  WholeWrap,
+  BuyBtn,
+  Nav,
+  ComponentSpan,
+} from "./MyPageStyledComponents";
 import MyPagePagination from "./MyPagePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { shopAction } from "redux/middleware/shopAction";
-const MyPageCart = () => {
+const MyPageCart = ({ setBuyConfirm, setTotalPrice }) => {
   const dispatch = useDispatch();
   const user_id = useSelector((state) => state.login.user_id);
+
   useEffect(() => {
     dispatch(shopAction.getCartData(user_id));
   }, []);
   const cartData = useSelector((state) => state.shopCart);
+  const buyHandler = (e) => {
+    e.preventDefault();
+    const target = e.target.children[1].children;
+    let totalPrice = 0;
+    for (let i = 0; i < target.length; i++) {
+      totalPrice += parseInt(target[i].children[0].children[3].textContent);
+    }
+    setTotalPrice(totalPrice);
+    setBuyConfirm(true);
+  };
   return (
-    <WholeWrap>
-      <MyPagePagination
-        component={""}
-        data={cartData ? cartData : {}}
-      ></MyPagePagination>
+    <form onSubmit={buyHandler} style={{ width: "100%", height: "100%" }}>
+      <Nav>
+        <ComponentSpan>이미지</ComponentSpan>
+        <ComponentSpan>이름</ComponentSpan>
+        <ComponentSpan>수량</ComponentSpan>
+        <ComponentSpan>가격</ComponentSpan>
+      </Nav>
+      <MyPagePagination data={cartData ? cartData : {}}></MyPagePagination>
       <BuyBtn>Buy</BuyBtn>
-    </WholeWrap>
+    </form>
   );
 };
 

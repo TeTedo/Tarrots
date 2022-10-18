@@ -20,7 +20,7 @@ const CartConfirm = ({ closeModal, setModal, data }) => {
   const plusNum = () => stateNum(num + 1);
   const userData = useSelector((state) => state.login.user_id);
   const addToCart = () => {
-    dispatch(shopAction.addToCart({ ...data, userData, num }));
+    dispatch(shopAction.addToCart({ ...data, user_id: userData, num }));
     setModal(false);
   };
   return (

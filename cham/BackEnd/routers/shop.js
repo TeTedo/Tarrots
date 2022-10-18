@@ -93,10 +93,9 @@ router.post("/shop/permission", async (req, res) => {
 });
 router.post("/shop/cart", async (req, res) => {
   const { user_id, id: shop_id, num } = req.body;
-  await ShopCart.create({
-    user_id,
-    shop_id,
-    num,
+  await ShopCart.findOne({ where: { user_id, shop_id } }).then((result) => {
+    if (result) result.update({ num: result.num + num });
+    else ShopCart.create({ user_id, shop_id, num });
   });
   res.send("끝");
 });
@@ -105,6 +104,7 @@ router.post("/shop/cartData", async (req, res) => {
   const cartData = await ShopCart.findAll({
     where: { user_id },
     raw: true,
+    include: [ShopList],
   });
   res.send(cartData);
 });
