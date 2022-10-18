@@ -32,4 +32,14 @@ const shopSlide = (state = {}, action) => {
   }
 };
 
-export const shop = { shopPermission, shopData, shopSlide };
+const shopCart = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "CART":
+      return { ...payload };
+
+    default:
+      return state;
+  }
+};
+export const shop = { shopPermission, shopData, shopSlide, shopCart };

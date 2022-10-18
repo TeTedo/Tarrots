@@ -4,16 +4,18 @@ const login = (state = { status: false }, action) => {
   const { setCookie, removeCookie } = Cookie;
   switch (type) {
     case "LOGIN":
-      setCookie("access", payload.access_token, {
-        path: "/",
-        secure: true,
-        sameSite: "none",
-      });
-      setCookie("refresh", payload.refresh_token, {
-        path: "/",
-        secure: true,
-        sameSite: "none",
-      });
+      if (payload.access_token) {
+        setCookie("access", payload.access_token, {
+          path: "/",
+          secure: true,
+          sameSite: "none",
+        });
+        setCookie("refresh", payload.refresh_token, {
+          path: "/",
+          secure: true,
+          sameSite: "none",
+        });
+      }
       window.localStorage.setItem("login", true);
       return {
         ...state,

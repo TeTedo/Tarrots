@@ -64,6 +64,20 @@ const permissionAction = (action, id) => {
   };
 };
 
+const addToCart = (data) => {
+  return async (dispatch, getState) => {
+    await axios.post("http://localhost:8000/shop/cart", { ...data });
+    alert("장바구니에 추가되었습니다.");
+  };
+};
+const getCartData = (user_id) => {
+  return async (dispatch, getState) => {
+    const cartData = await axios.post("http://localhost:8000/shop/cartData", {
+      user_id,
+    });
+    dispatch({ type: "CART", payload: { ...cartData.data } });
+  };
+};
 export const shopAction = {
   uploadGoodsToServer,
   getPermissionData,
@@ -73,4 +87,6 @@ export const shopAction = {
   uploadSlideToServer,
   getSlideData,
   deleteSlideData,
+  addToCart,
+  getCartData,
 };

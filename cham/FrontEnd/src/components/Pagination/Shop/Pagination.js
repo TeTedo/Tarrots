@@ -35,12 +35,13 @@ const Pagination = ({ component: Component, shopData }) => {
         {/* 컴포넌트자리 */}
         {new Array(length)
           .fill(0)
-          .slice(index * changedValue, index * changedValue + changedValue)
           .map((v, idx) => (
             <div className={cardClassName} key={idx}>
               <Component shopData={shopData[idx]} change={change}></Component>
             </div>
-          ))}
+          ))
+          .reverse()
+          .slice(index * changedValue, index * changedValue + changedValue)}
       </div>
       <div className="pagination_page">
         {new Array(pageNum).fill(0).map((v, idx) => (

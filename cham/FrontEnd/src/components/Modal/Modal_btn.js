@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
-const Modal_btn = ({ text, className }) => {
+const Modal_btn = ({ text, className, data }) => {
   const [modal, setModal] = useState(false);
   const showModal = () => {
     setModal(true);
@@ -10,7 +10,7 @@ const Modal_btn = ({ text, className }) => {
       <button className={className} onClick={showModal}>
         {text}
       </button>
-      {modal ? <Modal type={text} setModal={setModal} /> : ""}
+      {modal ? <Modal type={text} setModal={setModal} data={data} /> : ""}
     </>
   );
 };

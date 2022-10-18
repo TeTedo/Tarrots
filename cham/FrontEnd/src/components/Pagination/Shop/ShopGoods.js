@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Wrap, Img } from "../Pagination_styledComponents";
+import { Wrap, Img, Div, Span } from "../Pagination_styledComponents";
+import Modal_btn from "components/Modal/Modal_btn";
 const ShopGoods = ({ shopData, change }) => {
   const [enter, setEnter] = useState(false);
   const enterCheck = (e) => {
@@ -8,18 +9,50 @@ const ShopGoods = ({ shopData, change }) => {
   return (
     <>
       <Wrap onMouseEnter={enterCheck} onMouseLeave={enterCheck}>
-        <Img src={shopData.image} alt="이미지 오류" />
         {enter ? (
           change ? (
             // 9개일때 마우스엔터
-            <></>
+            <>
+              <Span>{shopData.price}원</Span>
+              <Span>
+                <Modal_btn
+                  text="CART"
+                  className="fa-solid fa-cart-shopping"
+                  data={shopData}
+                />
+                <Modal_btn
+                  text="BUY"
+                  className="fa-solid fa-money-check-dollar"
+                  data={shopData}
+                />
+              </Span>
+            </>
           ) : (
             //4개일때 엔터
-            <></>
+            <>
+              <Div>
+                <i className="fa-solid fa-star">&nbsp;{shopData.grade}</i>
+              </Div>
+              <Span>{shopData.price}원</Span>
+              <Span>
+                <Modal_btn
+                  text="CART"
+                  className="fa-solid fa-cart-shopping"
+                  data={shopData}
+                />
+                <Modal_btn
+                  text="BUY"
+                  className="fa-solid fa-money-check-dollar"
+                  data={shopData}
+                />
+              </Span>
+            </>
           )
         ) : (
           // 마우스 안올려놨을때
-          <></>
+          <>
+            <Img src={shopData.image} alt="이미지 오류" />
+          </>
         )}
       </Wrap>
     </>

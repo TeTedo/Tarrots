@@ -28,7 +28,7 @@ const PreviewImg = styled.img`
   height: 100%;
   border-radius: 50%;
 `;
-const BtnWrap = styled.div`
+const BtnWrap = styled.button`
   width: 80%;
   height: 50px;
   margin-bottom: 20px;
@@ -45,5 +45,41 @@ const BtnWrap = styled.div`
     color: white;
   }
 `;
-
-export { Wrap, Input, Preview, PreviewImg, BtnWrap, WholeWrap };
+const PaginationElem = styled.div`
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const BuyBtn = styled.button`
+  width: 100%;
+  height: 35px;
+  border: 2px solid green;
+  background-color: white;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  :hover {
+    background-color: green;
+    color: white;
+  }
+`;
+const PaginationNum = styled.div`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export {
+  Wrap,
+  Input,
+  Preview,
+  PreviewImg,
+  BtnWrap,
+  WholeWrap,
+  PaginationElem,
+  BuyBtn,
+  PaginationNum,
+};

@@ -73,4 +73,30 @@ const loginCheck = () => {
     }
   };
 };
-export const loginAction = { signup, login, loginCheck };
+const modifyInfo = (data) => {
+  return async (dispatch, getState) => {
+    const { formData, config, user_id, user_pw } = data;
+    const userData = await axios({
+      method: "post",
+      url: "http://localhost:8000/login",
+      data: { user_id, user_pw },
+    });
+
+    if (userData.data.user_id) {
+      const modify = await axios.post(
+        "http://localhost:8000/profile/modify",
+        formData,
+        config
+      );
+      if (modify) {
+        alert("회원정보 수정 성공");
+        dispatch({
+          type: "LOGIN",
+          payload: { ...modify.data },
+        });
+      }
+    }
+    if (userData.data === "비밀번호") alert("올바른 비밀번호를 입력해주세요.");
+  };
+};
+export const loginAction = { signup, login, loginCheck, modifyInfo };

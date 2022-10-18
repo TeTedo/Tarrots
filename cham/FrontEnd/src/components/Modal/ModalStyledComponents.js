@@ -242,7 +242,29 @@ const MiniNavWrap = styled.div`
     background-color: gray;
   }
 `;
+const CartInput = styled.input`
+  display: none;
+`;
+const LabelInput = styled.label`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const LabelControl = styled.div`
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: green;
+`;
 export {
+  CartInput,
+  LabelInput,
+  LabelControl,
   ModalWrap,
   Wrap,
   Content,

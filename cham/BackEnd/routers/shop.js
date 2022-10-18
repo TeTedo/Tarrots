@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { ShopList, ShopSlideMain, User } = require("../models");
+const { ShopList, ShopSlideMain, User, ShopCart } = require("../models");
 const imgUpload = require("../middleware/imgUpload");
 const path = require("path");
 router.post("/shop/uploads", imgUpload.single("file"), async (req, res) => {
@@ -91,5 +91,21 @@ router.post("/shop/permission", async (req, res) => {
   });
   res.send(shopData);
 });
-
+router.post("/shop/cart", async (req, res) => {
+  const { user_id, id: shop_id, num } = req.body;
+  await ShopCart.create({
+    user_id,
+    shop_id,
+    num,
+  });
+  res.send("끝");
+});
+router.post("/shop/cartData", async (req, res) => {
+  const { user_id } = req.body;
+  const cartData = await ShopCart.findAll({
+    where: { user_id },
+    raw: true,
+  });
+  res.send(cartData);
+});
 module.exports = router;

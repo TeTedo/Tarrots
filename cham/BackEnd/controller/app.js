@@ -45,7 +45,8 @@ app.use(
 const singUp = require("../routers/signUp");
 const login = require("../routers/login");
 const shop = require("../routers/shop");
-app.use(singUp, login, shop);
+const modifyProfile = require("../routers/modifyProfile");
+app.use(singUp, login, shop, modifyProfile);
 
 app.listen(8000, () => {
   console.log("server start");

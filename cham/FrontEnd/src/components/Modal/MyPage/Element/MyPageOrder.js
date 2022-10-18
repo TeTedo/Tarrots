@@ -1,7 +1,12 @@
 import React from "react";
-
+import { WholeWrap } from "./MyPageStyledComponents";
+import MyPagePagination from "./MyPagePagination";
 const MyPageOrder = () => {
-  return <div>MyPageOrder</div>;
+  return (
+    <WholeWrap>
+      <MyPagePagination></MyPagePagination>
+    </WholeWrap>
+  );
 };
 
 export default MyPageOrder;
