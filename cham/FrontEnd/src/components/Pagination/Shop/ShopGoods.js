@@ -38,7 +38,7 @@ const ShopGoods = ({ shopData, change }) => {
             //4개일때 엔터
             <>
               <Div>
-                <i className="fa-solid fa-star">&nbsp;{shopData.grade}</i>
+                <i className="fa-solid fa-star">&nbsp;{shopData.grade}/5</i>
               </Div>
               <Span>{shopData.price}원</Span>
               <Modal_btn
