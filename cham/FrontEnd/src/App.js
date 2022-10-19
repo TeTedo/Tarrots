@@ -9,6 +9,9 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loginAction.loginCheck());
+    setInterval(() => {
+      dispatch(loginAction.loginCheck());
+    }, 10000);
   }, []);
   return (
     <div className="App">

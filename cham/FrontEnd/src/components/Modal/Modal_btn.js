@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "./Modal";
 const Modal_btn = ({ text, className, data }) => {
   const [modal, setModal] = useState(false);
-  const showModal = () => {
+  const showModal = (e) => {
     setModal(true);
   };
   return (

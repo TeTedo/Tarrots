@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class ShopBuy extends Sequelize.Model {
+class ShopReview extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
@@ -8,25 +8,25 @@ class ShopBuy extends Sequelize.Model {
           type: Sequelize.STRING(16),
           allowNull: false,
         },
-        shop_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
-        num: {
+        review_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
         review: {
           type: Sequelize.STRING,
-          allowNull: true,
+          allowNull: false,
+        },
+        grade: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
         },
       },
       {
         sequelize: sequelize,
         timestamps: true,
         underscored: true,
-        modelName: "ShopBuy",
-        tableName: "shopBuys",
+        modelName: "ShopReview",
+        tableName: "shopReviews",
         charset: "utf8",
         collate: "utf8_general_ci",
       }
@@ -34,15 +34,11 @@ class ShopBuy extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.ShopBuy.belongsTo(db.ShopList, {
-      foreignKey: "shop_id",
-      targetKey: "id",
-    });
-    db.ShopBuy.hasMany(db.ShopReview, {
+    db.ShopReview.belongsTo(db.ShopList, {
       foreignKey: "review_id",
-      sourceKey: "id",
+      targetKey: "id",
     });
   }
 }
 
-module.exports = ShopBuy;
+module.exports = ShopReview;

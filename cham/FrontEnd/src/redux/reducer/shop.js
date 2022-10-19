@@ -37,9 +37,21 @@ const shopCart = (state = {}, action) => {
   switch (type) {
     case "CART":
       return { ...payload };
-
+    case "SHOPBOUGHT":
+      return { ...payload };
     default:
       return state;
   }
 };
-export const shop = { shopPermission, shopData, shopSlide, shopCart };
+const buying = (state = [], action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "SHOPBUY":
+      return [...state, { ...payload }];
+    case "SHOPBUYEND":
+      return [];
+    default:
+      return state;
+  }
+};
+export const shop = { shopPermission, shopData, shopSlide, shopCart, buying };

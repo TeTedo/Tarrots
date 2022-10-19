@@ -1,6 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { ShopList, ShopSlideMain, User, ShopCart } = require("../models");
+const {
+  ShopList,
+  ShopSlideMain,
+  User,
+  ShopCart,
+  ShopBuy,
+  ShopReview,
+} = require("../models");
 const imgUpload = require("../middleware/imgUpload");
 const path = require("path");
 router.post("/shop/uploads", imgUpload.single("file"), async (req, res) => {
@@ -107,5 +114,44 @@ router.post("/shop/cartData", async (req, res) => {
     include: [ShopList],
   });
   res.send(cartData);
+});
+router.post("/shop/buyingData", async (req, res) => {
+  for (const value of req.body) {
+    await ShopBuy.create({
+      user_id: value.user_id,
+      shop_id: value.shop_id,
+      num: value.num,
+      review: "none",
+    });
+    await ShopCart.destroy({
+      where: { user_id: value.user_id, shop_id: value.shop_id },
+    });
+  }
+
+  const cartData = await ShopCart.findAll({
+    where: { user_id: req.body[0].user_id },
+  });
+
+  res.send(cartData);
+});
+router.post("/shop/boughtData", async (req, res) => {
+  const { user_id } = req.body;
+  const boughtData = await ShopBuy.findAll({
+    where: { user_id },
+    raw: true,
+    include: [ShopList, ShopReview],
+  });
+  res.send(boughtData);
+});
+router.post("/shop/writeReview", async (req, res) => {
+  const { user_id, review_id, grade, review } = req.body;
+  await ShopReview.create({
+    user_id,
+    review_id,
+    grade,
+    review,
+  });
+  await ShopBuy.update({ review: "done" }, { where: { id: review_id } });
+  res.send("끝");
 });
 module.exports = router;

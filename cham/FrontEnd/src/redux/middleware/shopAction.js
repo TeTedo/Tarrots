@@ -78,6 +78,30 @@ const getCartData = (user_id) => {
     dispatch({ type: "CART", payload: { ...cartData.data } });
   };
 };
+const buyingData = (data) => {
+  return async (dispatch, getState) => {
+    const cartData = await axios.post("http://localhost:8000/shop/buyingData", [
+      ...data,
+    ]);
+    alert("구매가 완료되었습니다.");
+    dispatch({ type: "CART", payload: { ...cartData.data } });
+  };
+};
+const boughtData = (user_id) => {
+  return async (dispatch, getState) => {
+    const boughtData = await axios.post(
+      "http://localhost:8000/shop/boughtData",
+      { user_id }
+    );
+    dispatch({ type: "SHOPBOUGHT", payload: { ...boughtData.data } });
+  };
+};
+const writeReview = (data) => {
+  return async (dispatch, getState) => {
+    await axios.post("http://localhost:8000/shop/writeReview", { ...data });
+    alert("리뷰가 등록되었습니다.");
+  };
+};
 export const shopAction = {
   uploadGoodsToServer,
   getPermissionData,
@@ -89,4 +113,7 @@ export const shopAction = {
   deleteSlideData,
   addToCart,
   getCartData,
+  buyingData,
+  boughtData,
+  writeReview,
 };

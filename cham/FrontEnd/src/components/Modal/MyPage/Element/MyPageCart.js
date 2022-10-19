@@ -8,12 +8,15 @@ import {
 import MyPagePagination from "./MyPagePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { shopAction } from "redux/middleware/shopAction";
+import { loginAction } from "redux/middleware/loginAction";
+import MyPageCartCom from "./MyPageCartCom";
 const MyPageCart = ({ setBuyConfirm, setTotalPrice }) => {
   const dispatch = useDispatch();
   const user_id = useSelector((state) => state.login.user_id);
-
   useEffect(() => {
-    dispatch(shopAction.getCartData(user_id));
+    dispatch(loginAction.loginCheck()).then(() => {
+      dispatch(shopAction.getCartData(user_id));
+    });
   }, []);
   const cartData = useSelector((state) => state.shopCart);
   const buyHandler = (e) => {
@@ -34,7 +37,10 @@ const MyPageCart = ({ setBuyConfirm, setTotalPrice }) => {
         <ComponentSpan>수량</ComponentSpan>
         <ComponentSpan>가격</ComponentSpan>
       </Nav>
-      <MyPagePagination data={cartData ? cartData : {}}></MyPagePagination>
+      <MyPagePagination
+        data={cartData ? cartData : {}}
+        component={MyPageCartCom}
+      ></MyPagePagination>
       <BuyBtn>Buy</BuyBtn>
     </form>
   );

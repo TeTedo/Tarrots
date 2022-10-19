@@ -4,8 +4,7 @@ import {
   PaginationElem,
   PaginationNum,
 } from "./MyPageStyledComponents";
-import MyPageCartCom from "./MyPageCartCom";
-const MyPagePagination = ({ data }) => {
+const MyPagePagination = ({ component: Component, data }) => {
   const [index, setIndex] = useState(0);
   const dataValue = Object.values(data);
   const pageLength = Math.ceil(dataValue.length / 10);
@@ -18,7 +17,7 @@ const MyPagePagination = ({ data }) => {
         {dataValue
           .map((v, idx) => (
             <PaginationElem key={idx}>
-              <MyPageCartCom data={v} />
+              <Component data={v} />
             </PaginationElem>
           ))
           .slice(index * 10, (index + 1) * 10)

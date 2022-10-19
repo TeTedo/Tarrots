@@ -82,6 +82,7 @@ const ComponentWrap = styled.div`
   border-radius: 12px;
   border: 2px solid green;
 `;
+
 const ComponentSpan = styled.span`
   width: 100px;
   display: flex;

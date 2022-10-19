@@ -8,10 +8,19 @@ import {
   BtnWrap,
   ContentWrap,
 } from "../../ModalStyledComponents";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { shopAction } from "redux/middleware/shopAction";
 const Buy = ({ closeModal, setModal, data }) => {
   const dispatch = useDispatch();
+  const buyData = useSelector((state) => state.buying);
   const BUY = () => {
+    if (buyData[0]) {
+      dispatch(shopAction.buyingData(buyData)).then(() => {
+        dispatch({ type: "SHOPBUYEND" });
+      });
+    } else {
+      alert("구매할 물건을 선택해주세요.");
+    }
     setModal(false);
   };
   return (
