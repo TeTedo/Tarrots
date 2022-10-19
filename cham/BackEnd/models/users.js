@@ -63,6 +63,12 @@ class User extends Sequelize.Model {
       sourceKey: "user_id",
     });
   }
+  static associate(db) {
+    db.User.hasMany(db.ShopReview, {
+      foreignKey: "user_id",
+      sourceKey: "user_id",
+    });
+  }
 }
 
 module.exports = User;

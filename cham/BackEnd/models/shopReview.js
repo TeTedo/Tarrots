@@ -12,6 +12,10 @@ class ShopReview extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        shop_id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
         review: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -36,6 +40,18 @@ class ShopReview extends Sequelize.Model {
   static associate(db) {
     db.ShopReview.belongsTo(db.ShopList, {
       foreignKey: "review_id",
+      targetKey: "id",
+    });
+  }
+  static associate(db) {
+    db.ShopReview.belongsTo(db.User, {
+      foreignKey: "user_id",
+      targetKey: "user_id",
+    });
+  }
+  static associate(db) {
+    db.ShopReview.belongsTo(db.ShopList, {
+      foreignKey: "shop_id",
       targetKey: "id",
     });
   }

@@ -9,11 +9,11 @@ import PermissionCheck from "./Shop/Permission/PermissionCheck";
 import ShopSlideAdd from "./Shop/Slide/ShopSlideAdd";
 import MyPageModal from "./MyPage/MyPageModal";
 import MyPageConfirm from "./MyPage/Element/Modal/MyPageConfirm";
-import GoodsPage from "./Shop/Goods/GoodsPage";
 import CartConfirm from "./Shop/Cart.js/CartConfirm";
 import BuyConfirm from "./Shop/Buy/BuyConfirm";
 import Buy from "./Shop/Buy/Buy";
 import ShopReview from "./Review/ShopReview";
+import Product from "./Shop/Product/Product";
 const Modal = ({ setModal, type, data }) => {
   const closeModal = (e) => {
     if (e.currentTarget === e.target) setModal(false);
@@ -37,10 +37,6 @@ const Modal = ({ setModal, type, data }) => {
       return <PermissionCheck closeModal={closeModal} setModal={setModal} />;
     case "슬라이드추가":
       return <ShopSlideAdd closeModal={closeModal} setModal={setModal} />;
-    case "SHOP 상세페이지":
-      return (
-        <GoodsPage closeModal={closeModal} setModal={setModal} data={data} />
-      );
     case "프로필수정확인":
       return (
         <MyPageConfirm
@@ -49,6 +45,7 @@ const Modal = ({ setModal, type, data }) => {
           setModal={setModal}
         />
       );
+
     case "CART":
       return (
         <CartConfirm closeModal={closeModal} setModal={setModal} data={data} />
@@ -65,7 +62,7 @@ const Modal = ({ setModal, type, data }) => {
       );
     case "상세 페이지 보기":
       return (
-        <ShopReview closeModal={closeModal} setModal={setModal} data={data} />
+        <Product closeModal={closeModal} setModal={setModal} data={data} />
       );
     default:
       return;

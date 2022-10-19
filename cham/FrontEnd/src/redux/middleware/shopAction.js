@@ -102,6 +102,17 @@ const writeReview = (data) => {
     alert("리뷰가 등록되었습니다.");
   };
 };
+const getProductionData = (data) => {
+  return async (dispatch, getState) => {
+    const productionData = await axios.post(
+      "http://localhost:8000/shop/getProductionData",
+      {
+        ...data,
+      }
+    );
+    dispatch({ type: "SHOPPRODUCTION", payload: [...productionData.data] });
+  };
+};
 export const shopAction = {
   uploadGoodsToServer,
   getPermissionData,
@@ -116,4 +127,5 @@ export const shopAction = {
   buyingData,
   boughtData,
   writeReview,
+  getProductionData,
 };

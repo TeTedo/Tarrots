@@ -144,14 +144,40 @@ router.post("/shop/boughtData", async (req, res) => {
   res.send(boughtData);
 });
 router.post("/shop/writeReview", async (req, res) => {
-  const { user_id, review_id, grade, review } = req.body;
+  const { user_id, review_id, grade, review, shop_id } = req.body;
   await ShopReview.create({
     user_id,
     review_id,
     grade,
     review,
+    shop_id,
   });
   await ShopBuy.update({ review: "done" }, { where: { id: review_id } });
   res.send("끝");
+});
+router.post("/shop/getProductionData", async (req, res) => {
+  const { id } = req.body;
+  let shopData = await ShopList.findAll({
+    where: { id },
+    include: [{ model: ShopReview }],
+  });
+  const userIdData = shopData[0].ShopReviews.map((v) => v.user_id);
+  let productionData = [];
+  for (let i = 0; i < userIdData.length; i++) {
+    const userProfile = await User.findOne({
+      where: { user_id: userIdData[i] },
+      attributes: ["profile_img"],
+      raw: true,
+    });
+    productionData = [
+      ...productionData,
+      {
+        profile_img: userProfile.profile_img,
+        review: shopData[0].ShopReviews[i].review,
+        num: userIdData.length,
+      },
+    ];
+  }
+  res.send(productionData);
 });
 module.exports = router;

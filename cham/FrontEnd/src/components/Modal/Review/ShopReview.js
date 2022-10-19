@@ -19,9 +19,8 @@ const ShopReview = ({ closeModal, setModal, data }) => {
     setIndex(e.target.dataset.index);
   };
   const makeReview = () => {
-    console.log(data);
-    const { user_id, id: review_id } = data;
-    const grade = index + 1;
+    const { user_id, id: review_id, shop_id } = data;
+    const grade = +index + 1;
     const review = reviewText.current.value;
     dispatch(
       shopAction.writeReview({
@@ -29,6 +28,7 @@ const ShopReview = ({ closeModal, setModal, data }) => {
         review_id,
         grade,
         review,
+        shop_id,
       })
     );
     setModal(false);

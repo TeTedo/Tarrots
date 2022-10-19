@@ -54,4 +54,20 @@ const buying = (state = [], action) => {
       return state;
   }
 };
-export const shop = { shopPermission, shopData, shopSlide, shopCart, buying };
+const productionData = (state = [], action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "SHOPPRODUCTION":
+      return [...payload];
+    default:
+      return state;
+  }
+};
+export const shop = {
+  shopPermission,
+  shopData,
+  shopSlide,
+  shopCart,
+  buying,
+  productionData,
+};
