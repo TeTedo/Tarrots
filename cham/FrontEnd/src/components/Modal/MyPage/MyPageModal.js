@@ -13,6 +13,7 @@ import MyPageCart from "./Element/MyPageCart";
 import MyPageProfile from "./Element/MyPageProfile";
 import MyPageOrder from "./Element/MyPageOrder";
 import Modal from "../Modal";
+import MyPageSeller from "./Element/MyPageSeller";
 export const BuyContext = createContext();
 export const MakeReview = createContext();
 const MyPageModal = ({ closeModal, setModal }) => {
@@ -23,12 +24,16 @@ const MyPageModal = ({ closeModal, setModal }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [review, setReview] = useState(false);
   const [reviewData, setReviewData] = useState(null);
-  const menu = ["PROFILE", "CART", "ORDER"];
+  const [seller, setSeller] = useState(false);
+  const [sellerData, setSellerData] = useState(null);
+  const menu = ["PROFILE", "CART", "ORDER", "SELLER"];
   const elem = [
     <MyPageProfile
       key={0}
       setModify={setModify}
       setModifyData={setModifyData}
+      setSeller={setSeller}
+      setSellerData={setSellerData}
     />,
     <BuyContext.Provider key={1} value={{ buyConfirm }}>
       <MyPageCart setBuyConfirm={setBuyConfirm} setTotalPrice={setTotalPrice} />
@@ -36,6 +41,7 @@ const MyPageModal = ({ closeModal, setModal }) => {
     <MakeReview.Provider key={2} value={{ setReview, setReviewData }}>
       <MyPageOrder />
     </MakeReview.Provider>,
+    <MyPageSeller key={3}></MyPageSeller>,
   ];
   return (
     <ModalWrap onClick={closeModal}>
@@ -60,6 +66,11 @@ const MyPageModal = ({ closeModal, setModal }) => {
         )}
         {review ? (
           <Modal type={"SHOP리뷰작성"} setModal={setReview} data={reviewData} />
+        ) : (
+          ""
+        )}
+        {seller ? (
+          <Modal type={"판매자신청"} setModal={setSeller} data={sellerData} />
         ) : (
           ""
         )}

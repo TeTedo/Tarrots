@@ -12,9 +12,16 @@ const shopPermission = (state = {}, action) => {
 const shopData = (state = {}, action) => {
   const { type, payload } = action;
   switch (type) {
-    case "PERMISSION":
-      return { ...state, ...payload };
     case "SHOPDATA":
+      return { ...payload };
+    default:
+      return state;
+  }
+};
+const permissionData = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "PERMISSION":
       return { ...payload };
     default:
       return state;
@@ -63,6 +70,15 @@ const productionData = (state = [], action) => {
       return state;
   }
 };
+const sellerData = (state = [], action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "FINDAPPLYSELLER":
+      return [...payload];
+    default:
+      return state;
+  }
+};
 export const shop = {
   shopPermission,
   shopData,
@@ -70,4 +86,6 @@ export const shop = {
   shopCart,
   buying,
   productionData,
+  permissionData,
+  sellerData,
 };

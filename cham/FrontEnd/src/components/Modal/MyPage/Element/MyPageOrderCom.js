@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 import { ComponentWrap, ComponentSpan, Img } from "./MyPageStyledComponents";
 import { MakeReview } from "../MyPageModal";
 const MyPageOrderCom = ({ data }) => {
-  const reivew = useRef();
+  const reivew = useRef(null);
   const { setReview, setReviewData } = useContext(MakeReview);
   const writeReview = () => {
     if (reivew.current.textContent === "미작성") {
@@ -17,7 +17,9 @@ const MyPageOrderCom = ({ data }) => {
     }
   };
   const mouseLeave = (e) => {
-    e.currentTarget.style.backgroundColor = "white";
+    if (reivew.current.textContent === "미작성") {
+      e.currentTarget.style.backgroundColor = "white";
+    }
   };
   return (
     <ComponentWrap

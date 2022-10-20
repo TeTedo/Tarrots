@@ -189,6 +189,10 @@ const Pagination = styled.span`
 `;
 const PermissionSpan = styled.span`
   width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
 `;
 const PermissionInfo = styled.div`
   width: 100%;

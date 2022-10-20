@@ -74,7 +74,7 @@ const Product = ({ closeModal, setModal, data }) => {
                   key={idx}
                 />
               ))}
-              ({data.grade}/5)
+              ({(+data.grade).toFixed(1)}/5)
             </Grade>
             <Price>{data.price}원</Price>
             <BtnWrap>

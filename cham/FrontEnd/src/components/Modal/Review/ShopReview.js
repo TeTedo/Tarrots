@@ -30,7 +30,9 @@ const ShopReview = ({ closeModal, setModal, data }) => {
         review,
         shop_id,
       })
-    );
+    ).then(() => {
+      dispatch(shopAction.getShopData());
+    });
     setModal(false);
   };
   return (

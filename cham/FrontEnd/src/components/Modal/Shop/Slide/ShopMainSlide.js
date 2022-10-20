@@ -16,7 +16,7 @@ const ShopMainSlide = ({ closeModal, setModal }) => {
   const [index, setIndex] = useState(0);
   // 전체 개수
   // 페이지당 개수
-  const num = 10;
+  const num = 5;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(shopAction.getSlideData());
@@ -48,7 +48,7 @@ const ShopMainSlide = ({ closeModal, setModal }) => {
             ))}
           <PermissionPagination
             index={index}
-            pageLength={Math.ceil(dataLength / 10)}
+            pageLength={Math.ceil(dataLength / 5)}
             setIndex={setIndex}
           ></PermissionPagination>
         </PermissionContent>

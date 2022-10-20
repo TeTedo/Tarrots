@@ -7,6 +7,7 @@ const {
   ShopCart,
   ShopBuy,
   ShopReview,
+  ShopSeller,
 } = require("../models");
 const imgUpload = require("../middleware/imgUpload");
 const path = require("path");
@@ -153,6 +154,26 @@ router.post("/shop/writeReview", async (req, res) => {
     shop_id,
   });
   await ShopBuy.update({ review: "done" }, { where: { id: review_id } });
+  const findReview = await ShopReview.findAll({
+    where: { shop_id },
+    raw: true,
+  });
+  const reviewNum = findReview.length;
+  const findGrade = await ShopList.findOne({
+    where: { id: shop_id },
+    raw: true,
+  });
+  const reviewGrade = findGrade.grade;
+  if (reviewGrade) {
+    await ShopList.update(
+      {
+        grade: (reviewGrade * (reviewNum - 1) + grade) / reviewNum,
+      },
+      { where: { id: shop_id } }
+    );
+  } else {
+    await ShopList.update({ grade }, { where: { id: shop_id } });
+  }
   res.send("끝");
 });
 router.post("/shop/getProductionData", async (req, res) => {
@@ -179,5 +200,39 @@ router.post("/shop/getProductionData", async (req, res) => {
     ];
   }
   res.send(productionData);
+});
+router.post("/profile/applySeller", async (req, res) => {
+  const { user_id } = req.body;
+  const sellerData = await ShopSeller.findOne({
+    where: { user_id },
+    raw: true,
+  });
+  if (sellerData) {
+    res.send(false);
+  } else {
+    await ShopSeller.create({
+      user_id,
+      permission: "N",
+    });
+    res.send(true);
+  }
+});
+router.get("/shop/getSellerData", async (req, res) => {
+  const sellerData = await ShopSeller.findAll({
+    where: { permission: "N" },
+    include: [{ model: User }],
+    raw: true,
+  });
+  res.send(sellerData);
+});
+router.post("/shop/resultSellerData", async (req, res) => {
+  const { user_id, result } = req.body;
+  if (result === "approve") {
+    await ShopSeller.update({ permission: "Y" }, { where: { user_id } });
+    await User.update({ type: "S" }, { where: { user_id } });
+  } else {
+    await ShopSeller.update({ permission: "D" }, { where: { user_id } });
+  }
+  res.send("끝");
 });
 module.exports = router;

@@ -99,4 +99,33 @@ const modifyInfo = (data) => {
     if (userData.data === "비밀번호") alert("올바른 비밀번호를 입력해주세요.");
   };
 };
-export const loginAction = { signup, login, loginCheck, modifyInfo };
+const applySeller = (data) => {
+  return async (dispatch, getState) => {
+    const { user_id, user_pw } = data;
+    const userData = await axios({
+      method: "post",
+      url: "http://localhost:8000/login",
+      data: { user_id, user_pw },
+    });
+
+    if (userData.data.user_id) {
+      const apply = await axios.post(
+        "http://localhost:8000/profile/applySeller",
+        { user_id }
+      );
+      if (apply.data) {
+        alert("판매자 신청 성공");
+      } else {
+        alert("이미 신청하였습니다.");
+      }
+    }
+    if (userData.data === "비밀번호") alert("올바른 비밀번호를 입력해주세요.");
+  };
+};
+export const loginAction = {
+  signup,
+  login,
+  loginCheck,
+  modifyInfo,
+  applySeller,
+};

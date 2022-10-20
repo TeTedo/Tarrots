@@ -14,6 +14,8 @@ import BuyConfirm from "./Shop/Buy/BuyConfirm";
 import Buy from "./Shop/Buy/Buy";
 import ShopReview from "./Review/ShopReview";
 import Product from "./Shop/Product/Product";
+import ApplySeller from "./MyPage/Element/Modal/ApplySeller";
+import ManageSeller from "./Shop/Seller/ManageSeller";
 const Modal = ({ setModal, type, data }) => {
   const closeModal = (e) => {
     if (e.currentTarget === e.target) setModal(false);
@@ -63,6 +65,14 @@ const Modal = ({ setModal, type, data }) => {
     case "상세 페이지 보기":
       return (
         <Product closeModal={closeModal} setModal={setModal} data={data} />
+      );
+    case "판매자신청":
+      return (
+        <ApplySeller closeModal={closeModal} setModal={setModal} data={data} />
+      );
+    case "판매자신청 현황":
+      return (
+        <ManageSeller closeModal={closeModal} setModal={setModal} data={data} />
       );
     default:
       return;

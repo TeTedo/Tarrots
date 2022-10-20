@@ -8,9 +8,6 @@ const MyPagePagination = ({ component: Component, data }) => {
   const [index, setIndex] = useState(0);
   const dataValue = Object.values(data);
   const pageLength = Math.ceil(dataValue.length / 10);
-  const movePage = (e) => {
-    setIndex(e.target.textContent - 1);
-  };
   return (
     <>
       <WholeWrap>
@@ -31,7 +28,9 @@ const MyPagePagination = ({ component: Component, data }) => {
               color: idx === index ? "green" : "",
               fontSize: idx === index ? "25px" : "",
             }}
-            onClick={movePage}
+            onClick={() => {
+              setIndex(idx);
+            }}
           >
             {idx + 1}
           </PaginationNum>

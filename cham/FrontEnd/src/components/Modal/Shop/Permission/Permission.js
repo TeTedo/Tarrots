@@ -16,7 +16,7 @@ const Permission = ({ closeModal, setModal }) => {
   // 전체 개수
 
   // 페이지당 개수
-  const num = 10;
+  const num = 5;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(shopAction.getPermissionData());
@@ -46,7 +46,7 @@ const Permission = ({ closeModal, setModal }) => {
             ))}
           <PermissionPagination
             index={index}
-            pageLength={Math.ceil(dataLength / 10)}
+            pageLength={Math.ceil(dataLength / 5)}
             setIndex={setIndex}
           ></PermissionPagination>
         </PermissionContent>

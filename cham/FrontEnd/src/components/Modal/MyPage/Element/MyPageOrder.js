@@ -23,6 +23,7 @@ const MyPageOrder = () => {
         <ComponentSpan>가격</ComponentSpan>
         <ComponentSpan>리뷰</ComponentSpan>
       </Nav>
+
       <MyPagePagination
         data={buyData ? buyData : {}}
         component={MyPageOrderCom}

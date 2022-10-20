@@ -9,7 +9,12 @@ import {
   BtnWrap,
 } from "./MyPageStyledComponents";
 import previewImg from "util/previewImg";
-const MyPageProfile = ({ setModify, setModifyData }) => {
+const MyPageProfile = ({
+  setModify,
+  setModifyData,
+  setSeller,
+  setSellerData,
+}) => {
   const previewTarget = useRef();
   const uploadTarget = useRef();
   const dispatch = useDispatch();
@@ -44,46 +49,53 @@ const MyPageProfile = ({ setModify, setModifyData }) => {
   const mobile_number = useRef();
   const address = useRef();
   const email = useRef();
+  const applySeller = () => {
+    setSellerData(userData.user_id);
+    setSeller(true);
+  };
   return (
-    <form onSubmit={submitHandler}>
-      <Wrap>
-        ID
-        <Input defaultValue={userData.user_id} readOnly name="user_id" />
-      </Wrap>
-      <Wrap>
-        PROFILE IMAGE
-        <Preview>
-          <PreviewImg src={userData.profile_img} ref={previewTarget} />
-        </Preview>
-        <Input
-          type="file"
-          ref={uploadTarget}
-          onChange={imgPreview}
-          name="profile_img"
-        />
-      </Wrap>
-      <Wrap>
-        NAME
-        <Input defaultValue={userData.name} readOnly />
-      </Wrap>
-      <Wrap>
-        NICKNAME
-        <Input defaultValue={userData.nick_name} ref={nick_name} />
-      </Wrap>
-      <Wrap>
-        MOBILE NUMBER
-        <Input defaultValue={userData.mobile_number} ref={mobile_number} />
-      </Wrap>
-      <Wrap>
-        ADDRESS
-        <Input defaultValue={userData.address} ref={address} />
-      </Wrap>
-      <Wrap>
-        E-MAIL
-        <Input defaultValue={userData.email} ref={email} />
-      </Wrap>
-      <BtnWrap>수정하기</BtnWrap>
-    </form>
+    <>
+      <form onSubmit={submitHandler}>
+        <Wrap>
+          ID
+          <Input defaultValue={userData.user_id} readOnly name="user_id" />
+        </Wrap>
+        <Wrap>
+          PROFILE IMAGE
+          <Preview>
+            <PreviewImg src={userData.profile_img} ref={previewTarget} />
+          </Preview>
+          <Input
+            type="file"
+            ref={uploadTarget}
+            onChange={imgPreview}
+            name="profile_img"
+          />
+        </Wrap>
+        <Wrap>
+          NAME
+          <Input defaultValue={userData.name} readOnly />
+        </Wrap>
+        <Wrap>
+          NICKNAME
+          <Input defaultValue={userData.nick_name} ref={nick_name} />
+        </Wrap>
+        <Wrap>
+          MOBILE NUMBER
+          <Input defaultValue={userData.mobile_number} ref={mobile_number} />
+        </Wrap>
+        <Wrap>
+          ADDRESS
+          <Input defaultValue={userData.address} ref={address} />
+        </Wrap>
+        <Wrap>
+          E-MAIL
+          <Input defaultValue={userData.email} ref={email} />
+        </Wrap>
+        <BtnWrap>수정하기</BtnWrap>
+      </form>
+      <BtnWrap onClick={applySeller}>판매자 신청</BtnWrap>
+    </>
   );
 };
 

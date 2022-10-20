@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Wrap, Img, Div, Span } from "../Pagination_styledComponents";
 import Modal_btn from "components/Modal/Modal_btn";
 
@@ -7,7 +7,7 @@ const ShopGoods = ({ shopData, change }) => {
   const enterCheck = (e) => {
     e._reactName === "onMouseEnter" ? setEnter(true) : setEnter(false);
   };
-
+  const grade = +shopData.grade;
   return (
     <>
       <Wrap onMouseEnter={enterCheck} onMouseLeave={enterCheck}>
@@ -38,7 +38,7 @@ const ShopGoods = ({ shopData, change }) => {
             //4개일때 엔터
             <>
               <Div>
-                <i className="fa-solid fa-star">&nbsp;{shopData.grade}/5</i>
+                <i className="fa-solid fa-star">&nbsp;{grade.toFixed(1)}/5</i>
               </Div>
               <Span>{shopData.price}원</Span>
               <Modal_btn

@@ -113,6 +113,23 @@ const getProductionData = (data) => {
     dispatch({ type: "SHOPPRODUCTION", payload: [...productionData.data] });
   };
 };
+const getSellerData = () => {
+  return async (dispatch, getState) => {
+    const sellerData = await axios.get(
+      "http://localhost:8000/shop/getSellerData"
+    );
+    dispatch({ type: "FINDAPPLYSELLER", payload: [...sellerData.data] });
+  };
+};
+const resultSellerData = ({ user_id, result }) => {
+  return async (dispatch, getState) => {
+    await axios.post("http://localhost:8000/shop/resultSellerData", {
+      user_id,
+      result,
+    });
+  };
+};
+
 export const shopAction = {
   uploadGoodsToServer,
   getPermissionData,
@@ -128,4 +145,6 @@ export const shopAction = {
   boughtData,
   writeReview,
   getProductionData,
+  getSellerData,
+  resultSellerData,
 };
