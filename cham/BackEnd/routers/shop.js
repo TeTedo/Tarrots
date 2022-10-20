@@ -235,4 +235,13 @@ router.post("/shop/resultSellerData", async (req, res) => {
   }
   res.send("끝");
 });
+router.post("/shop/getTotalSellData", async (req, res) => {
+  const { user_id } = req.body;
+  const totalData = await ShopList.findAll({
+    where: { user_id },
+    include: [ShopBuy],
+    raw: true,
+  });
+  res.send(totalData);
+});
 module.exports = router;

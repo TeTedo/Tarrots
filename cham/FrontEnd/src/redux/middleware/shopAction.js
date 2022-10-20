@@ -129,7 +129,17 @@ const resultSellerData = ({ user_id, result }) => {
     });
   };
 };
-
+const getTotalSellData = (user_id) => {
+  return async (dispatch, getState) => {
+    const totalSell = await axios.post(
+      "http://localhost:8000/shop/getTotalSellData",
+      {
+        user_id,
+      }
+    );
+    dispatch({ type: "TOTALSELLDATA", payload: [...totalSell.data] });
+  };
+};
 export const shopAction = {
   uploadGoodsToServer,
   getPermissionData,
@@ -147,4 +157,5 @@ export const shopAction = {
   getProductionData,
   getSellerData,
   resultSellerData,
+  getTotalSellData,
 };

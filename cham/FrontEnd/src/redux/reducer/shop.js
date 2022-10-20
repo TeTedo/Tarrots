@@ -79,6 +79,16 @@ const sellerData = (state = [], action) => {
       return state;
   }
 };
+const totalSellData = (state = [], action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "TOTALSELLDATA":
+      return [...payload];
+    default:
+      return state;
+  }
+};
+
 export const shop = {
   shopPermission,
   shopData,
@@ -88,4 +98,5 @@ export const shop = {
   productionData,
   permissionData,
   sellerData,
+  totalSellData,
 };

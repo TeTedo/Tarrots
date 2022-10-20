@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { shopAction } from "redux/middleware/shopAction";
 import {
   CallenderWrap,
   Callender,
@@ -12,6 +13,7 @@ import {
 const MyPageCalender = ({ month, setMonth, year, setYear }) => {
   const dispatch = useDispatch();
   const day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  const user_id = useSelector((state) => state.login.user_id);
   const moveMonth = (e) => {
     if (e.target.className.includes("right")) {
       if (month === 12) {
@@ -29,13 +31,21 @@ const MyPageCalender = ({ month, setMonth, year, setYear }) => {
     const date = new Date();
     setYear(date.getFullYear());
     setMonth(date.getMonth() + 1);
+    dispatch(shopAction.getTotalSellData(user_id));
   }, []);
   const prevMonthDate = new Date(year, month - 1, 0).getDate();
   let prevMonthDay = new Date(year, month - 1, 0).getDay();
   prevMonthDay = prevMonthDay === 6 ? -1 : prevMonthDay;
   const currentMonthDate = new Date(year, month, 0).getDate();
-  const getSellData = () => {
-    console.log("gd");
+  const totalData = useSelector((state) => state.totalSellData);
+  const getSellData = (e) => {
+    const day = +e.currentTarget.dataset.index + 1;
+    const dayData = totalData.filter(
+      (v) =>
+        month === new Date(v["ShopBuys.createdAt"]).getMonth() + 1 &&
+        year === new Date(v["ShopBuys.createdAt"]).getFullYear() &&
+        day === new Date(v["ShopBuys.createdAt"]).getDate()
+    );
   };
   return (
     <CallenderWrap>
@@ -73,6 +83,7 @@ const MyPageCalender = ({ month, setMonth, year, setYear }) => {
           key={idx}
           onClick={getSellData}
           style={{ cursor: "pointer" }}
+          data-index={idx}
         >
           <CallenderDate
             style={{
