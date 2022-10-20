@@ -4,8 +4,8 @@ import {
   ComponentSpan,
   Img,
   NumCount,
-} from "./MyPageStyledComponents";
-import { BuyContext } from "../MyPageModal";
+} from "../MyPageStyledComponents";
+import { BuyContext } from "../../MyPageModal";
 import { useDispatch, useSelector } from "react-redux";
 const MyPageCartCom = ({ data }) => {
   const dispatch = useDispatch();
@@ -27,19 +27,20 @@ const MyPageCartCom = ({ data }) => {
       });
     }
   }
+
   giveBuyData();
   return (
     <ComponentWrap>
       <ComponentSpan>
-        <Img src={Object.values(data)[10]} />
+        <Img src={data["ShopList.image"]} />
       </ComponentSpan>
-      <ComponentSpan>{Object.values(data)[8]}</ComponentSpan>
+      <ComponentSpan>{data["ShopList.name"]}</ComponentSpan>
       <ComponentSpan ref={count}>
         <NumCount onClick={minus}>-</NumCount>
         {num}
         <NumCount onClick={plus}>+</NumCount>
       </ComponentSpan>
-      <ComponentSpan>{+Object.values(data)[14] * num}원</ComponentSpan>
+      <ComponentSpan>{data["ShopList.price"] * num}원</ComponentSpan>
     </ComponentWrap>
   );
 };

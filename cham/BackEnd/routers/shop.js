@@ -117,20 +117,28 @@ router.post("/shop/cartData", async (req, res) => {
   res.send(cartData);
 });
 router.post("/shop/buyingData", async (req, res) => {
-  for (const value of req.body) {
+  for (let i = 0; i < Object.values(req.body[0]).length; i++) {
     await ShopBuy.create({
-      user_id: value.user_id,
-      shop_id: value.shop_id,
-      num: value.num,
+      user_id: req.body[0][i].user_id,
+      shop_id: req.body[0][i].shop_id,
+      num: req.body[0][i].num,
       review: "none",
     });
+
     await ShopCart.destroy({
-      where: { user_id: value.user_id, shop_id: value.shop_id },
+      where: {
+        user_id: req.body[0][i].user_id,
+        shop_id: req.body[0][i].shop_id,
+      },
     });
   }
 
+  await User.increment(
+    { point: +Math.ceil(req.body[1].totalPrice * 0.05 - req.body[1].point) },
+    { where: { user_id: req.body[0][0].user_id } }
+  );
   const cartData = await ShopCart.findAll({
-    where: { user_id: req.body[0].user_id },
+    where: { user_id: req.body[0][0].user_id },
   });
 
   res.send(cartData);

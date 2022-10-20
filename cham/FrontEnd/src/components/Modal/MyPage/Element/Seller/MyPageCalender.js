@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { shopAction } from "redux/middleware/shopAction";
 import {
   CallenderWrap,
   Callender,
@@ -9,10 +8,21 @@ import {
   CallenderPrice,
   CallenderUnit,
   CallenderDate,
-} from "./MyPageStyledComponents";
-const MyPageCalender = ({ month, setMonth, year, setYear }) => {
+} from "../MyPageStyledComponents";
+const MyPageCalender = ({
+  month,
+  setMonth,
+  year,
+  setYear,
+  setMonthPrice,
+  setTotalPrice,
+  setDayData,
+  setMove,
+  setDate,
+}) => {
   const dispatch = useDispatch();
   const day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  const totalData = useSelector((state) => state.totalSellData);
   const user_id = useSelector((state) => state.login.user_id);
   const moveMonth = (e) => {
     if (e.target.className.includes("right")) {
@@ -28,24 +38,38 @@ const MyPageCalender = ({ month, setMonth, year, setYear }) => {
     }
   };
   useEffect(() => {
-    const date = new Date();
-    setYear(date.getFullYear());
-    setMonth(date.getMonth() + 1);
-    dispatch(shopAction.getTotalSellData(user_id));
-  }, []);
+    setTotalPrice(
+      totalData
+        .map((v) => +v["ShopBuys.num"] * +v.price)
+        .reduce((acc, cur) => acc + cur, 0)
+    );
+    setMonthPrice(
+      monthData
+        .map((v) => +v["ShopBuys.num"] * +v.price)
+        .reduce((acc, cur) => acc + cur, 0)
+    );
+  }, [totalData, month]);
   const prevMonthDate = new Date(year, month - 1, 0).getDate();
   let prevMonthDay = new Date(year, month - 1, 0).getDay();
   prevMonthDay = prevMonthDay === 6 ? -1 : prevMonthDay;
   const currentMonthDate = new Date(year, month, 0).getDate();
-  const totalData = useSelector((state) => state.totalSellData);
+  const monthData = totalData.filter(
+    (v) =>
+      month === new Date(v["ShopBuys.createdAt"]).getMonth() + 1 &&
+      year === new Date(v["ShopBuys.createdAt"]).getFullYear()
+  );
+
   const getSellData = (e) => {
-    const day = +e.currentTarget.dataset.index + 1;
+    const date = +e.currentTarget.dataset.index + 1;
+    setDate(date);
     const dayData = totalData.filter(
       (v) =>
         month === new Date(v["ShopBuys.createdAt"]).getMonth() + 1 &&
         year === new Date(v["ShopBuys.createdAt"]).getFullYear() &&
-        day === new Date(v["ShopBuys.createdAt"]).getDate()
+        date === new Date(v["ShopBuys.createdAt"]).getDate()
     );
+    setDayData(dayData);
+    setMove(true);
   };
   return (
     <CallenderWrap>
@@ -75,7 +99,7 @@ const MyPageCalender = ({ month, setMonth, year, setYear }) => {
           >
             {prevMonthDate - prevMonthDay + idx}
           </CallenderDate>
-          <CallenderPrice>123</CallenderPrice>
+          <CallenderPrice></CallenderPrice>
         </Callender>
       ))}
       {new Array(currentMonthDate).fill(0).map((v, idx) => (
@@ -98,7 +122,16 @@ const MyPageCalender = ({ month, setMonth, year, setYear }) => {
             {idx + 1}
           </CallenderDate>
 
-          <CallenderPrice>123</CallenderPrice>
+          <CallenderPrice style={{ color: "green" }}>
+            {(
+              monthData
+                .filter(
+                  (v) => idx + 1 === new Date(v["ShopBuys.createdAt"]).getDate()
+                )
+                .map((v) => +v["ShopBuys.num"] * +v.price)
+                .reduce((acc, cur) => acc + cur, 0) + ""
+            ).slice(0, -4)}
+          </CallenderPrice>
         </Callender>
       ))}
       {new Array(42 - currentMonthDate - prevMonthDay - 1)
@@ -118,7 +151,7 @@ const MyPageCalender = ({ month, setMonth, year, setYear }) => {
               {idx + 1}
             </CallenderDate>
 
-            <CallenderPrice>123</CallenderPrice>
+            <CallenderPrice></CallenderPrice>
           </Callender>
         ))}
     </CallenderWrap>

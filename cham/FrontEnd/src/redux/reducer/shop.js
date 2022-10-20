@@ -55,8 +55,6 @@ const buying = (state = [], action) => {
   switch (type) {
     case "SHOPBUY":
       return [...state, { ...payload }];
-    case "SHOPBUYEND":
-      return [];
     default:
       return state;
   }

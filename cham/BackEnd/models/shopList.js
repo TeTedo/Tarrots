@@ -28,10 +28,6 @@ class ShopList extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        review: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
         price: {
           type: Sequelize.STRING,
           allowNull: false,

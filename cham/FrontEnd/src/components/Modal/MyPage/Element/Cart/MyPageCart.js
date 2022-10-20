@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { BuyBtn, Nav, ComponentSpan } from "./MyPageStyledComponents";
-import MyPagePagination from "./MyPagePagination";
+import React, { useEffect } from "react";
+import { BuyBtn, Nav, ComponentSpan } from "../MyPageStyledComponents";
+import MyPagePagination from "../MyPagePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { shopAction } from "redux/middleware/shopAction";
 import { loginAction } from "redux/middleware/loginAction";

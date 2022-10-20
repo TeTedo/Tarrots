@@ -186,6 +186,64 @@ const CallenderUnit = styled.div`
   font-size: 10px;
   margin-left: 120px;
 `;
+const CallenderDayNav = styled.div`
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const CallenderDayNavSpan = styled.span`
+  width: 100px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+const CallenderSellWrap = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0px;
+`;
+const CallenderSell = styled.span`
+  width: 100px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  box-shadow: 2px 2px 3px black;
+`;
+const CallenderSellImg = styled.img`
+  width: 45px;
+  height: 45px;
+`;
+const CallenderPagination = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+`;
+const CallenderPaginationSpan = styled.span`
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 5px;
+`;
+const ProfileWrap = styled.div`
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+`;
 export {
   Wrap,
   Input,
@@ -211,4 +269,12 @@ export {
   CallenderPrice,
   CallenderUnit,
   CallenderDate,
+  CallenderDayNav,
+  CallenderDayNavSpan,
+  CallenderSellWrap,
+  CallenderSell,
+  CallenderSellImg,
+  CallenderPagination,
+  CallenderPaginationSpan,
+  ProfileWrap,
 };

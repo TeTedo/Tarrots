@@ -209,7 +209,7 @@ const PermissionInfoSpan = styled.div`
 `;
 const MyPageContent = styled.div`
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 500px;
@@ -275,7 +275,7 @@ const LabelControl = styled.div`
 const MyPageWrap = styled.div`
   position: absolute;
   z-index: 999;
-  width: 800px;
+  width: 600px;
   height: 800px;
   border-radius: 12px;
   border: 2px solid green;
@@ -287,6 +287,7 @@ const MyPageWrap = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 export {
   CartInput,
   LabelInput,

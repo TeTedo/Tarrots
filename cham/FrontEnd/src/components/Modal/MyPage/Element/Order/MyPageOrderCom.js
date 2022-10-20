@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from "react";
-import { ComponentWrap, ComponentSpan, Img } from "./MyPageStyledComponents";
-import { MakeReview } from "../MyPageModal";
+import { ComponentWrap, ComponentSpan, Img } from "../MyPageStyledComponents";
+import { MakeReview } from "../../MyPageModal";
 const MyPageOrderCom = ({ data }) => {
   const reivew = useRef(null);
   const { setReview, setReviewData } = useContext(MakeReview);
@@ -28,11 +28,11 @@ const MyPageOrderCom = ({ data }) => {
       onMouseLeave={mouseLeave}
     >
       <ComponentSpan>
-        <Img src={Object.values(data)[11]} />
+        <Img src={data["ShopList.image"]} />
       </ComponentSpan>
-      <ComponentSpan>{Object.values(data)[9]}</ComponentSpan>
+      <ComponentSpan>{data["ShopList.name"]}</ComponentSpan>
       <ComponentSpan>{data.num}</ComponentSpan>
-      <ComponentSpan>{Object.values(data)[15] * data.num}</ComponentSpan>
+      <ComponentSpan>{data["ShopList.price"] * data.num}</ComponentSpan>
       <ComponentSpan ref={reivew}>
         {data.review === "none" ? "미작성" : "작성"}
       </ComponentSpan>

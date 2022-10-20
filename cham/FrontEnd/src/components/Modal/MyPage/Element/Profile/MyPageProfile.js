@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "redux/middleware/loginAction";
 import {
-  Wrap,
   Input,
   Preview,
   PreviewImg,
   BtnWrap,
-} from "./MyPageStyledComponents";
+  ProfileWrap,
+} from "../MyPageStyledComponents";
 import previewImg from "util/previewImg";
 const MyPageProfile = ({
   setModify,
@@ -56,11 +56,11 @@ const MyPageProfile = ({
   return (
     <>
       <form onSubmit={submitHandler}>
-        <Wrap>
+        <ProfileWrap>
           ID
           <Input defaultValue={userData.user_id} readOnly name="user_id" />
-        </Wrap>
-        <Wrap>
+        </ProfileWrap>
+        <ProfileWrap>
           PROFILE IMAGE
           <Preview>
             <PreviewImg src={userData.profile_img} ref={previewTarget} />
@@ -71,27 +71,31 @@ const MyPageProfile = ({
             onChange={imgPreview}
             name="profile_img"
           />
-        </Wrap>
-        <Wrap>
+        </ProfileWrap>
+        <ProfileWrap>
           NAME
           <Input defaultValue={userData.name} readOnly />
-        </Wrap>
-        <Wrap>
+        </ProfileWrap>
+        <ProfileWrap>
           NICKNAME
           <Input defaultValue={userData.nick_name} ref={nick_name} />
-        </Wrap>
-        <Wrap>
+        </ProfileWrap>
+        <ProfileWrap>
           MOBILE NUMBER
           <Input defaultValue={userData.mobile_number} ref={mobile_number} />
-        </Wrap>
-        <Wrap>
+        </ProfileWrap>
+        <ProfileWrap>
           ADDRESS
           <Input defaultValue={userData.address} ref={address} />
-        </Wrap>
-        <Wrap>
+        </ProfileWrap>
+        <ProfileWrap>
           E-MAIL
           <Input defaultValue={userData.email} ref={email} />
-        </Wrap>
+        </ProfileWrap>
+        <ProfileWrap>
+          POINT
+          <Input defaultValue={userData.point} readOnly />
+        </ProfileWrap>
         <BtnWrap>수정하기</BtnWrap>
       </form>
       <BtnWrap onClick={applySeller}>판매자 신청</BtnWrap>

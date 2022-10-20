@@ -2,18 +2,18 @@ import React, { createContext, useState } from "react";
 import {
   ModalWrap,
   Title,
-  PermissionWrap,
   MyPageContent,
   MiniNav,
   MyPageElem,
   MyPageWrap,
 } from "../ModalStyledComponents";
 import MyPageMiniNav from "./MyPageMiniNav";
-import MyPageCart from "./Element/MyPageCart";
-import MyPageProfile from "./Element/MyPageProfile";
-import MyPageOrder from "./Element/MyPageOrder";
+import MyPageCart from "./Element/Cart/MyPageCart";
+import MyPageProfile from "./Element/Profile/MyPageProfile";
+import MyPageOrder from "./Element/Order/MyPageOrder";
 import Modal from "../Modal";
-import MyPageSeller from "./Element/MyPageSeller";
+import MyPageSellerEnter from "./Element/Seller/MyPageSellerEnter";
+import { useSelector } from "react-redux";
 export const BuyContext = createContext();
 export const MakeReview = createContext();
 const MyPageModal = ({ closeModal, setModal }) => {
@@ -26,7 +26,11 @@ const MyPageModal = ({ closeModal, setModal }) => {
   const [reviewData, setReviewData] = useState(null);
   const [seller, setSeller] = useState(false);
   const [sellerData, setSellerData] = useState(null);
-  const menu = ["PROFILE", "CART", "ORDER", "SELLER"];
+  const user_type = useSelector((state) => state.login.type);
+  const confirmSeller = user_type === "S" ? true : false;
+  const menu = confirmSeller
+    ? ["PROFILE", "CART", "ORDER", "SELLER"]
+    : ["PROFILE", "CART", "ORDER"];
   const elem = [
     <MyPageProfile
       key={0}
@@ -41,7 +45,7 @@ const MyPageModal = ({ closeModal, setModal }) => {
     <MakeReview.Provider key={2} value={{ setReview, setReviewData }}>
       <MyPageOrder />
     </MakeReview.Provider>,
-    <MyPageSeller key={3}></MyPageSeller>,
+    <MyPageSellerEnter key={3}></MyPageSellerEnter>,
   ];
   return (
     <ModalWrap onClick={closeModal}>

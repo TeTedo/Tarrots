@@ -45,6 +45,10 @@ class User extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false,
         },
+        point: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
       },
       {
         sequelize: sequelize,

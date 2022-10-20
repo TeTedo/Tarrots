@@ -80,6 +80,7 @@ const getCartData = (user_id) => {
 };
 const buyingData = (data) => {
   return async (dispatch, getState) => {
+    console.log(data);
     const cartData = await axios.post("http://localhost:8000/shop/buyingData", [
       ...data,
     ]);
