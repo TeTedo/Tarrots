@@ -12,13 +12,13 @@ const MyPagePagination = ({ component: Component, data }) => {
     <>
       <WholeWrap>
         {dataValue
+          .reverse()
           .map((v, idx) => (
             <PaginationElem key={idx}>
               <Component data={v} />
             </PaginationElem>
           ))
-          .slice(index * 10, (index + 1) * 10)
-          .reverse()}
+          .slice(index * 10, (index + 1) * 10)}
       </WholeWrap>
       <PaginationElem>
         {new Array(pageLength).fill(0).map((v, idx) => (

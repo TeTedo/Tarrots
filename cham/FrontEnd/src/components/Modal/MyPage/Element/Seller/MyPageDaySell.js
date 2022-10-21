@@ -18,7 +18,11 @@ const MyPageDaySell = ({ dayData, month, year, date }) => {
   const totalPrice = dayData
     .map((v) => +v["ShopBuys.num"] * +v.price)
     .reduce((acc, cur) => acc + cur, 0);
-  const length = Math.ceil(dayData.length / 7);
+  const pageLength = Math.ceil(dayData.length / 7);
+  const data = [...dayData].sort(
+    (a, b) =>
+      new Date(a["ShopBuys.createdAt"]) - new Date(b["ShopBuys.createdAt"])
+  );
   return (
     <WholeWrap>
       <SellDataDiv>
@@ -32,18 +36,21 @@ const MyPageDaySell = ({ dayData, month, year, date }) => {
           <CallenderDayNavSpan>수량</CallenderDayNavSpan>
           <CallenderDayNavSpan>가격</CallenderDayNavSpan>
         </CallenderDayNav>
-        {dayData.map((v, idx) => (
-          <CallenderSellWrap key={idx}>
-            <CallenderSell>
-              <CallenderSellImg src={v.image} />
-            </CallenderSell>
-            <CallenderSell>{v.name}</CallenderSell>
-            <CallenderSell>{v["ShopBuys.num"]}</CallenderSell>
-            <CallenderSell>{v["ShopBuys.num"] * v.price}</CallenderSell>
-          </CallenderSellWrap>
-        ))}
+        {data
+          .map((v, idx) => (
+            <CallenderSellWrap key={idx}>
+              <CallenderSell>
+                <CallenderSellImg src={v.image} />
+              </CallenderSell>
+              <CallenderSell>{v.name}</CallenderSell>
+              <CallenderSell>{v["ShopBuys.num"]}</CallenderSell>
+              <CallenderSell>{v["ShopBuys.num"] * v.price}</CallenderSell>
+            </CallenderSellWrap>
+          ))
+          .reverse()
+          .slice(index * 7, (index + 1) * 7)}
         <CallenderPagination>
-          {new Array(length).fill(0).map((v, idx) => (
+          {new Array(pageLength).fill(0).map((v, idx) => (
             <CallenderPaginationSpan
               key={idx}
               onClick={() => {
@@ -52,9 +59,10 @@ const MyPageDaySell = ({ dayData, month, year, date }) => {
               style={{
                 color: index === idx ? "green" : "black",
                 fontSize: index === idx ? "25px" : "",
+                cursor: "pointer",
               }}
             >
-              1
+              {idx + 1}
             </CallenderPaginationSpan>
           ))}
         </CallenderPagination>

@@ -58,7 +58,6 @@ const MyPageCalender = ({
       month === new Date(v["ShopBuys.createdAt"]).getMonth() + 1 &&
       year === new Date(v["ShopBuys.createdAt"]).getFullYear()
   );
-
   const getSellData = (e) => {
     const date = +e.currentTarget.dataset.index + 1;
     setDate(date);

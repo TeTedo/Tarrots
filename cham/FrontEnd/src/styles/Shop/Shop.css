@@ -21,6 +21,10 @@
   width: 50%;
   height: 80%;
   border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 .shop_slide_com_top > img {
   width: 100%;

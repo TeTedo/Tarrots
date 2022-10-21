@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { WholeWrap, Nav, ComponentSpan } from "../MyPageStyledComponents";
 import MyPagePagination from "../MyPagePagination";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,13 +7,14 @@ import { loginAction } from "redux/middleware/loginAction";
 import MyPageOrderCom from "./MyPageOrderCom";
 const MyPageOrder = () => {
   const dispatch = useDispatch();
-  const buyData = useSelector((state) => state.shopCart);
+  const buyData = useSelector((state) => state.shopOrder);
   const user_id = useSelector((state) => state.login.user_id);
   useEffect(() => {
     dispatch(loginAction.loginCheck()).then(() => {
       dispatch(shopAction.boughtData(user_id));
     });
   }, []);
+
   return (
     <WholeWrap>
       <Nav>

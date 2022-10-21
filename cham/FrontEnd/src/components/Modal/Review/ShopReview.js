@@ -32,6 +32,7 @@ const ShopReview = ({ closeModal, setModal, data }) => {
       })
     ).then(() => {
       dispatch(shopAction.getShopData());
+      dispatch(shopAction.boughtData(user_id));
     });
     setModal(false);
   };

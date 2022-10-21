@@ -13,6 +13,7 @@ import MyPageProfile from "./Element/Profile/MyPageProfile";
 import MyPageOrder from "./Element/Order/MyPageOrder";
 import Modal from "../Modal";
 import MyPageSellerEnter from "./Element/Seller/MyPageSellerEnter";
+import ManageUser from "./Element/ManageUser/ManageUser";
 import { useSelector } from "react-redux";
 export const BuyContext = createContext();
 export const MakeReview = createContext();
@@ -28,9 +29,10 @@ const MyPageModal = ({ closeModal, setModal }) => {
   const [sellerData, setSellerData] = useState(null);
   const user_type = useSelector((state) => state.login.type);
   const confirmSeller = user_type === "S" ? true : false;
-  const menu = confirmSeller
-    ? ["PROFILE", "CART", "ORDER", "SELLER"]
-    : ["PROFILE", "CART", "ORDER"];
+  const confirmAdmin = user_type === "A" ? true : false;
+  let menu = confirmSeller && ["PROFILE", "CART", "ORDER", "SELLER"];
+  menu = menu || ["PROFILE", "CART", "ORDER"];
+  menu = (confirmAdmin && ["MANAGE", "PROFILE", "CART", "ORDER"]) || menu;
   const elem = [
     <MyPageProfile
       key={0}
@@ -45,38 +47,36 @@ const MyPageModal = ({ closeModal, setModal }) => {
     <MakeReview.Provider key={2} value={{ setReview, setReviewData }}>
       <MyPageOrder />
     </MakeReview.Provider>,
-    <MyPageSellerEnter key={3}></MyPageSellerEnter>,
   ];
+  if (confirmSeller) {
+    elem.push(<MyPageSellerEnter key={3}></MyPageSellerEnter>);
+  }
+
+  if (confirmAdmin) {
+    elem.unshift(<ManageUser key={4} />);
+  }
   return (
     <ModalWrap onClick={closeModal}>
       <MyPageWrap>
-        {modify ? (
+        {modify && (
           <Modal
             type={"프로필수정확인"}
             setModal={setModify}
             data={modifyData}
           />
-        ) : (
-          ""
         )}
-        {buyConfirm ? (
+        {buyConfirm && (
           <Modal
             type={"장바구니물건구매"}
             setModal={setBuyConfirm}
             data={totalPrice}
           />
-        ) : (
-          ""
         )}
-        {review ? (
+        {review && (
           <Modal type={"SHOP리뷰작성"} setModal={setReview} data={reviewData} />
-        ) : (
-          ""
         )}
-        {seller ? (
+        {seller && (
           <Modal type={"판매자신청"} setModal={setSeller} data={sellerData} />
-        ) : (
-          ""
         )}
         <Title>MY PAGE</Title>
         <MyPageContent>

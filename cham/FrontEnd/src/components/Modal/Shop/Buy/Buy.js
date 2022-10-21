@@ -17,24 +17,29 @@ const Buy = ({ closeModal, setModal, data }) => {
   const dispatch = useDispatch();
   const buyData = useSelector((state) => state.buying);
   const useTotalPoint = () => {
-    usingPoint.current.value = userData.point;
-    setTotalPrice(data - usingPoint.current.value);
+    if (userData.point > data) {
+      usingPoint.current.value = data;
+      setTotalPrice(0);
+    } else {
+      usingPoint.current.value = userData.point;
+      setTotalPrice(data - usingPoint.current.value);
+    }
   };
   const usePoint = () => {
     if (
       usingPoint.current.value > userData.point ||
-      usingPoint.current.value < 0
+      usingPoint.current.value < 0 ||
+      +usingPoint.current.value > data
     ) {
       alert("알맞는 포인트를 입력하세요");
       usingPoint.current.value = 0;
+      setTotalPrice(data);
     } else {
       setTotalPrice(data - usingPoint.current.value);
     }
-    setTotalPrice(data - usingPoint.current.value);
   };
   const BUY = () => {
     if (buyData[0]) {
-      console.log(buyData);
       dispatch(
         shopAction.buyingData([
           { ...buyData },

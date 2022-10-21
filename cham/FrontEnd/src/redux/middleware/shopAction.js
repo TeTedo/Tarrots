@@ -1,4 +1,5 @@
 import axios from "axios";
+import { loginAction } from "./loginAction";
 
 const uploadGoodsToServer = (props) => {
   return async (dispatch, getState) => {
@@ -80,12 +81,12 @@ const getCartData = (user_id) => {
 };
 const buyingData = (data) => {
   return async (dispatch, getState) => {
-    console.log(data);
     const cartData = await axios.post("http://localhost:8000/shop/buyingData", [
       ...data,
     ]);
     alert("구매가 완료되었습니다.");
     dispatch({ type: "CART", payload: { ...cartData.data } });
+    dispatch(loginAction.loginCheck());
   };
 };
 const boughtData = (user_id) => {

@@ -20,13 +20,13 @@ import Modal_btn from "components/Modal/Modal_btn";
 import { shopAction } from "redux/middleware/shopAction";
 const Product = ({ closeModal, setModal, data }) => {
   const dispatch = useDispatch();
-  const productionData = useSelector((state) => state.productionData);
+  const productionState = useSelector((state) => state.productionData);
+  const productionData = [...productionState];
   const [index, setIndex] = useState(0);
   const length = Math.ceil(productionData.length / 5);
   useEffect(() => {
     dispatch(shopAction.getProductionData(data));
   }, []);
-
   return (
     <ModalWrap onClick={closeModal}>
       <ProductionWrap>
@@ -38,13 +38,14 @@ const Product = ({ closeModal, setModal, data }) => {
           <ContentDiv>
             <Review>
               {productionData
+                .reverse()
                 .map((v, idx) => (
                   <ReviewWrap key={idx}>
                     <ReviewProfile src={v.profile_img} />
                     <ReviewText>{v.review}</ReviewText>
                   </ReviewWrap>
                 ))
-                .reverse()}
+                .slice(index * 5, (index + 1) * 5)}
             </Review>
             <ReviewPage>
               {new Array(length).fill(0).map((v, idx) => (

@@ -19,16 +19,15 @@ const MyPageCartCom = ({ data }) => {
   const count = useRef();
   const { buyConfirm } = useContext(BuyContext);
   const user_id = useSelector((state) => state.login.user_id);
-  function giveBuyData() {
+  useEffect(() => {
     if (buyConfirm && num !== 0) {
       dispatch({
         type: "SHOPBUY",
         payload: { shop_id: data.shop_id, num, user_id },
       });
     }
-  }
+  }, [buyConfirm]);
 
-  giveBuyData();
   return (
     <ComponentWrap>
       <ComponentSpan>

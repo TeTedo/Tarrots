@@ -11,7 +11,6 @@ import {
 } from "../../ModalStyledComponents";
 import { useDispatch, useSelector } from "react-redux";
 import { shopAction } from "redux/middleware/shopAction";
-import { loginAction } from "redux/middleware/loginAction";
 const BuyConfirm = ({ closeModal, setModal, data }) => {
   const dispatch = useDispatch();
   const [num, stateNum] = useState(1);
@@ -22,24 +21,30 @@ const BuyConfirm = ({ closeModal, setModal, data }) => {
   };
   const plusNum = () => stateNum(num + 1);
   const userData = useSelector((state) => state.login);
-
   useEffect(() => {
     setTotalPrice(data.price * num - usingPoint.current.value);
   }, [num]);
   const usePoint = () => {
     if (
       usingPoint.current.value > userData.point ||
-      usingPoint.current.value < 0
+      usingPoint.current.value < 0 ||
+      +usingPoint.current.value > data.price
     ) {
       alert("알맞는 포인트를 입력하세요");
       usingPoint.current.value = 0;
+      setTotalPrice(data.price);
     } else {
       setTotalPrice(data.price * num - usingPoint.current.value);
     }
   };
   const useTotalPoint = () => {
-    usingPoint.current.value = userData.point;
-    setTotalPrice(data.price * num - usingPoint.current.value);
+    if (userData.point > data.price) {
+      usingPoint.current.value = data.price;
+      setTotalPrice(0);
+    } else {
+      usingPoint.current.value = userData.point;
+      setTotalPrice(data.price * num - usingPoint.current.value);
+    }
   };
   const BUY = () => {
     dispatch(
