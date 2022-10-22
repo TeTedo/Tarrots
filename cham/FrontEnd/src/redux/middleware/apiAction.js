@@ -4,9 +4,9 @@ const callAirData = () => {
     var url =
       "http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList";
     var queryParams =
-      "?" +
+      "?=" +
       encodeURIComponent("serviceKey") +
-      "=unCVhcmHHK3Q8faJOGGNbZF7RtczH35eu6DRapp6zvPvgXeuZhZnWuTWlW2DGlUxKGyk7whRmpa29q9YFtRsxw=="; /* Service Key*/
+      "unCVhcmHHK3Q8faJOGGNbZF7RtczH35eu6DRapp6zvPvgXeuZhZnWuTWlW2DGlUxKGyk7whRmpa29q9YFtRsxw=="; /* Service Key*/
     queryParams +=
       "&" +
       encodeURIComponent("schDate") +
@@ -32,7 +32,8 @@ const callAirData = () => {
       encodeURIComponent("schFlightNum") +
       "=" +
       encodeURIComponent("NH862"); /* */
-    const allUser = await axios.get({
+    const allUser = await axios({
+      method: "GET",
       url: url + queryParams,
     });
 

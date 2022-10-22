@@ -40,6 +40,7 @@ const Buy = ({ closeModal, setModal, data }) => {
   };
   const BUY = () => {
     if (buyData[0]) {
+      console.log(buyData);
       dispatch(
         shopAction.buyingData([
           { ...buyData },
