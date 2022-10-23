@@ -17,7 +17,7 @@ import ManageUser from "./Element/ManageUser/ManageUser";
 import { useSelector } from "react-redux";
 export const BuyContext = createContext();
 export const MakeReview = createContext();
-const MyPageModal = ({ closeModal, setModal }) => {
+const MyPageModal = ({ closeModal }) => {
   const [index, setIndex] = useState(0);
   const [modify, setModify] = useState(false);
   const [modifyData, setModifyData] = useState(null);

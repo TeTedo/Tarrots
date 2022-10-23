@@ -7,9 +7,9 @@ import {
   Title,
   Btn,
 } from "./ErrorStyledComponent";
-const ErrorModal = () => {
+const ErrorModal = ({ closeModal }) => {
   return (
-    <ModalWrap>
+    <ModalWrap onClick={closeModal}>
       <Wrap>
         <Title>REPORT ERROR</Title>
         <ErrorTitle placeholder="에러 제목" />
