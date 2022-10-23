@@ -16,6 +16,7 @@ import ShopReview from "./Review/ShopReview";
 import Product from "./Shop/Product/Product";
 import ApplySeller from "./MyPage/Element/Modal/ApplySeller";
 import ManageSeller from "./Shop/Seller/ManageSeller";
+import ErrorModal from "./Error/ErrorModal";
 const Modal = ({ setModal, type, data }) => {
   const closeModal = (e) => {
     if (e.currentTarget === e.target) setModal(false);
@@ -74,6 +75,8 @@ const Modal = ({ setModal, type, data }) => {
       return (
         <ManageSeller closeModal={closeModal} setModal={setModal} data={data} />
       );
+    case "에러":
+      return <ErrorModal closeModal={closeModal} setModal={setModal} />;
     default:
       return;
   }
