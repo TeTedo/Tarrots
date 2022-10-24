@@ -17,6 +17,7 @@ import Product from "./Shop/Product/Product";
 import ApplySeller from "./MyPage/Element/Modal/ApplySeller";
 import ManageSeller from "./Shop/Seller/ManageSeller";
 import ErrorModal from "./Error/ErrorModal";
+import ManageProduct from "./Shop/Product/Manage/ManageProduct";
 const Modal = ({ setModal, type, data }) => {
   const closeModal = (e) => {
     if (e.currentTarget === e.target) setModal(false);
@@ -77,6 +78,8 @@ const Modal = ({ setModal, type, data }) => {
       );
     case "에러":
       return <ErrorModal closeModal={closeModal} setModal={setModal} />;
+    case "판매물건관리":
+      return <ManageProduct closeModal={closeModal} setModal={setModal} />;
     default:
       return;
   }

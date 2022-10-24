@@ -252,4 +252,11 @@ router.post("/shop/getTotalSellData", async (req, res) => {
   });
   res.send(totalData);
 });
+
+router.post("/shop/manageProduct", async (req, res) => {
+  const { id } = req.body;
+  await ShopList.destroy({ where: { id } });
+  const shopData = ShopList.findAll({});
+  res.send(shopData);
+});
 module.exports = router;

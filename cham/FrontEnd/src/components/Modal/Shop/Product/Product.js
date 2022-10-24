@@ -14,6 +14,7 @@ import {
   ReviewProfile,
   ReviewText,
   ReviewPageSpan,
+  ViewBtn,
 } from "./ProductStyledComponent";
 import { useDispatch, useSelector } from "react-redux";
 import Modal_btn from "components/Modal/Modal_btn";
@@ -24,6 +25,8 @@ const Product = ({ closeModal, setModal, data }) => {
   const productionData = [...productionState];
   const [index, setIndex] = useState(0);
   const length = Math.ceil(productionData.length / 5);
+  const userData = useSelector((state) => state.login);
+  const [viewReview, setViewReview] = useState(false);
   useEffect(() => {
     dispatch(shopAction.getProductionData(data));
   }, []);
@@ -36,34 +39,44 @@ const Product = ({ closeModal, setModal, data }) => {
             <ProductionImg src={data.image} />
           </ContentDiv>
           <ContentDiv>
-            <Review>
-              {productionData
-                .reverse()
-                .map((v, idx) => (
-                  <ReviewWrap key={idx}>
-                    <ReviewProfile src={v.profile_img} />
-                    <ReviewText>{v.review}</ReviewText>
-                  </ReviewWrap>
-                ))
-                .slice(index * 5, (index + 1) * 5)}
-            </Review>
-            <ReviewPage>
-              {new Array(length).fill(0).map((v, idx) => (
-                <ReviewPageSpan
-                  key={idx}
-                  onClick={() => {
-                    setIndex(idx);
-                  }}
-                  style={{
-                    color: idx === index ? "green" : "",
-                    fontWeight: idx === index ? "bold" : "",
-                    fontSize: idx === index ? "25px" : "",
-                  }}
-                >
-                  {idx + 1}
-                </ReviewPageSpan>
-              ))}
-            </ReviewPage>
+            {viewReview ? (
+              <>
+                <Review>
+                  {productionData
+                    .reverse()
+                    .map((v, idx) => (
+                      <ReviewWrap key={idx}>
+                        <ReviewProfile src={v.profile_img} />
+                        <ReviewText>{v.review}</ReviewText>
+                      </ReviewWrap>
+                    ))
+                    .slice(index * 5, (index + 1) * 5)}
+                </Review>
+                <ReviewPage>
+                  {new Array(length).fill(0).map((v, idx) => (
+                    <ReviewPageSpan
+                      key={idx}
+                      onClick={() => {
+                        setIndex(idx);
+                      }}
+                      style={{
+                        color: idx === index ? "green" : "",
+                        fontWeight: idx === index ? "bold" : "",
+                        fontSize: idx === index ? "25px" : "",
+                      }}
+                    >
+                      {idx + 1}
+                    </ReviewPageSpan>
+                  ))}
+                </ReviewPage>
+              </>
+            ) : (
+              <>
+                <Review>{data.introduction}</Review>
+                <ReviewPage></ReviewPage>
+              </>
+            )}
+
             <Grade>
               {new Array(5).fill(0).map((v, idx) => (
                 <i
@@ -76,20 +89,39 @@ const Product = ({ closeModal, setModal, data }) => {
                 />
               ))}
               ({(+data.grade).toFixed(1)}/5)
+              {viewReview ? (
+                <ViewBtn
+                  onClick={() => {
+                    setViewReview(false);
+                  }}
+                >
+                  설명 보기
+                </ViewBtn>
+              ) : (
+                <ViewBtn
+                  onClick={() => {
+                    setViewReview(true);
+                  }}
+                >
+                  리뷰보기({productionData.length})
+                </ViewBtn>
+              )}
             </Grade>
             <Price>{data.price}원</Price>
-            <BtnWrap>
-              <Modal_btn
-                text="CART"
-                data={data}
-                className="fa-solid fa-cart-shopping"
-              />
-              <Modal_btn
-                text="BUY"
-                data={data}
-                className="fa-solid fa-money-check-dollar"
-              />
-            </BtnWrap>
+            {userData.user_id && (
+              <BtnWrap>
+                <Modal_btn
+                  text="CART"
+                  data={data}
+                  className="fa-solid fa-cart-shopping"
+                />
+                <Modal_btn
+                  text="BUY"
+                  data={data}
+                  className="fa-solid fa-money-check-dollar"
+                />
+              </BtnWrap>
+            )}
           </ContentDiv>
         </ProductionContent>
       </ProductionWrap>

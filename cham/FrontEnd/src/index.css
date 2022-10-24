@@ -15,9 +15,10 @@ code {
     monospace;
 }
 .errorBtn {
+  background-color: white;
   position: absolute;
-  bottom: 50px;
-  right: 50px;
+  top: 30px;
+  right: 30px;
   border: 1px solid black;
   border-radius: 50%;
   width: 30px;
@@ -26,7 +27,7 @@ code {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 999;
+  z-index: 3;
 }
 .errorBtn:hover {
   background-color: gray;

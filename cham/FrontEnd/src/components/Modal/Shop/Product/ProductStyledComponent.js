@@ -112,6 +112,9 @@ const BtnWrap = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+const ViewBtn = styled.button`
+  margin-left: 20px;
+`;
 export {
   ProductionWrap,
   ProductionContent,
@@ -126,4 +129,5 @@ export {
   ReviewProfile,
   ReviewText,
   ReviewPageSpan,
+  ViewBtn,
 };

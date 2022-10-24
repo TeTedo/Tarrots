@@ -14,14 +14,26 @@ import {
   LastBtn,
 } from "../ModalStyledComponents";
 import { useDispatch } from "react-redux";
+import { Check } from "./Check";
 const SignUpModal = ({ closeModal, setModal }) => {
   const inputWrap = useRef(null);
   const [index, setIndex] = useState(0);
   const dispatch = useDispatch();
+  const mailCheck = useRef();
   const moveLeft = () => {
     if (index !== 0) setIndex(index - 1);
   };
   const moveRight = () => {
+    if (index === 5) {
+      const mail = mailCheck.current.value;
+      const reg = new RegExp(
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+      );
+      if (!reg.test(mail)) {
+        alert("올바른 메일 형식을 입력하세요.");
+        return;
+      }
+    }
     if (index !== inputWrap.current.children.length - 1) setIndex(index + 1);
   };
   const signup = (e) => {
@@ -77,6 +89,7 @@ const SignUpModal = ({ closeModal, setModal }) => {
             <Input
               placeholder="ID"
               style={{ display: index === 0 ? "block" : "none" }}
+              onChange={Check.IDCheck}
             />
             <Input
               placeholder="PassWord"
@@ -85,22 +98,28 @@ const SignUpModal = ({ closeModal, setModal }) => {
             <Input
               placeholder="Name"
               style={{ display: index === 2 ? "block" : "none" }}
+              onChange={Check.nameCheck}
             />
             <Input
               placeholder="Nick Name"
               style={{ display: index === 3 ? "block" : "none" }}
+              onChange={Check.nickNameCheck}
             />
             <Input
               placeholder="Mobile-number"
               style={{ display: index === 4 ? "block" : "none" }}
+              onChange={Check.mobileCheck}
             />
             <Input
               placeholder="E-mail"
+              type="email"
               style={{ display: index === 5 ? "block" : "none" }}
+              ref={mailCheck}
             />
             <Input
               placeholder="Address"
               style={{ display: index === 6 ? "block" : "none" }}
+              onChange={Check.nickNameCheck}
             />
             <LastBtn
               style={{ display: index === 7 ? "block" : "none" }}

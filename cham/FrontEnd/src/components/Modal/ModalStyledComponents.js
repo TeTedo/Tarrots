@@ -165,6 +165,7 @@ const PermissionArgWrap = styled.div`
   width: 100%;
   border: 1px solid green;
   border-radius: 12px;
+  box-sizing: border-box;
   margin-bottom: 10px;
   display: flex;
   display: flex;
@@ -203,7 +204,7 @@ const PermissionInfoSpan = styled.div`
   color: green;
   font-weight: bold;
   :nth-child(1) {
-    margin-left: 10px;
+    margin-left: 25px;
   }
   text-align: center;
 `;

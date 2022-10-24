@@ -20,6 +20,10 @@ const CartConfirm = ({ closeModal, setModal, data }) => {
   const plusNum = () => stateNum(num + 1);
   const userData = useSelector((state) => state.login.user_id);
   const addToCart = () => {
+    if (!userData) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
     dispatch(shopAction.addToCart({ ...data, user_id: userData, num }));
     setModal(false);
   };

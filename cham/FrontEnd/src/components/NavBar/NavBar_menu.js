@@ -5,9 +5,9 @@ const NavBar_menu = () => {
     <div className="navBar_menu">
       <NavBar_menu_com path="/" name="HOME" />
       <NavBar_menu_com path="/shop" name="SHOP" />
-      <NavBar_menu_com path="/travel" name="TRAVEL" />
+      {/* <NavBar_menu_com path="/travel" name="TRAVEL" />
       <NavBar_menu_com path="/auction" name="AUCTION" />
-      <NavBar_menu_com path="/game" name="GAME" />
+      <NavBar_menu_com path="/game" name="GAME" /> */}
     </div>
   );
 };

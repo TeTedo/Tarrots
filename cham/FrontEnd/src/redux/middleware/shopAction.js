@@ -142,6 +142,14 @@ const getTotalSellData = (user_id) => {
     dispatch({ type: "TOTALSELLDATA", payload: [...totalSell.data] });
   };
 };
+const manageProduct = (id) => {
+  return async (dispatch, getState) => {
+    const shop = await axios.post("http://localhost:8000/shop/manageProduct", {
+      id,
+    });
+    dispatch({ type: "SHOPDATA", payload: { ...shop.data } });
+  };
+};
 export const shopAction = {
   uploadGoodsToServer,
   getPermissionData,
@@ -160,4 +168,5 @@ export const shopAction = {
   getSellerData,
   resultSellerData,
   getTotalSellData,
+  manageProduct,
 };

@@ -5,7 +5,6 @@ const { User } = require("../models");
 
 router.post("/user/getAllUserData", async (req, res) => {
   const { user_id } = req.body;
-  console.log(user_id);
   let userData = await User.findAll({
     where: {
       user_id: { [Op.not]: user_id },

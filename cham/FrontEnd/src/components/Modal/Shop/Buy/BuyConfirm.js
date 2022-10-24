@@ -47,6 +47,10 @@ const BuyConfirm = ({ closeModal, setModal, data }) => {
     }
   };
   const BUY = () => {
+    if (!userData.user_id) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
     dispatch(
       shopAction.buyingData([
         {

@@ -52,4 +52,11 @@ const Btn = styled.button`
   height: 30px;
   margin: auto;
 `;
-export { ModalWrap, Wrap, ErrorTitle, ErrorMsg, Title, Btn };
+const SelectError = styled.select`
+  margin: 5px auto;
+  width: 80%;
+  height: 30px;
+  box-sizing: border-box;
+  border: 2px solid black;
+`;
+export { ModalWrap, Wrap, ErrorTitle, ErrorMsg, Title, Btn, SelectError };

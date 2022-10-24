@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Wrap, Img, Div, Span } from "../Pagination_styledComponents";
 import Modal_btn from "components/Modal/Modal_btn";
+import { useSelector } from "react-redux";
 
 const ShopGoods = ({ shopData, change }) => {
   const [enter, setEnter] = useState(false);
@@ -8,6 +9,7 @@ const ShopGoods = ({ shopData, change }) => {
     e._reactName === "onMouseEnter" ? setEnter(true) : setEnter(false);
   };
   const grade = +shopData.grade;
+  const userData = useSelector((state) => state.login);
   return (
     <>
       <Wrap onMouseEnter={enterCheck} onMouseLeave={enterCheck}>
@@ -21,18 +23,20 @@ const ShopGoods = ({ shopData, change }) => {
                 className="fa-solid fa-magnifying-glass"
                 data={shopData}
               />
-              <Span>
-                <Modal_btn
-                  text="CART"
-                  className="fa-solid fa-cart-shopping"
-                  data={shopData}
-                />
-                <Modal_btn
-                  text="BUY"
-                  className="fa-solid fa-money-check-dollar"
-                  data={shopData}
-                />
-              </Span>
+              {userData.user_id && (
+                <Span>
+                  <Modal_btn
+                    text="CART"
+                    className="fa-solid fa-cart-shopping"
+                    data={shopData}
+                  />
+                  <Modal_btn
+                    text="BUY"
+                    className="fa-solid fa-money-check-dollar"
+                    data={shopData}
+                  />
+                </Span>
+              )}
             </>
           ) : (
             //4개일때 엔터
