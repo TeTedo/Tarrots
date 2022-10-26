@@ -23,6 +23,7 @@ const Permission = ({ closeModal, setModal }) => {
   }, []);
   const permissionData = useSelector((state) => state.shopPermission);
   const dataLength = Object.keys(permissionData).length;
+
   return (
     <ModalWrap onClick={closeModal}>
       <PermissionWrap>
@@ -37,13 +38,13 @@ const Permission = ({ closeModal, setModal }) => {
           </PermissionInfo>
           {new Array(dataLength)
             .fill(0)
-            .slice(index * num, index * num + num)
             .map((v, idx) => (
               <PermissionCom
                 key={idx}
                 data={permissionData[idx]}
               ></PermissionCom>
-            ))}
+            ))
+            .slice(index * num, index * num + num)}
           <PermissionPagination
             index={index}
             pageLength={Math.ceil(dataLength / 5)}
