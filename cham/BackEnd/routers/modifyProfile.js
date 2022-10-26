@@ -7,7 +7,6 @@ router.post("/profile/modify", imgUpload.single("file"), async (req, res) => {
   const { user_id, nick_name, mobile_number, address, email } = JSON.parse(
     req.body.data
   );
-  console.log(req.file);
   if (req.file) {
     await User.update(
       {
