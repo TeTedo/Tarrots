@@ -1,7 +1,7 @@
 import axios from "axios";
 const reportError = (data) => {
   return async (dispatch, getState) => {
-    const error = await axios.post("http://192.168.0.128:8000/error", {
+    const error = await axios.post("http://localhost:8000/error", {
       ...data,
     });
     if (error.data === true) {

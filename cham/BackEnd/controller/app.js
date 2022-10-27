@@ -15,24 +15,9 @@ sequelize
 
 //리액트랑 백엔드 연동하기 위해cors 설정
 const options = {
-  origin: "http://192.168.0.128:3000",
+  origin: "http://localhost:3000",
 };
 app.use(cors(options));
-
-// express-session연결
-app.use(
-  session({
-    secret: process.env.SESSION_KEY,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      sameSite: "none",
-      maxAge: 5300000,
-      secure: true,
-    },
-  })
-);
 
 //json형태의 파일을 읽을수 있게
 app.use(express.json());
