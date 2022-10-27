@@ -8,12 +8,10 @@ const login = (state = { status: false }, action) => {
         setCookie("access", payload.access_token, {
           path: "/",
           secure: true,
-          sameSite: "none",
         });
         setCookie("refresh", payload.refresh_token, {
           path: "/",
           secure: true,
-          sameSite: "none",
         });
       }
       window.localStorage.setItem("login", true);

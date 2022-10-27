@@ -12,9 +12,10 @@ const signup = ({
   return async (dispatch, getState) => {
     const data = await axios({
       method: "post",
-      url: "http://localhost:8000/signUp",
+      url: "http://192.168.0.128:8000/signUp",
       data: {
         user_id,
+
         user_pw,
         name,
         nick_name,
@@ -30,10 +31,9 @@ const login = ({ user_id, user_pw }) => {
   return async (dispatch, getState) => {
     const userData = await axios({
       method: "post",
-      url: "http://localhost:8000/login",
+      url: "http://192.168.0.128:8000/login",
       data: { user_id, user_pw },
     });
-
     if (userData.data.user_id) {
       dispatch({
         type: "LOGIN",
@@ -51,7 +51,7 @@ const loginCheck = () => {
     if (window.localStorage.getItem("login") === "true") {
       const userData = await axios({
         method: "post",
-        url: "http://localhost:8000/loginCheck",
+        url: "http://192.168.0.128:8000/loginCheck",
         data: {
           access_token: getCookie("access"),
           refresh_token: getCookie("refresh"),
@@ -65,9 +65,9 @@ const loginCheck = () => {
         });
       }
       // 로그인 검사 실패시
-      else {
-        dispatch({ type: "LOGOUT" });
-      }
+      // else {
+      //   dispatch({ type: "LOGOUT" });
+      // }
     } else {
       dispatch({ type: "LOGOUT" });
     }
@@ -78,13 +78,13 @@ const modifyInfo = (data) => {
     const { formData, config, user_id, user_pw } = data;
     const userData = await axios({
       method: "post",
-      url: "http://localhost:8000/login",
+      url: "http://192.168.0.128:8000/login",
       data: { user_id, user_pw },
     });
 
     if (userData.data.user_id) {
       const modify = await axios.post(
-        "http://localhost:8000/profile/modify",
+        "http://192.168.0.128:8000/profile/modify",
         formData,
         config
       );
@@ -104,13 +104,13 @@ const applySeller = (data) => {
     const { user_id, user_pw } = data;
     const userData = await axios({
       method: "post",
-      url: "http://localhost:8000/login",
+      url: "http://192.168.0.128:8000/login",
       data: { user_id, user_pw },
     });
 
     if (userData.data.user_id) {
       const apply = await axios.post(
-        "http://localhost:8000/profile/applySeller",
+        "http://192.168.0.128:8000/profile/applySeller",
         { user_id }
       );
       if (apply.data) {

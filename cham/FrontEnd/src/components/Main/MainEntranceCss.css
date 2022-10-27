@@ -15,13 +15,13 @@
 .cut1 {
   width: 100px;
   height: 100px;
-  background-color: black;
+  background-color: green;
   position: absolute;
   border-radius: 50%;
 }
 .cut2 {
   position: absolute;
-  background-color: black;
+  background-color: green;
   width: 100px;
   height: 100px;
   left: 50%;
@@ -32,7 +32,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: black;
+  background-color: green;
   top: 20px;
   right: 65px;
 }
@@ -91,7 +91,7 @@
   width: 100%;
   height: 100%;
   border-radius: 12px;
-  background-color: black;
+  background-color: green;
   clip-path: polygon(49% 35%, 38% 60%, 49% 54%, 56% 60%);
 }
 .chamM {
@@ -127,7 +127,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: black;
+  background-color: green;
   top: 120px;
   left: 65px;
 }
@@ -136,7 +136,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: black;
+  background-color: green;
   top: 120px;
   right: 65px;
 }
@@ -149,4 +149,21 @@
   width: 20px;
   height: 20px;
   background-color: white;
+}
+.goShop {
+  position: absolute;
+  bottom: 100px;
+  width: 200px;
+  height: 100px;
+  color: white;
+  background-color: green;
+  border: 3px solid white;
+  border-radius: 12px;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.goShop:hover {
+  background-color: white;
+  color: green;
 }

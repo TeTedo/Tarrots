@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Wrap, Wrap2 } from "./MainStyledComponents";
 import "./MainEntranceCss.css";
 import anime from "animejs";
+import { useNavigate } from "react-router-dom";
 const MainEntrance = () => {
   useEffect(() => {
     const grid = [10, 10];
@@ -23,9 +24,25 @@ const MainEntrance = () => {
           axis: "x",
         }),
       });
-
+    const btn = anime
+      .timeline({
+        targets: ".goShop",
+      })
+      .add({
+        points: "0 0 30 30 40 40 ",
+        baseFrequency: 0,
+        scale: 1,
+        loop: true,
+        direction: "alternate",
+        easing: "easeInOutExpo",
+      });
     animation.play();
+    btn.play();
   }, []);
+  const navigate = useNavigate();
+  const moveShop = () => {
+    navigate("/shop");
+  };
   return (
     <Wrap>
       <Wrap2>
@@ -105,6 +122,9 @@ const MainEntrance = () => {
           <div className="cut7"></div>
           <div className="cut8"></div>
         </div>
+        <button className="goShop" onClick={moveShop}>
+          GO SHOP
+        </button>
       </Wrap2>
     </Wrap>
   );
