@@ -20,7 +20,7 @@ router.post("/shop/uploads", imgUpload.single("file"), async (req, res) => {
     name,
     introduction,
     category,
-    image: path.join("/assets/imgs", req.file.filename),
+    image: "http://3.38.162.133/img/" + req.file.filename,
     price,
     grade: 0,
     review: 0,
@@ -36,7 +36,7 @@ router.post(
   async (req, res) => {
     await ShopSlideMain.create({
       shop_id: req.body.data,
-      backgroundImg: path.join("/assets/imgs", req.file.filename),
+      backgroundImg: "http://3.38.162.133/img/" + req.file.filename,
     });
     const slideData = await ShopSlideMain.findAll({
       include: [{ model: ShopList }],
