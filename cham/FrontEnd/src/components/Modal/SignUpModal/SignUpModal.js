@@ -60,30 +60,12 @@ const SignUpModal = ({ closeModal, setModal }) => {
         <Title>Sign Up</Title>
         <Content>
           <LabelWrap>
-            <Label
-              style={{ backgroundColor: index === 0 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 1 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 2 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 3 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 4 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 5 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 6 ? "green" : "black" }}
-            />
-            <Label
-              style={{ backgroundColor: index === 7 ? "green" : "black" }}
-            />
+            {new Array(8).fill(0).map((v, idx) => (
+              <Label
+                style={{ backgroundColor: idx === index ? "green" : "black" }}
+                key={idx}
+              />
+            ))}
           </LabelWrap>
           <InputWrap ref={inputWrap}>
             <Input
