@@ -2,6 +2,8 @@
 
 ### 참 편한 쇼핑몰
 
+[screen-recording.webm](https://user-images.githubusercontent.com/107897812/198971354-8cdcea21-5456-438b-a1a3-0057b66f6a67.webm)
+
 ### 기간 : 2022.10.12 ~ 2022.10.28
 
 ### 개발자 : [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTeTedo&count_bg=%230D00FF&title_bg=%23000000&icon=darkreader.svg&icon_color=%23FF0000&title=hits&edge_flat=false)](https://github.com/TeTedo)(TeTedO)
@@ -13,7 +15,7 @@
     - [npm install](#npm-install)
     - [npm start](#npm-start)
 - [**사용 기술**](#사용-기술)
-- [**기능**](#주요-기능)
+- [**기능**](#기능)
   - [회원가입](#회원가입)
   - [로그인](#로그인)
   - [유저관리](#유저관리)
@@ -57,3 +59,72 @@ FrontEnd,BackEnd 폴더에서 npm start하면 http://localhost:3000에서 실행
 ## 사용 **기술**
 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"> <img src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=React Router&logoColor=white"> <img src="https://img.shields.io/badge/font awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white"> <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=white"> <img src="https://img.shields.io/badge/Bcrypt-003A70?style=for-the-badge&logo=Let's Encrypt&logoColor=white"> <img src="https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white"> <img src="https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=black"> <img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=for-the-badge&logo=JSON Web Tokens&logoColor=white"> <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"> <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white"> <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> <img src="https://img.shields.io/badge/cors-blue?style=for-the-badge&logo=&logoColor=white"> <img src="https://img.shields.io/badge/multer.js-black?style=for-the-badge&logo=&logoColor=white"> <img src="https://img.shields.io/badge/anime.js-green?style=for-the-badge&logo=s&logoColor=">
+
+---
+
+## 기능
+
+### 회원가입
+
+<img width=80% src='https://user-images.githubusercontent.com/107897812/198974851-0dc2aa89-63db-4f40-882b-89437b403e06.png' />
+
+<br/>
+
+- 정규표현식으로 양식 설정
+
+```JS
+const IDCheck = (e) => {
+  const reg1 = new RegExp(/[a-z]/, "gi");
+  const reg2 = new RegExp(/\d/, "gi");
+  const reg3 = new RegExp(/[ㄱ-힣]/, "gi");
+  if (
+    (!reg1.test(e.target.value) && !reg2.test(e.target.value)) ||
+    reg3.test(e.target.value)
+  ) {
+    if (e.target.value === "") return;
+    alert("영어나 숫자만 이용가능합니다.");
+    e.target.value = "";
+  }
+};
+```
+
+<br/>
+
+- 옆으로 넘기는 UI
+  <br/>
+
+### 로그인
+
+### 유저관리
+
+### 프로필변경
+
+### 판매자 신청 현황
+
+### 장바구니
+
+### 주문목록
+
+### 리뷰
+
+### 포인트
+
+### 판매금 관리
+
+### 물건 올리기
+
+### 판매 승인
+
+### 판매 승인 확인
+
+### 슬라이드 관리
+
+### 판매 물건 관리
+
+### 오류신고
+
+## 기타
+
+### DB구조
+
+### PPT
