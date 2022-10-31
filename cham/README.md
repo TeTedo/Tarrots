@@ -36,6 +36,43 @@
 
 ---
 
-## 개요
+## **개요**
+
+간단하게 편한 쇼핑몰
 
 ### Scripts
+
+실행시키기 위해 FrontEnd, BackEnd 둘다 package를 다운받고 실행시켜야 한다.
+
+#### `npm install`
+
+FrontEnd,BackEnd 폴더에서 npm install
+
+#### `npm start`
+
+FrontEnd,BackEnd 폴더에서 npm start하면 http://localhost:3000에서 실행된다.
+
+---
+
+## 사용 **기술**
+
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+<img src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=React Router&logoColor=white">
+<img src="https://img.shields.io/badge/font awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white">
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
+<img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=white">
+<img src="https://img.shields.io/badge/Bcrypt-003A70?style=for-the-badge&logo=Let's Encrypt&logoColor=white">
+<img src="https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white">
+<img src="https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=black">
+<img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=for-the-badge&logo=JSON Web Tokens&logoColor=white">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+<img src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white">
+<img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white">
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+<img src="https://img.shields.io/badge/cors-blue?style=for-the-badge&logo=&logoColor=white">
+<img src="https://img.shields.io/badge/multer.js-black?style=for-the-badge&logo=&logoColor=white">
+<img src="https://img.shields.io/badge/anime.js-green?style=for-the-badge&logo=s&logoColor=">
