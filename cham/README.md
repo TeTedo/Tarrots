@@ -173,7 +173,7 @@ router.post("/login", async (req, res) => {
 - 남은 포인트 확인 가능
 - 판매자 신청 가능
 
-  <img  src="https://user-images.githubusercontent.com/107897812/198978363-b6eb486c-1c80-46e7-9a5e-8ca8bb84978f.png"/>
+  <img   width=300px heigth=300px src="https://user-images.githubusercontent.com/107897812/198978363-b6eb486c-1c80-46e7-9a5e-8ca8bb84978f.png"/>
 판매자 신청시 비밀번호 확인 후 신청 할수 있다.
 
 ### **판매자 신청 현황**
@@ -190,19 +190,19 @@ router.post("/login", async (req, res) => {
 
 <br/>
 
-<img src="https://user-images.githubusercontent.com/107897812/198979027-bdb32d50-9f69-43e6-95ff-396781ebbfc8.png"/>
+<img  width=300px heigth=300px src="https://user-images.githubusercontent.com/107897812/198979027-bdb32d50-9f69-43e6-95ff-396781ebbfc8.png"/>
 
 - 로그인 후 상품에 마우스 갖다대면 CART BUY 버튼이 보인다
 
 <br/>
 
-<img src="https://user-images.githubusercontent.com/107897812/198979310-63a7c250-1054-41ce-9665-51666a86b9ba.png"/>
+<img  width=300px heigth=300px src="https://user-images.githubusercontent.com/107897812/198979310-63a7c250-1054-41ce-9665-51666a86b9ba.png"/>
 
 - 상품 상세페이지에서도 CART버튼이 있다.
 
 <br/>
 
-<img src="https://user-images.githubusercontent.com/107897812/198979445-329b57b4-fc54-45b7-b371-fe03f76d17e8.png"/>
+<img  width=300px heigth=300px src="https://user-images.githubusercontent.com/107897812/198979445-329b57b4-fc54-45b7-b371-fe03f76d17e8.png"/>
 
 - 장바구니 추가시 수량 선택 가능
 
@@ -214,14 +214,14 @@ router.post("/login", async (req, res) => {
 
 <br/>
 
-<img src="https://user-images.githubusercontent.com/107897812/198980275-dd37061a-5af9-40af-b97d-63634d3dd865.png"/>
+<img  width=300px heigth=300px src="https://user-images.githubusercontent.com/107897812/198980275-dd37061a-5af9-40af-b97d-63634d3dd865.png"/>
 
 - 구매 버튼 클릭시 포인트 사용가능
 - 포인트는 구매금액의 5% 쌓인다.
 
 <br/>
 
-<img width=300px height=30% src="https://user-images.githubusercontent.com/107897812/198980148-59f64a36-2020-4d29-8030-39bd9db89aae.png">
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/198980148-59f64a36-2020-4d29-8030-39bd9db89aae.png">
 
 - 장바구니에서 0개 선택시 예외처리
 
