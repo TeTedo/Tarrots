@@ -67,7 +67,7 @@ FrontEnd,BackEnd 폴더에서 npm start하면 http://localhost:3000에서 실행
 ### **회원가입**
 
 <br/>
-<img width=80% src='https://user-images.githubusercontent.com/107897812/198974851-0dc2aa89-63db-4f40-882b-89437b403e06.png' />
+<img width=300px src='https://user-images.githubusercontent.com/107897812/198974851-0dc2aa89-63db-4f40-882b-89437b403e06.png' />
 
 <br/>
 
@@ -159,7 +159,7 @@ router.post("/login", async (req, res) => {
 
 <br/>
 
-<img width=80% heigth=80% src="https://user-images.githubusercontent.com/107897812/198977555-a9edd86b-e84e-4294-a1ff-b7e1b9ed9eae.png"/>
+<img width=300px heigth=300px src="https://user-images.githubusercontent.com/107897812/198977555-a9edd86b-e84e-4294-a1ff-b7e1b9ed9eae.png"/>
 
 - 각 유저의 권한을 조절할 수 있다.
 
@@ -167,7 +167,7 @@ router.post("/login", async (req, res) => {
 
 <br/>
 
-<img width=80% heigth=80% src="https://user-images.githubusercontent.com/107897812/198978092-8f1c54eb-eb17-48d7-8221-6fcedca3bc35.png"/>
+<img width=300px heigth=300px src="https://user-images.githubusercontent.com/107897812/198978092-8f1c54eb-eb17-48d7-8221-6fcedca3bc35.png"/>
 
 - 마이페이지에서 이름,닉네임,번호,주소,이메일 변경 가능
 - 남은 포인트 확인 가능
@@ -180,7 +180,7 @@ router.post("/login", async (req, res) => {
 
 <br/>
 
-<img width=80% heigth=80% src="https://user-images.githubusercontent.com/107897812/198978752-12527ca8-8bf5-45c3-9b5f-8bce03b918c1.png"/>
+<img width=300px heigth=300px src="https://user-images.githubusercontent.com/107897812/198978752-12527ca8-8bf5-45c3-9b5f-8bce03b918c1.png"/>
 
 - 어드민으로 접속시 오른쪽에 판매자 신청 현황 버튼이 활성화 된다.
 
@@ -208,7 +208,7 @@ router.post("/login", async (req, res) => {
 
 <br/>
 
-<img width=80% height=80% src="https://user-images.githubusercontent.com/107897812/198979938-c93b6d8a-2af2-4bd4-8046-aa90cb281314.png">
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/198979938-c93b6d8a-2af2-4bd4-8046-aa90cb281314.png">
 
 - 장바구니에서 구매 가능
 
@@ -221,7 +221,7 @@ router.post("/login", async (req, res) => {
 
 <br/>
 
-<img width=80% height=30% src="https://user-images.githubusercontent.com/107897812/198980148-59f64a36-2020-4d29-8030-39bd9db89aae.png">
+<img width=300px height=30% src="https://user-images.githubusercontent.com/107897812/198980148-59f64a36-2020-4d29-8030-39bd9db89aae.png">
 
 - 장바구니에서 0개 선택시 예외처리
 
