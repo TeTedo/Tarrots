@@ -15,7 +15,7 @@
     - [npm install](#npm-install)
     - [npm start](#npm-start)
 - [**사용 기술**](#사용-기술)
-- [**기능**](#기능)
+- [**주요 기능**](#주요-기능)
   - [회원가입](#회원가입)
   - [로그인](#로그인)
   - [유저관리](#유저관리)
@@ -32,7 +32,7 @@
   - [슬라이드 관리](#슬라이드-관리)
   - [판매 물건 관리](#판매-물건-관리)
   - [오류신고](#오류신고)
-- [**기타**](#기타)
+- [**서브 기능**](#기타)
   - [DB구조](#DB구조)
   - [PPT](#PPT)
 
@@ -62,10 +62,11 @@ FrontEnd,BackEnd 폴더에서 npm start하면 http://localhost:3000에서 실행
 
 ---
 
-## 기능
+## 주요 기능
 
-### 회원가입
+### **회원가입**
 
+<br/>
 <img width=80% src='https://user-images.githubusercontent.com/107897812/198974851-0dc2aa89-63db-4f40-882b-89437b403e06.png' />
 
 <br/>
@@ -91,40 +92,161 @@ const IDCheck = (e) => {
 <br/>
 
 - 옆으로 넘기는 UI
+
   <br/>
 
-### 로그인
+### **로그인**
 
-### 유저관리
+<br/>
 
-### 프로필변경
+- 로그인시 토큰 발급(세션에 저장)
 
-### 판매자 신청 현황
+```JS
+router.post("/login", async (req, res) => {
+  const { user_id, user_pw } = req.body;
+  const userData = await User.findOne({
+    where: { user_id },
+  })
+    .then((result) => {
+      const data = result.dataValues;
+      bcrypt.compare(user_pw, data.user_pw, async (err, same) => {
+        //로그인 성공
+        if (same) {
+          // access token
+          const access_token = jwt.sign(
+            {
+              alg: "HS256",
+              typ: "JWT",
+              userId: data.user_id,
+            },
+            process.env.ACCSESS_TOKEN,
+            {
+              expiresIn: "10m",
+            }
+          );
+          // refresh token
+          const refresh_token = jwt.sign(
+            {
+              alg: "HS256",
+              typ: "JWT",
+              userId: data.user_id,
+            },
+            process.env.REFRESH_TOKEN,
+            {
+              expiresIn: "1h",
+            }
+          );
 
-### 장바구니
+          res.send({ ...data, refresh_token, access_token });
+        } else {
+          res.send("비밀번호");
+        }
+      });
+    })
+    .catch(() => {
+      res.send("아이디");
+    });
+});
+```
 
-### 주문목록
+  <br/>
 
-### 리뷰
+### **유저관리**
 
-### 포인트
+<br/>
 
-### 판매금 관리
+- 어드민 아이디로 로그인시 마이페이지에 MANAGE 메뉴 활성화
 
-### 물건 올리기
+<br/>
 
-### 판매 승인
+<img width=80% heigth=80% src="https://user-images.githubusercontent.com/107897812/198977555-a9edd86b-e84e-4294-a1ff-b7e1b9ed9eae.png"/>
 
-### 판매 승인 확인
+- 각 유저의 권한을 조절할 수 있다.
 
-### 슬라이드 관리
+### **프로필변경**
 
-### 판매 물건 관리
+<br/>
 
-### 오류신고
+<img width=80% heigth=80% src="https://user-images.githubusercontent.com/107897812/198978092-8f1c54eb-eb17-48d7-8221-6fcedca3bc35.png"/>
 
-## 기타
+- 마이페이지에서 이름,닉네임,번호,주소,이메일 변경 가능
+- 남은 포인트 확인 가능
+- 판매자 신청 가능
 
-### DB구조
+  <img  src="https://user-images.githubusercontent.com/107897812/198978363-b6eb486c-1c80-46e7-9a5e-8ca8bb84978f.png"/>
+판매자 신청시 비밀번호 확인 후 신청 할수 있다.
 
-### PPT
+### **판매자 신청 현황**
+
+<br/>
+
+<img width=80% heigth=80% src="https://user-images.githubusercontent.com/107897812/198978752-12527ca8-8bf5-45c3-9b5f-8bce03b918c1.png"/>
+
+- 어드민으로 접속시 오른쪽에 판매자 신청 현황 버튼이 활성화 된다.
+
+<br/>
+
+### **장바구니**
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/107897812/198979027-bdb32d50-9f69-43e6-95ff-396781ebbfc8.png"/>
+
+- 로그인 후 상품에 마우스 갖다대면 CART BUY 버튼이 보인다
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/107897812/198979310-63a7c250-1054-41ce-9665-51666a86b9ba.png"/>
+
+- 상품 상세페이지에서도 CART버튼이 있다.
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/107897812/198979445-329b57b4-fc54-45b7-b371-fe03f76d17e8.png"/>
+
+- 장바구니 추가시 수량 선택 가능
+
+<br/>
+
+<img width=80% height=80% src="https://user-images.githubusercontent.com/107897812/198979938-c93b6d8a-2af2-4bd4-8046-aa90cb281314.png">
+
+- 장바구니에서 구매 가능
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/107897812/198980275-dd37061a-5af9-40af-b97d-63634d3dd865.png"/>
+
+- 구매 버튼 클릭시 포인트 사용가능
+- 포인트는 구매금액의 5% 쌓인다.
+
+<br/>
+
+<img width=80% height=30% src="https://user-images.githubusercontent.com/107897812/198980148-59f64a36-2020-4d29-8030-39bd9db89aae.png">
+
+- 장바구니에서 0개 선택시 예외처리
+
+### **주문목록**
+
+### **리뷰**
+
+### **포인트**
+
+### **판매금 관리**
+
+### **물건 올리기**
+
+### **판매 승인**
+
+### **판매 승인 확인**
+
+### **슬라이드 관리**
+
+### **판매 물건 관리**
+
+### **오류신고**
+
+## **기타**
+
+### **DB구조**
+
+### **PPT**
