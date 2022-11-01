@@ -31,11 +31,11 @@ Project with React.
 
 In the project directory, you can run:
 
-`npm install`
+#### `npm install`
 
 To install the dependencies package.
 
-`npm start`
+#### `npm start`
 
 Runs the app in http://localhost:3000
 
