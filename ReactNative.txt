@@ -1,0 +1,8 @@
+설치
+npm i -g expo-cli
+
+폰에 expo 앱 깔기
+
+expo 로그인
+터미널에 expo login
+이메일 비밀번호 입력
