@@ -227,19 +227,101 @@ router.post("/login", async (req, res) => {
 
 ### **주문목록**
 
+<br/>
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199626345-70ceec5d-afe4-4753-b3b0-851a86787aa9.png">
+
+구매한 목록들과 리뷰 작성 여부를 볼수 있다.
+
+목록들을 클릭하여 리뷰를 작성할수 있다.
+
+<br/>
+
 ### **리뷰**
+
+<br/>
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199626467-c11da846-541d-42b1-a32b-1d695ad6554f.png">
+
+구매목록을 클릭하여 별점과 텍스트를 입력할 수 있다.
+
+<br/>
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199626581-e629b88b-85f1-4622-83d4-7b1f9b44426f.png">
+
+리뷰를 등록하면 물건 상세페이지에서 리뷰보기를 클릭하여 그 상품의 리뷰를 볼수 있다.
+
+<br/>
 
 ### **포인트**
 
+<br/>
+
+포인트는 구매금액의 5%씩 적립된다.
+
+<br/>
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199626875-0dc047e4-552c-47ae-a430-8d4f2bd1bcd1.png">
+
+포인트는 구매시에 사용할 수 있다.
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199626999-c3bdf709-aedb-4472-9a81-35ea66f45ba8.png">
+
+포인트보다 구매금액이 적다면 구매금액 이상으로 포인트를 쓰지 못하게 예외처리하였다.
+
+포인트가 음수인 경우도 예외처리하였다.
+
+<br/>
+
 ### **판매금 관리**
+
+<br/>
+
+판매자 아이디로 로그인을 하면 마이페이지에 SELLER 메뉴가 활성화 된다.
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199627501-b8cf6253-5f89-4b3d-9129-24a94a6fd840.png">
+
+SELLER에서는 총 판매금액, 월 판매금액, 일 판매금액을 볼수 있다.
+
+달력에 초록색 숫자로 일 판매금액을 표시한다.
+
+<br/>
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199628101-8c459466-8c63-472f-b8bc-75d8369af847.png">
+
+달력의 날짜들을 클릭해보면 더 자세한 일 판매금액을 볼 수 있다.
 
 ### **물건 올리기**
 
+<br/>
+
+판매자로 로그인 하면 오른쪽에 물건올리기 라는 버튼을 볼수 있다. 버튼을 눌러 물건을 올릴수 있다.
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199628186-109a6fe8-62ef-436c-b098-4f77d57e8764.png">
+
+물건을 올릴때에는 이름, 사진, 설명, 가격, 카테고리를 설정하여야 한다.
+
 ### **판매 승인**
+
+<br/>
+
+운영자 아이디로 로그인하면 판매승인 이라는 버튼을 볼수 있다. 버튼을 눌러 올린 물건의 판매를 승인 할 수 있다.
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199628471-88525389-6c8a-4b0a-9695-737512992c60.png">
 
 ### **판매 승인 확인**
 
+판매자 아이디로 로그인하면 판매승인확인 버튼을 통해 올린 물건의 심사 여부를 확인할 수 있다.
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199628589-a3729dce-2892-4b92-9ff2-fb5b86495ef1.png">
+
 ### **슬라이드 관리**
+
+운영자 아이디로 로그인하면 슬라이드관리라는 버튼을 통해 슬라이트를 추가,삭제 할수 있다.
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199630246-69e244ca-18e5-4a0a-884a-5d49cc21f7ae.png">
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199630149-f53ecc4d-2134-430a-bd3e-760d4e9765d2.png">
+
+슬라이드는 드래그로 이동할수 있다.
 
 ### **판매 물건 관리**
 
