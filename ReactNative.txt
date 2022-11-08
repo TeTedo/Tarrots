@@ -6,3 +6,6 @@ npm i -g expo-cli
 expo 로그인
 터미널에 expo login
 이메일 비밀번호 입력
+
+폴더 생성
+expo init 폴더이름 --npm
