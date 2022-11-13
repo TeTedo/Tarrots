@@ -1,0 +1,10 @@
+터미널에
+expo publish
+
+view 는 div
+text 는 span
+image 는 img
+
+expo-cli가 알아서 build 해준다.
+웹배포
+https://docs.expo.dev/distribution/publishing-websites/
