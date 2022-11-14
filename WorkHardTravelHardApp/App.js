@@ -63,7 +63,7 @@ export default function App() {
         onChangeText={onChangetext}
         value={text}
         style={styles.input}
-        placeholder={working ? "Add a To Do" : "Where want yo go "}
+        placeholder={working ? "Add a To Do" : "Where you want to go? "}
       />
       <ScrollView>
         {Object.keys(toDos).map((key) => (
