@@ -1,0 +1,8 @@
+RN
+npm i expo-cli
+핸드폰에서 expo앱 설치, 회원가입
+같은 와이파이에서 들어가기
+
+터미널에서 npx expo login
+유저 네임, 비밀번호  입력
+

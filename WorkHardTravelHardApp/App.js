@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -10,17 +10,49 @@ import {
   Pressable,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
 import { theme } from "./color";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Fontisto } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
+const STORAGE_KEY = "@toDos";
+const HEADER_SAVE = "@headerSave";
 export default function App() {
   const [working, setWorking] = useState(true);
   const [text, setText] = useState("");
   const [toDos, setToDos] = useState({});
-  const travel = () => setWorking(false);
-  const work = () => setWorking(true);
+  const [modifying, setModifying] = useState(false);
+  const [modifyKey, setModifyKey] = useState("");
+  const toModify = useRef(null);
+  const loadWorkOrTravel = async () => {
+    const workOrTravel = await AsyncStorage.getItem(HEADER_SAVE);
+    setWorking(JSON.parse(workOrTravel));
+  };
+  useEffect(() => {
+    loadToDos();
+    loadWorkOrTravel();
+  }, []);
+  const travel = async () => {
+    setWorking(false);
+    await AsyncStorage.setItem(HEADER_SAVE, "false");
+  };
+  const work = async () => {
+    setWorking(true);
+    await AsyncStorage.setItem(HEADER_SAVE, "true");
+  };
   const onChangetext = (payload) => setText(payload);
-  const addToDo = () => {
+  const saveToDos = async (toSave) => {
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  };
+  const loadToDos = async () => {
+    // try catch 문 쓰면 좋음
+    const s = await AsyncStorage.getItem(STORAGE_KEY);
+    setToDos(JSON.parse(s));
+  };
+
+  const addToDo = async () => {
     if (text === "") return;
 
     // const newToDos = Object.assign({}, toDos, {
@@ -28,19 +60,80 @@ export default function App() {
     // });
     const newToDos = {
       ...toDos,
-      [Date.now()]: { text, work: working },
+      [Date.now()]: { text, working, done: false },
     };
     setToDos(newToDos);
+    await saveToDos(newToDos);
     setText("");
   };
-  console.log(toDos);
+  const deleteToDo = (key) => {
+    Alert.alert("Delete To Do?", "Are you sure?", [
+      { text: "Cancel" },
+      {
+        text: "I'm Sure",
+        onPress: () => {
+          const newToDos = { ...toDos };
+          delete newToDos[key];
+          setToDos(newToDos);
+          saveToDos(newToDos);
+        },
+      },
+    ]);
+    return;
+  };
+  const doneToDo = (key) => {
+    Alert.alert("Done?", "Are you sure?", [
+      { text: "No" },
+      {
+        text: "Yes!",
+        onPress: () => {
+          const newToDos = { ...toDos };
+          newToDos[key].done = true;
+          setToDos(newToDos);
+          saveToDos(newToDos);
+        },
+      },
+    ]);
+  };
+  const noneToDo = (key) => {
+    Alert.alert("None?", "Are you sure?", [
+      {
+        text: "No",
+        onPress: () => {
+          const newToDos = { ...toDos };
+          newToDos[key].done = false;
+          setToDos(newToDos);
+          saveToDos(newToDos);
+        },
+      },
+      { text: "Yes!" },
+    ]);
+  };
+  const modifyToDo = (key) => {
+    toModify.current.focus();
+    setModifying(true);
+    setModifyKey(key);
+  };
+  const modifyingToDo = async () => {
+    if (text === "") return;
+    const newToDos = { ...toDos };
+    newToDos[modifyKey].text = text;
+    setToDos(newToDos);
+    await saveToDos(newToDos);
+    setText("");
+    setModifying(false);
+  };
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <View style={styles.header}>
         <TouchableOpacity onPress={work}>
           <Text
-            style={{ ...styles.btnText, color: working ? "white" : theme.grey }}
+            style={{
+              fontSize: 44,
+              fontWeight: "600",
+              color: working ? "white" : theme.grey,
+            }}
           >
             Work
           </Text>
@@ -48,7 +141,8 @@ export default function App() {
         <TouchableOpacity onPress={travel}>
           <Text
             style={{
-              ...styles.btnText,
+              fontSize: 44,
+              fontWeight: "600",
               color: !working ? "white" : theme.grey,
             }}
           >
@@ -59,18 +153,79 @@ export default function App() {
 
       <TextInput
         returnKeyType="done"
-        onSubmitEditing={addToDo}
+        onSubmitEditing={modifying ? modifyingToDo : addToDo}
         onChangeText={onChangetext}
         value={text}
         style={styles.input}
-        placeholder={working ? "Add a To Do" : "Where you want to go? "}
+        placeholder={
+          modifying
+            ? "Change the words"
+            : working
+            ? "Add a To Do"
+            : "Where want yo go "
+        }
+        ref={toModify}
       />
       <ScrollView>
-        {Object.keys(toDos).map((key) => (
-          <View style={styles.toDo} key={key}>
-            <Text style={styles.toDoText}>{toDos[key].text}</Text>
-          </View>
-        ))}
+        {Object.keys(toDos).map((key) =>
+          toDos[key].working === working ? (
+            <View style={styles.toDo} key={key}>
+              <Text
+                style={{
+                  ...styles.toDoText,
+                  textDecorationLine: toDos[key].done ? "line-through" : "none",
+                  color: toDos[key].done ? "black" : "white",
+                }}
+              >
+                {toDos[key].text}
+              </Text>
+              <Text
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                }}
+              >
+                {toDos[key].done ? (
+                  <TouchableOpacity onPress={() => noneToDo(key)}>
+                    <Fontisto
+                      name="checkbox-active"
+                      size={25}
+                      color="black"
+                      style={{ marginLeft: 20 }}
+                    />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity onPress={() => doneToDo(key)}>
+                    <Fontisto
+                      name="checkbox-passive"
+                      size={25}
+                      color="black"
+                      style={{ marginLeft: 20 }}
+                    />
+                  </TouchableOpacity>
+                )}
+
+                <TouchableOpacity onPress={() => modifyToDo(key)}>
+                  <Entypo
+                    name="pencil"
+                    size={25}
+                    color="black"
+                    style={{ marginLeft: 20 }}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => deleteToDo(key)}>
+                  <Fontisto
+                    name="trash"
+                    size={25}
+                    color="black"
+                    style={{ marginLeft: 20 }}
+                  />
+                </TouchableOpacity>
+              </Text>
+            </View>
+          ) : null
+        )}
       </ScrollView>
     </View>
   );
@@ -87,10 +242,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 100,
   },
-  btnText: {
-    fontSize: 44,
-    fontWeight: "600",
-  },
   input: {
     backgroundColor: "white",
     height: 50,
@@ -106,6 +257,9 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 40,
     borderRadius: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   toDoText: {
     color: "white",
