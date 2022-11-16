@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
-import styles from "./style/styleSheet";
 import Login from "./components/Login";
 import { useState } from "react";
+import Main from "./components/Main";
+import Top from "./components/Top";
+import Nav from "./components/Nav";
 export default function App() {
   const [login, setLogin] = useState(false);
 
@@ -11,12 +12,14 @@ export default function App() {
       {login ? (
         <>
           <StatusBar style="auto" />
-          <View style={styles.container}></View>
+          <Top />
+          <Main />
+          <Nav />
         </>
       ) : (
         <>
           <StatusBar style="auto" />
-          <Login />
+          <Login setLogin={setLogin} />
         </>
       )}
     </>

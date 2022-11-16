@@ -24,6 +24,8 @@ export default styles = StyleSheet.create({
     margin: 10,
     borderColor: "black",
     borderWidth: 2,
+    padding: 10,
+    fontSize: 20,
   },
   buttonWrap: {
     display: "flex",
