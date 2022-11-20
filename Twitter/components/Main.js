@@ -1,10 +1,16 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { bodyStyle } from "../style/mainStyle";
+import Write from "./Modal/Write";
 const Main = () => {
   return (
     <View style={bodyStyle.Wrap}>
-      <Text>Main</Text>
+      <ScrollView>
+        <View style={bodyStyle.container}>
+          <Text>Masdfasdfasdfain</Text>
+        </View>
+      </ScrollView>
+      <Write />
     </View>
   );
 };

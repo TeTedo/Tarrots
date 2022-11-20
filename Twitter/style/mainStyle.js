@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { color } from "../color";
 export const bodyStyle = StyleSheet.create({
   Wrap: {
     flex: 10,
@@ -6,7 +7,17 @@ export const bodyStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  container: {},
+  container: {
+    display: "flex",
+    alignItems: "center",
+  },
+  writeBtn: {
+    position: "absolute",
+    bottom: 50,
+    right: 30,
+    width: 40,
+    height: 40,
+  },
 });
 
 export const topStyle = StyleSheet.create({
@@ -17,7 +28,21 @@ export const topStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderColor: "black",
-    borderWidth: 1,
+    borderBottomWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  container: {
+    margin: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  profile_img: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
   },
 });
 export const navStyle = StyleSheet.create({
@@ -27,6 +52,16 @@ export const navStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderColor: "black",
-    borderWidth: 1,
+    borderTopWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  container: {
+    marginLeft: 30,
+    marginRight: 30,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
