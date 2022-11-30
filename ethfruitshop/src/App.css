@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .registerModal {
@@ -38,6 +39,7 @@
   height: calc(100% - 150px);
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .shopList {

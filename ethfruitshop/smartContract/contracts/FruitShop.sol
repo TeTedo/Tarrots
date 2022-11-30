@@ -15,7 +15,7 @@ contract FruitShop{
     }
     mapping (string=>SellFruit) makeShop;
     // 판매 등록
-    function registerFruit(string memory _name,uint _pirce, uint _num,uint _buyPrice) public returns(bool check){
+    function registerFruit(string memory _name,uint _price, uint _num,uint _buyPrice) public returns(bool check){
         check = true;
         for(uint i = 0 ;i<fruitList.length;i++){
             if(keccak256(abi.encode(fruitList[i]))  == keccak256(abi.encode(_name))) check = false;
@@ -23,7 +23,7 @@ contract FruitShop{
         if(check == true) {
             fruitList.push(_name);
             makeShop[_name].owner = msg.sender;
-            makeShop[_name].price = _pirce;
+            makeShop[_name].price = _price;
             makeShop[_name].num = _num;
             makeShop[_name].buyPrice = _buyPrice;
         }
