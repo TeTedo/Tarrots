@@ -39,7 +39,7 @@ const Header = () => {
         <div></div>
         {Object.keys(hasFruit).map((v, idx) => (
           <div key={idx}>
-            {v} : {hasFruit[v]}
+            {v} : {hasFruit[v]}개
           </div>
         ))}
       </div>
