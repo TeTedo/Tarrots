@@ -8,20 +8,23 @@ export const DeployedContext = createContext();
 function App() {
   const [web3, account] = useWeb3();
   const [deployed, setDeployed] = useState();
+  const [CA, setCA] = useState();
   useEffect(() => {
     (async () => {
       if (!web3) return;
       const networkId = await web3.eth.net.getId();
+      const contractAddress = FruitShopContract.networks[networkId].address;
       const instance = await new web3.eth.Contract(
         FruitShopContract.abi,
-        FruitShopContract.networks[networkId].address
+        contractAddress
       );
       setDeployed(instance);
+      setCA(contractAddress);
     })();
   }, [web3]);
   return (
     <div className="App">
-      <DeployedContext.Provider value={{ deployed, web3, account }}>
+      <DeployedContext.Provider value={{ deployed, web3, account, CA }}>
         <Header />
         <Shop />
       </DeployedContext.Provider>

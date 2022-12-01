@@ -43,6 +43,7 @@
 }
 
 .shopList {
+  position: relative;
   width: 20%;
   height: 25%;
   display: flex;
@@ -52,4 +53,34 @@
   border: 1px solid black;
   margin: 20px, 10px;
   flex-direction: column;
+}
+
+.deleteBtn {
+  background-color: black;
+  color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 1px solid black;
+  font-weight: bold;
+}
+.deleteBtn:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.buySellBtns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buySellBtns > input {
+  margin-right: 30px;
 }

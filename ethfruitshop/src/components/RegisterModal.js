@@ -1,46 +1,73 @@
-import React, { useContext, useRef } from "react";
-import { useDispatch } from "react-redux";
+import React, { useContext, useRef, useState } from "react";
 import { DeployedContext } from "../App";
-import FroutShopContract from "../contracts/FruitShop.json";
+
 const RegisterModal = ({ setRegister }) => {
-  const { deployed, web3, account } = useContext(DeployedContext);
+  const { deployed, account, CA, web3 } = useContext(DeployedContext);
+  const [isChecked, SetIsChecked] = useState(true);
   const value1 = useRef();
   const value2 = useRef();
   const value3 = useRef();
   const value4 = useRef();
-  const dispatch = useDispatch();
   const register = async () => {
     const name = value1.current.value.toString();
     const price = value2.current.value;
     const num = value3.current.value;
-    const buyPrice = value4.current.value;
-    if (!name || !price || !num || !buyPrice) {
+    const typeIs = value4.current.checked ? "BUY" : "SELL";
+    if (!name || !price || !num) {
       alert("모든 값을 입력해주세요.");
       return;
     }
-    const data = await deployed.methods
-      .registerFruit(name, price, num, buyPrice)
-      .encodeABI();
-    const nonce = await web3.eth.getTransactionCount(account);
-    const networkId = await web3.eth.net.getId();
-    const CA = FroutShopContract.networks[networkId].address;
-    await web3.eth.sendTransaction({ nonce, from: account, to: CA, data });
-    // dispatch({ type: "ADD", payload: { name, price, num, buyPrice } });
+    if (typeIs === "BUY") {
+      await deployed.methods
+        .registerFruit(name, price, num, typeIs)
+        .send({
+          from: account,
+          to: CA,
+          value: web3.utils.toWei(String(price * num), "ether"),
+        });
+    } else {
+      await deployed.methods
+        .registerFruit(name, price, num, typeIs)
+        .send({ from: account });
+    }
+
     setRegister(false);
   };
   return (
     <div className="registerModal">
+      <div className="buySellBtns">
+        <label htmlFor="BUY">구매</label>
+        <input
+          id="BUY"
+          type="checkbox"
+          value="BUY"
+          checked={isChecked}
+          onChange={() => {
+            SetIsChecked(!isChecked);
+          }}
+          ref={value4}
+        />{" "}
+        <label htmlFor="SELL">판매</label>
+        <input
+          id="SELL"
+          value="SELL"
+          type="checkbox"
+          checked={!isChecked}
+          onChange={() => {
+            SetIsChecked(!isChecked);
+          }}
+        />
+      </div>
       <div className="registerDiv">
         과일 이름 : <input type="text" ref={value1} />
       </div>
       <div className="registerDiv">
-        판매 가격 : <input type="number" ref={value2} />
+        {isChecked ? "구매" : "판매"} 수량 :{" "}
+        <input type="number" ref={value3} />
       </div>
       <div className="registerDiv">
-        판매 수량 : <input type="number" ref={value3} />
-      </div>
-      <div className="registerDiv">
-        매입 가격 : <input type="number" ref={value4} />
+        {isChecked ? "구매" : "판매"} 가격 :{" "}
+        <input type="number" ref={value2} />
       </div>
       <div className="registerBtns">
         <button

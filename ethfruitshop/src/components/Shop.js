@@ -1,22 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ShopList from "./ShopList";
 import { DeployedContext } from "../App";
-import { useSelector } from "react-redux";
 const Shop = () => {
   const { deployed } = useContext(DeployedContext);
-  const shopData = useSelector((state) => state.addShopList);
-  console.log(shopData);
-  console.log(deployed);
+  const [shopData, setShopData] = useState([]);
+  useEffect(() => {
+    (async () => {
+      if (!deployed) return;
+      const buyFruitList = await deployed.methods.getBuyFruitList().call();
+      const sellFruitList = await deployed.methods.getSellFruitList().call();
+      const data = [];
+      for (const value of buyFruitList) {
+        if (value) {
+          const temp = await deployed.methods
+            .getSellerList(value, "BUY")
+            .call();
+          data.push(temp);
+        }
+      }
+      for (const value of sellFruitList) {
+        if (value) {
+          const temp = await deployed.methods
+            .getSellerList(value, "SELL")
+            .call();
+          data.push(temp);
+        }
+      }
+      setShopData(data);
+    })();
+  }, [deployed]);
+
   return (
     <div className="shopWrap">
       {shopData &&
         shopData.map((v, idx) => (
           <ShopList
+            key={idx}
+            owner={v.owner}
             name={v.name}
             price={v.price}
             num={v.num}
-            buyPrice={v.buyPrice}
-            key={idx}
+            type={v.typeIs}
           />
         ))}
     </div>
