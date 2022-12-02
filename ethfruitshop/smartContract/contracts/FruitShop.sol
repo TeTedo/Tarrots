@@ -37,10 +37,7 @@ contract FruitShop{
         if(keccak256(abi.encode(makeShop[_name][_typeIs].owner))  == keccak256(abi.encode(msg.sender))){
             for(uint i = 0 ;i<fruitList[_typeIs].length; i++){
                 if(keccak256(abi.encode(fruitList[_typeIs][i])) == keccak256(abi.encode(_name))){
-                    // 먼저 돈낸거 환불받는곳
-                    // if(keccak256(abi.encode(_typeIs))==keccak256("BUY")){
-                    //     payable(msg.sender).transfer()
-                    // }
+                    refund(_name, _typeIs);
                     delete fruitList[_typeIs][i];
                     check = true;
                 }
@@ -48,21 +45,39 @@ contract FruitShop{
         }
         return check;
     }
+    // 먼저 돈낸거 환불받는곳
+    function refund(string memory _name,string memory _typeIs) public payable {
+        if(keccak256(abi.encode(_typeIs))==keccak256(abi.encode("BUY"))){
+            uint refundMoney = makeShop[_name][_typeIs].price * makeShop[_name][_typeIs].num;
+            payable(msg.sender).transfer(refundMoney);
+        }
+    }
     // 과일 지갑
     // {주소 : {과일 종류 : 갯수}}
     struct Fruit{
         mapping(string=>uint) num;
     }
     mapping (address=>Fruit) fruitWallet;
-    // 과일 수량 불러오기
-    function getFruitWallet() public returns()  {
-        return fruitWallet[msg.sender];
+    mapping (address=>string[]) hasFruitList;
+    //과일 지갑 갯수 조회
+    function getFruitWallet() view public returns(uint[] memory){
+        uint count = hasFruitList[msg.sender].length;
+        uint[] memory wallet = new uint[](count);
+        for(uint i=0; i<count;i++){
+            wallet[i] = fruitWallet[msg.sender].num[hasFruitList[msg.sender][i]];
+        }
+        return wallet;
+    }
+    // 과일 종류 조회
+    function hasFruit() view public returns(string[] memory){
+        return hasFruitList[msg.sender];
     }
     // 과일 구매
     function buyFruit(string memory _name, uint _num, string memory _typeIs) public payable{
         if(fruitWallet[msg.sender].num[_name] > 0){
             fruitWallet[msg.sender].num[_name] += _num;
         }else{
+            hasFruitList[msg.sender].push(_name);
             fruitWallet[msg.sender].num[_name] = _num;
         }
     uint sendMoney = makeShop[_name][_typeIs].price * _num * 95 / 100;
