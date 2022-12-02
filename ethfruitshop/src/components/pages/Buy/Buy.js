@@ -1,23 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import ShopList from "./ShopList";
-import { DeployedContext } from "../App";
-const Shop = () => {
+import BuySellList from "components/BuySellList";
+import { DeployedContext } from "App";
+const Buy = () => {
   const { deployed } = useContext(DeployedContext);
   const [shopData, setShopData] = useState([]);
   useEffect(() => {
     (async () => {
       if (!deployed) return;
-      const buyFruitList = await deployed.methods.getBuyFruitList().call();
       const sellFruitList = await deployed.methods.getSellFruitList().call();
       const data = [];
-      for (const value of buyFruitList) {
-        if (value) {
-          const temp = await deployed.methods
-            .getSellerList(value, "BUY")
-            .call();
-          data.push(temp);
-        }
-      }
       for (const value of sellFruitList) {
         if (value) {
           const temp = await deployed.methods
@@ -34,7 +25,7 @@ const Shop = () => {
     <div className="shopWrap">
       {shopData &&
         shopData.map((v, idx) => (
-          <ShopList
+          <BuySellList
             key={idx}
             owner={v.owner}
             name={v.name}
@@ -47,4 +38,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Buy;

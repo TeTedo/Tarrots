@@ -73,21 +73,23 @@ contract FruitShop{
         return hasFruitList[msg.sender];
     }
     // 과일 구매
-    function buyFruit(string memory _name, uint _num, string memory _typeIs) public payable{
+    function buyFruit(string memory _name, uint _num, string memory _typeIs) public payable {
         if(fruitWallet[msg.sender].num[_name] > 0){
             fruitWallet[msg.sender].num[_name] += _num;
         }else{
             hasFruitList[msg.sender].push(_name);
             fruitWallet[msg.sender].num[_name] = _num;
         }
-    uint sendMoney = makeShop[_name][_typeIs].price * _num * 95 / 100;
-    payable(makeShop[_name][_typeIs].owner).transfer(sendMoney);
+        makeShop[_name][_typeIs].num -= _num;
+        uint sendMoney = makeShop[_name][_typeIs].price * _num * 95 / 100;
+        payable(makeShop[_name][_typeIs].owner).transfer(sendMoney);
     }
     // 과일 판매
     function sellFruit(string memory _name, uint _num,string memory _typeIs) public payable {
-            fruitWallet[msg.sender].num[_name] -= _num;
-            uint sendMoney = makeShop[_name][_typeIs].price * _num * 95 / 100;
-            payable(msg.sender).transfer(sendMoney);
+        makeShop[_name][_typeIs].num -= _num;
+        fruitWallet[msg.sender].num[_name] -= _num;
+        uint sendMoney = makeShop[_name][_typeIs].price * _num * 95 / 100;
+        payable(msg.sender).transfer(sendMoney);
     }
     // 상품들 조회
     function getBuyFruitList() public view returns(string[] memory)  {
@@ -96,7 +98,7 @@ contract FruitShop{
     function getSellFruitList() public view returns(string[] memory)  {
         return fruitList["SELL"];
     }
-    // 판매자 정보 조회
+    // 물건 조회
     function getSellerList(string memory _name, string memory _typeIs) public view returns(SellFruit memory){
     return makeShop[_name][_typeIs];
     }

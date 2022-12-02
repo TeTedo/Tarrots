@@ -1,10 +1,14 @@
-import React, { useContext, useState } from "react";
-import { DeployedContext } from "../App";
-const ShopList = ({ name, price, num, owner, type }) => {
+import React, { useContext, useEffect, useState } from "react";
+import { DeployedContext } from "App";
+const BuySellList = ({ name, price, num, owner, type }) => {
   const { deployed, account, web3, CA } = useContext(DeployedContext);
   const [count, setCount] = useState();
-
+  const [sold, setSold] = useState(false);
   const buy = async () => {
+    if (+num < +count) {
+      alert("수량을 잘 입력해주세요");
+      return;
+    }
     await deployed.methods.buyFruit(name, count, type).send({
       from: account,
       to: CA,
@@ -12,6 +16,10 @@ const ShopList = ({ name, price, num, owner, type }) => {
     });
   };
   const sell = async () => {
+    if (+num < +count) {
+      alert("수량을 잘 입력해주세요");
+      return;
+    }
     await deployed.methods.sellFruit(name, count, type).send({
       from: account,
       to: CA,
@@ -23,6 +31,9 @@ const ShopList = ({ name, price, num, owner, type }) => {
       to: CA,
     });
   };
+  useEffect(() => {
+    if (num <= 0) setSold(true);
+  }, [num]);
   return (
     <div className="shopList">
       {owner.toLowerCase() === account ? (
@@ -39,15 +50,21 @@ const ShopList = ({ name, price, num, owner, type }) => {
         {type === "BUY" ? "구매" : "판매"} 가격 : {price / 10 ** 18}ETH
       </div>
       <div>
-        <input
-          type="text"
-          placeholder="수량"
-          onChange={(e) => {
-            setCount(e.target.value);
-          }}
-        />
+        {sold ? (
+          ""
+        ) : (
+          <input
+            type="text"
+            placeholder="수량"
+            onChange={(e) => {
+              setCount(e.target.value);
+            }}
+          />
+        )}
         {type === "BUY" ? (
           <button onClick={sell}>판매</button>
+        ) : sold ? (
+          <button>종료</button>
         ) : (
           <button onClick={buy}>구입</button>
         )}
@@ -56,4 +73,4 @@ const ShopList = ({ name, price, num, owner, type }) => {
   );
 };
 
-export default ShopList;
+export default BuySellList;

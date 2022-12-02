@@ -25,7 +25,7 @@ const Header = () => {
         .call({ from: account });
       let temp = {};
       for (let i = 0; i < getHasFruit.length; i++) {
-        temp[getHasFruit[i]] = getFruitWallet[i];
+        if (!getFruitWallet[i]) temp[getHasFruit[i]] = getFruitWallet[i];
       }
       setHasFruit(temp);
     })();
