@@ -54,7 +54,10 @@ contract FruitShop{
         mapping(string=>uint) num;
     }
     mapping (address=>Fruit) fruitWallet;
-
+    // 과일 수량 불러오기
+    function getFruitWallet() public returns()  {
+        return fruitWallet[msg.sender];
+    }
     // 과일 구매
     function buyFruit(string memory _name, uint _num, string memory _typeIs) public payable{
         if(fruitWallet[msg.sender].num[_name] > 0){
