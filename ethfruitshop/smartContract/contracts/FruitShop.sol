@@ -176,22 +176,24 @@ contract FruitShop is FRT{
     function hasFruit() view public returns(string[] memory){
         return hasFruitList[msg.sender];
     }
-    // 과일 구매
+    // 유저가 과일 구매
     function buyFruit(string memory _name, uint _num, string memory _typeIs, address _seller) public payable {
-        if(fruitWallet[msg.sender].num[_name] > 0){
+        if(fruitWallet[msg.sender].num[_name] > 0 || fruitWallet[msg.sender].num[_name] == 0){
             fruitWallet[msg.sender].num[_name] += _num;
         }else{
             hasFruitList[msg.sender].push(_name);
             fruitWallet[msg.sender].num[_name] = _num;
         }
         makeShop[_name][_typeIs][_seller].num -= _num;
+        fruitWallet[_seller].num[_name] -= _num;
         fruitWallet[msg.sender].num[_name] += _num;
         uint sendMoney = makeShop[_name][_typeIs][_seller].price * _num * 95 / 100;
         payable(makeShop[_name][_typeIs][_seller].owner).transfer(sendMoney);
     }
-    // 과일 판매
+    // 유저가 과일 판매
     function sellFruit(string memory _name, uint _num,string memory _typeIs,address _seller) public payable {
-        makeShop[_name][_typeIs][_seller].num += _num;
+        makeShop[_name][_typeIs][_seller].num -= _num;
+        fruitWallet[_seller].num[_name] += _num;
         fruitWallet[msg.sender].num[_name] -= _num;
         if(fruitWallet[_seller].num[_name] > 0){
             fruitWallet[_seller].num[_name] += _num;

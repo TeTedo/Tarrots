@@ -35,6 +35,7 @@ const Buy = () => {
             type={v.typeIs}
           />
         ))}
+      {/* <div className="pagination">1 2 3 4 </div> */}
     </div>
   );
 };

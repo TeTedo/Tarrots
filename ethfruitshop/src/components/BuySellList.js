@@ -43,37 +43,42 @@ const BuySellList = ({ name, price, num, owner, type }) => {
       ) : (
         ""
       )}
-      <div>
-        {type === "BUY" ? "구매" : "판매"}자 :{" "}
-        {owner.slice(0, 5) + "..." + owner.slice(38)}
+      <div className="imgWrap">
+        <i className={`fa-solid fa-4x fa-beat fa-${name}`}></i>
       </div>
-      <div>
-        과일 이름 :{" "}
-        {name === "lemon" ? "레몬" : name === "carrot" ? "당근" : "사과"}
-      </div>
-      <div>남은 수량 : {num}</div>
-      <div>
-        {type === "BUY" ? "구매" : "판매"} 가격 : {price / 10 ** 18}ETH
-      </div>
-      <div>
-        {sold ? (
-          ""
-        ) : (
-          <input
-            type="text"
-            placeholder="수량"
-            onChange={(e) => {
-              setCount(e.target.value);
-            }}
-          />
-        )}
-        {type === "BUY" ? (
-          <button onClick={sell}>판매</button>
-        ) : sold ? (
-          <button>종료</button>
-        ) : (
-          <button onClick={buy}>구입</button>
-        )}
+      <div className="boxWrap">
+        <div>
+          {type === "BUY" ? "구매" : "판매"}자 :{" "}
+          {owner.slice(0, 5) + "..." + owner.slice(38)}
+        </div>
+        <div>
+          과일 이름 :{" "}
+          {name === "lemon" ? "레몬" : name === "carrot" ? "당근" : "사과"}
+        </div>
+        <div>남은 수량 : {num}</div>
+        <div>
+          {type === "BUY" ? "구매" : "판매"} 가격 : {price / 10 ** 18}ETH
+        </div>
+        <div>
+          {sold ? (
+            ""
+          ) : (
+            <input
+              type="text"
+              placeholder="수량"
+              onChange={(e) => {
+                setCount(e.target.value);
+              }}
+            />
+          )}
+          {type === "BUY" ? (
+            <button onClick={sell}>판매</button>
+          ) : sold ? (
+            <button>종료</button>
+          ) : (
+            <button onClick={buy}>구입</button>
+          )}
+        </div>
       </div>
     </div>
   );
