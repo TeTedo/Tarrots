@@ -7,14 +7,15 @@ const Buy = () => {
   useEffect(() => {
     (async () => {
       if (!deployed) return;
-      const sellFruitList = await deployed.methods.getSellFruitList().call();
+      const fruitList = await deployed.methods.getFruitInitList().call();
+      const fruitTrader = await deployed.methods.getFruitTrader("SELL").call();
       const data = [];
-      for (const value of sellFruitList) {
-        if (value) {
+      for (const value of fruitList) {
+        for (const trader of fruitTrader) {
           const temp = await deployed.methods
-            .getSellerList(value, "SELL")
+            .getSellerList(value, "SELL", trader)
             .call();
-          data.push(temp);
+          if (temp.status === "on") data.push(temp);
         }
       }
       setShopData(data);

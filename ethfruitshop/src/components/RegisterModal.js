@@ -3,7 +3,7 @@ import { DeployedContext } from "../App";
 
 const RegisterModal = ({ setRegister }) => {
   const { deployed, account, CA, web3 } = useContext(DeployedContext);
-  const [isChecked, SetIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(true);
   const value1 = useRef();
   const value2 = useRef();
   const value3 = useRef();
@@ -18,13 +18,11 @@ const RegisterModal = ({ setRegister }) => {
       return;
     }
     if (typeIs === "BUY") {
-      await deployed.methods
-        .registerFruit(name, price, num, typeIs)
-        .send({
-          from: account,
-          to: CA,
-          value: web3.utils.toWei(String(price * num), "ether"),
-        });
+      await deployed.methods.registerFruit(name, price, num, typeIs).send({
+        from: account,
+        to: CA,
+        value: web3.utils.toWei(String(price * num), "ether"),
+      });
     } else {
       await deployed.methods
         .registerFruit(name, price, num, typeIs)
@@ -43,7 +41,7 @@ const RegisterModal = ({ setRegister }) => {
           value="BUY"
           checked={isChecked}
           onChange={() => {
-            SetIsChecked(!isChecked);
+            setIsChecked(!isChecked);
           }}
           ref={value4}
         />{" "}
@@ -54,12 +52,17 @@ const RegisterModal = ({ setRegister }) => {
           type="checkbox"
           checked={!isChecked}
           onChange={() => {
-            SetIsChecked(!isChecked);
+            setIsChecked(!isChecked);
           }}
         />
       </div>
       <div className="registerDiv">
-        과일 이름 : <input type="text" ref={value1} />
+        과일 이름 :{" "}
+        <select ref={value1} style={{ width: 170 }}>
+          <option value="carrot">당근</option>
+          <option value="apple-whole">사과</option>
+          <option value="lemon">레몬</option>
+        </select>
       </div>
       <div className="registerDiv">
         {isChecked ? "구매" : "판매"} 수량 :{" "}

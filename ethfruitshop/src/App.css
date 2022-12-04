@@ -58,13 +58,13 @@
   width: 100%;
   height: calc(100% - 150px);
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   box-sizing: border-box;
 }
 
 .shopList {
   position: relative;
-  width: 20%;
+  width: 100%;
   height: 25%;
   display: flex;
   justify-content: center;

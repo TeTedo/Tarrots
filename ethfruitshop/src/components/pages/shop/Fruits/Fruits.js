@@ -4,9 +4,9 @@ import FruitsCom from "./FruitsCom";
 const Fruits = () => {
   return (
     <FruitsWrap>
-      <FruitsCom />
-      <FruitsCom />
-      <FruitsCom />
+      <FruitsCom name="carrot" />
+      <FruitsCom name="apple-whole" />
+      <FruitsCom name="lemon" />
     </FruitsWrap>
   );
 };

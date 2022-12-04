@@ -21,7 +21,6 @@ const Btn = styled.button`
 `;
 
 const Container = styled.div`
-  border: 1px solid black;
   width: 100%;
   height: 500px;
   display: flex;
@@ -36,11 +35,11 @@ const TokenWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  border-radius: 12px;
 `;
 const SwapWrap = styled.div`
   width: 100%;
   height: 80%;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,7 +81,6 @@ const TokenIcon = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
 `;
 const TokenSymbol = styled.span`
   width: 70px;
@@ -94,9 +92,11 @@ const TokenSymbol = styled.span`
 `;
 const SwapInput = styled.input`
   width: 230px;
-  height: 100%;
+  height: 80%;
   padding-left: 10px;
+  outline: none;
   box-sizing: border-box;
+  border: none;
   font-size: 18px;
 `;
 const MaxBtn = styled.span`
@@ -131,16 +131,67 @@ const FruitsWrap = styled.div`
 
 const FruitsComWrap = styled.div`
   width: 200px;
-  height: 400px;
+  height: 450px;
   border: 1px solid black;
+  border-radius: 12px;
+  box-shadow: 3px 2px black;
 `;
 const FruitsTop = styled.div`
   width: 100%;
   height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const FruitsBottom = styled.div`
   width: 100%;
   height: 50%;
+`;
+const FruitAttr = styled.div`
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+`;
+const FruitInput = styled.input`
+  width: 90px;
+  height: 20px;
+  margin-left: 10px;
+  padding-left: 5px;
+  border: 1px solid black;
+  box-sizing: border-box;
+`;
+const FruitBuy = styled.div`
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+`;
+const FruitBuyTypeWrap = styled.div`
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+const FruitBuyBtn = styled.div`
+  width: 50px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  :hover {
+    background-color: black;
+    color: white;
+  }
 `;
 export {
   BtnWrap,
@@ -161,4 +212,9 @@ export {
   FruitsComWrap,
   FruitsTop,
   FruitsBottom,
+  FruitAttr,
+  FruitBuy,
+  FruitBuyBtn,
+  FruitInput,
+  FruitBuyTypeWrap,
 };

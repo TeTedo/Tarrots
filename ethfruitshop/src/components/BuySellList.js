@@ -9,7 +9,7 @@ const BuySellList = ({ name, price, num, owner, type }) => {
       alert("수량을 잘 입력해주세요");
       return;
     }
-    await deployed.methods.buyFruit(name, count, type).send({
+    await deployed.methods.buyFruit(name, count, type, owner).send({
       from: account,
       to: CA,
       value: count * price,
@@ -20,7 +20,7 @@ const BuySellList = ({ name, price, num, owner, type }) => {
       alert("수량을 잘 입력해주세요");
       return;
     }
-    await deployed.methods.sellFruit(name, count, type).send({
+    await deployed.methods.sellFruit(name, count, type, owner).send({
       from: account,
       to: CA,
     });
@@ -43,8 +43,14 @@ const BuySellList = ({ name, price, num, owner, type }) => {
       ) : (
         ""
       )}
-      <div>판매자 : {owner.slice(0, 5) + "..." + owner.slice(38)}</div>
-      <div>과일 이름 : {name}</div>
+      <div>
+        {type === "BUY" ? "구매" : "판매"}자 :{" "}
+        {owner.slice(0, 5) + "..." + owner.slice(38)}
+      </div>
+      <div>
+        과일 이름 :{" "}
+        {name === "lemon" ? "레몬" : name === "carrot" ? "당근" : "사과"}
+      </div>
       <div>남은 수량 : {num}</div>
       <div>
         {type === "BUY" ? "구매" : "판매"} 가격 : {price / 10 ** 18}ETH
