@@ -5,22 +5,29 @@ import HasModal from "./HasModal";
 const Header = () => {
   const [register, setRegister] = useState(false);
   const [balance, setBalance] = useState();
+  const [FRTBalance, setFRTBalance] = useState();
   const { web3, account, deployed } = useContext(DeployedContext);
   const [hasFruit, setHasFruit] = useState(false);
   useEffect(() => {
-    if (!account) return;
-    const init = async () => {
+    if (!account || !deployed) return;
+    (async () => {
       const balance = await web3.eth.getBalance(account);
       setBalance((balance / 10 ** 18).toFixed(2));
-    };
-    init();
-  }, [account]);
+      const frtbalance = await deployed.methods.balanceOf(account).call();
+
+      setFRTBalance((frtbalance / 10 ** 18).toFixed(2));
+    })();
+  }, [account, deployed]);
   return (
     <>
       {hasFruit ? <HasModal setHasFruit={setHasFruit} /> : ""}
       <div className="Header">
         <div>주소 : {account}</div>
-        <div>잔액 : {balance}ETH</div>
+        <div>
+          잔액 <br />
+          {balance}ETH <br />
+          {FRTBalance} FRT
+        </div>
         <div
           onClick={() => {
             setHasFruit(true);

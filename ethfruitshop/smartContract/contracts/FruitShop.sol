@@ -83,27 +83,42 @@ contract FruitShop is FRT{
         return fruitInit[_name];
     }
     // 상점에서 ETH로 과일 구매
-    function buyFruitsByETH(string memory _name, uint _amount) public payable{
+    function buyFruitsByETH(string memory _name, uint _amount) public payable returns(uint){
         require(fruitInit[_name].num >= _amount);
         fruitInit[_name].num -= _amount;
-        if(fruitWallet[msg.sender].num[_name] > 0){
+        bool check = false;
+        for(uint i = 0 ; i<hasFruitList[msg.sender].length; i++){
+            if(keccak256(abi.encode(hasFruitList[msg.sender][i]))==keccak256(abi.encode(_name))){
+                check = true;
+            }
+        }
+        if(check){
             fruitWallet[msg.sender].num[_name] += _amount;
         }else{
             hasFruitList[msg.sender].push(_name);
             fruitWallet[msg.sender].num[_name] = _amount;
         }
+        
+        return fruitWallet[msg.sender].num[_name];
     }
     // 상점에서 FRT로 과일구매 
-    function buyFruitsByFRT(string memory _name, uint _amount) public payable {
+    function buyFruitsByFRT(string memory _name, uint _amount) public payable returns(uint){
         require(fruitInit[_name].num >= _amount);
         balances[msg.sender] -= _amount * fruitInit[_name].price * ethCanBuy;
         fruitInit[_name].num -= _amount;
-        if(fruitWallet[msg.sender].num[_name] > 0){
+        bool check = false;
+        for(uint i = 0 ; i<hasFruitList[msg.sender].length; i++){
+            if(keccak256(abi.encode(hasFruitList[msg.sender][i]))==keccak256(abi.encode(_name))){
+                check = true;
+            }
+        }
+        if(check){
             fruitWallet[msg.sender].num[_name] += _amount;
         }else{
             hasFruitList[msg.sender].push(_name);
             fruitWallet[msg.sender].num[_name] = _amount;
         }
+        return fruitWallet[msg.sender].num[_name];
     }
     // 초기 과일
 
@@ -122,11 +137,13 @@ contract FruitShop is FRT{
         uint num;
         string typeIs;
         string status;
+        uint date;
     }
     mapping (string=>mapping(string=>mapping(address=>SellFruit))) makeShop;
     // 판매 등록
     function registerFruit(string memory _name,uint _price, uint _num,string memory _typeIs) public payable {
-        if(keccak256(abi.encode(_typeIs))==keccak256(abi.encode("BUY"))){
+        require(_num >0);
+        if(keccak256(abi.encode(_typeIs))==keccak256(abi.encode("SELL"))){
             require(fruitWallet[msg.sender].num[_name] >= _num);
         }
         require(keccak256(abi.encode(makeShop[_name][_typeIs][msg.sender].status)) != keccak256(abi.encode("on")));
@@ -143,6 +160,7 @@ contract FruitShop is FRT{
         makeShop[_name][_typeIs][msg.sender].name = _name;
         makeShop[_name][_typeIs][msg.sender].typeIs = _typeIs;
         makeShop[_name][_typeIs][msg.sender].status = "on";
+        makeShop[_name][_typeIs][msg.sender].date = block.timestamp;
     }
     // 판매 삭제
     function deleteFruit(string memory _name,string memory _typeIs) public payable{
@@ -178,7 +196,13 @@ contract FruitShop is FRT{
     }
     // 유저가 과일 구매
     function buyFruit(string memory _name, uint _num, string memory _typeIs, address _seller) public payable {
-        if(fruitWallet[msg.sender].num[_name] > 0 || fruitWallet[msg.sender].num[_name] == 0){
+        bool check = false;
+        for(uint i = 0 ; i<hasFruitList[msg.sender].length; i++){
+            if(keccak256(abi.encode(hasFruitList[msg.sender][i]))==keccak256(abi.encode(_name))){
+                check = true;
+            }
+        }
+        if(check){
             fruitWallet[msg.sender].num[_name] += _num;
         }else{
             hasFruitList[msg.sender].push(_name);
@@ -186,8 +210,8 @@ contract FruitShop is FRT{
         }
         makeShop[_name][_typeIs][_seller].num -= _num;
         fruitWallet[_seller].num[_name] -= _num;
-        fruitWallet[msg.sender].num[_name] += _num;
         uint sendMoney = makeShop[_name][_typeIs][_seller].price * _num * 95 / 100;
+        
         payable(makeShop[_name][_typeIs][_seller].owner).transfer(sendMoney);
     }
     // 유저가 과일 판매
@@ -195,11 +219,6 @@ contract FruitShop is FRT{
         makeShop[_name][_typeIs][_seller].num -= _num;
         fruitWallet[_seller].num[_name] += _num;
         fruitWallet[msg.sender].num[_name] -= _num;
-        if(fruitWallet[_seller].num[_name] > 0){
-            fruitWallet[_seller].num[_name] += _num;
-        }else{
-            fruitWallet[_seller].num[_name] = _num;
-        }
 
         uint sendMoney = makeShop[_name][_typeIs][_seller].price * _num * 95 / 100;
         payable(msg.sender).transfer(sendMoney);

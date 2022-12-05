@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DeployedContext } from "App";
-import { isCompositeComponent } from "react-dom/test-utils";
 const HasModal = ({ setHasFruit }) => {
   const { deployed, account, web3 } = useContext(DeployedContext);
   const [fruitList, setFruitList] = useState({});
@@ -12,8 +11,12 @@ const HasModal = ({ setHasFruit }) => {
   useEffect(() => {
     (async () => {
       if (!deployed) return;
-      const hasFruit = await deployed.methods.hasFruit().call();
-      const fruitWallet = await deployed.methods.getFruitWallet().call();
+      const hasFruit = await deployed.methods
+        .hasFruit()
+        .call({ from: account });
+      const fruitWallet = await deployed.methods
+        .getFruitWallet()
+        .call({ from: account });
       let temp = {};
       for (let i = 0; i < hasFruit.length; i++) {
         temp[hasFruit[i]] = fruitWallet[i];

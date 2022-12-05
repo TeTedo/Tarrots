@@ -4,12 +4,14 @@ import { DeployedContext } from "App";
 const Buy = () => {
   const { deployed } = useContext(DeployedContext);
   const [shopData, setShopData] = useState([]);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageLength, setPageLength] = useState(1);
   useEffect(() => {
     (async () => {
       if (!deployed) return;
       const fruitList = await deployed.methods.getFruitInitList().call();
       const fruitTrader = await deployed.methods.getFruitTrader("SELL").call();
-      const data = [];
+      let data = [];
       for (const value of fruitList) {
         for (const trader of fruitTrader) {
           const temp = await deployed.methods
@@ -18,24 +20,44 @@ const Buy = () => {
           if (temp.status === "on") data.push(temp);
         }
       }
+      data = data.sort((a, b) => b.date - a.date);
       setShopData(data);
+      setPageLength(Math.floor(data.length / 6));
     })();
   }, [deployed]);
 
+  const movePage = (idx) => {
+    setPageIndex(idx);
+  };
   return (
     <div className="shopWrap">
       {shopData &&
-        shopData.map((v, idx) => (
-          <BuySellList
+        shopData
+          .map((v, idx) => (
+            <BuySellList
+              key={idx}
+              owner={v.owner}
+              name={v.name}
+              price={v.price}
+              num={v.num}
+              type={v.typeIs}
+            />
+          ))
+          .slice(pageIndex * 6, pageIndex * 6 + 6)}
+      <div className="pagination">
+        {new Array(pageLength + 1).fill(0).map((v, idx) => (
+          <span
+            onClick={() => {
+              movePage(idx);
+            }}
+            style={{ fontWeight: pageIndex === idx ? "bold" : "" }}
             key={idx}
-            owner={v.owner}
-            name={v.name}
-            price={v.price}
-            num={v.num}
-            type={v.typeIs}
-          />
+            className="paginationNum"
+          >
+            {idx + 1}
+          </span>
         ))}
-      {/* <div className="pagination">1 2 3 4 </div> */}
+      </div>
     </div>
   );
 };

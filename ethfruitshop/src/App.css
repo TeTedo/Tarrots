@@ -56,10 +56,12 @@
 
 .shopWrap {
   width: 100%;
+  height: 80%;
   display: flex;
   align-items: center;
   box-sizing: border-box;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .shopList {
@@ -152,4 +154,19 @@
   display: flex;
   align-items: center;
   margin-left: 40px;
+}
+
+.pagination {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paginationNum {
+  margin-right: 20px;
+  font-size: large;
+  cursor: pointer;
 }
