@@ -278,6 +278,7 @@ router.post("/login", async (req, res) => {
 <br/>
 
 판매자 아이디로 로그인을 하면 마이페이지에 SELLER 메뉴가 활성화 된다.
+
 <img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/199627501-b8cf6253-5f89-4b3d-9129-24a94a6fd840.png">
 
 SELLER에서는 총 판매금액, 월 판매금액, 일 판매금액을 볼수 있다.
@@ -325,10 +326,26 @@ SELLER에서는 총 판매금액, 월 판매금액, 일 판매금액을 볼수 �
 
 ### **판매 물건 관리**
 
+운영자 아이디로 로그인시 판매물건관리 버튼을 이용하여 판매물건의 승인을 취소할 수 있다.
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/205842434-f3cbffc6-6b1a-4a99-b2a5-d490f3d4b3c1.png">
+
 ### **오류신고**
+
+오른쪽 상단 느낌표 버튼을 클릭해서 오류를 신고할수 있다.
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/205843196-83fb868f-94c1-4a26-9d2a-87eb0ba42d26.png">
+
+신고한 오류는 github issues에 자동으로 들어오도록 설정했다.
+
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/205843447-eb8d7dc3-0fcb-4b97-a351-f46eab9d54c7.png">
 
 ## **기타**
 
 ### **DB구조**
 
+<img width=300px height=300px src="https://user-images.githubusercontent.com/107897812/205844090-c2d82424-5cca-4ce0-bf06-ed45fcd432b7.png">
+
 ### **PPT**
+
+[발표용ppt(cham).pptx](https://github.com/TeTedo/react_project/files/10163612/ppt.cham.pptx)
