@@ -22,7 +22,7 @@ const Buy = () => {
       }
       data = data.sort((a, b) => b.date - a.date);
       setShopData(data);
-      setPageLength(Math.floor(data.length / 6));
+      setPageLength(Math.ceil(data.length / 6));
     })();
   }, [deployed]);
 
@@ -45,7 +45,7 @@ const Buy = () => {
           ))
           .slice(pageIndex * 6, pageIndex * 6 + 6)}
       <div className="pagination">
-        {new Array(pageLength + 1).fill(0).map((v, idx) => (
+        {new Array(pageLength).fill(0).map((v, idx) => (
           <span
             onClick={() => {
               movePage(idx);

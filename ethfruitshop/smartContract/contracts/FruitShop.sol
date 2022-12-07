@@ -58,8 +58,6 @@ contract FruitShop is FRT{
 
         balances[owner] -= _maxCan;
         balances[msg.sender] += _maxCan;
-
-        emit Transfer(owner,msg.sender,_maxCan);
     }
 
     // FRT => ETH
@@ -98,7 +96,7 @@ contract FruitShop is FRT{
             hasFruitList[msg.sender].push(_name);
             fruitWallet[msg.sender].num[_name] = _amount;
         }
-        
+        emit TransferETH(msg.sender,address(0),_name, _amount, msg.value/(10**18),block.timestamp,"ETH");
         return fruitWallet[msg.sender].num[_name];
     }
     // 상점에서 FRT로 과일구매 
@@ -118,6 +116,7 @@ contract FruitShop is FRT{
             hasFruitList[msg.sender].push(_name);
             fruitWallet[msg.sender].num[_name] = _amount;
         }
+        emit TransferFRT(msg.sender,address(0),_name, _amount, _amount * fruitInit[_name].price/(10**18) ,block.timestamp,"FRT");
         return fruitWallet[msg.sender].num[_name];
     }
     // 초기 과일
@@ -210,21 +209,29 @@ contract FruitShop is FRT{
         }
         makeShop[_name][_typeIs][_seller].num -= _num;
         fruitWallet[_seller].num[_name] -= _num;
-        uint sendMoney = makeShop[_name][_typeIs][_seller].price * _num * 95 / 100;
+        uint _amount = makeShop[_name][_typeIs][_seller].price * _num;
+        uint sendMoney = _amount * 95 / 100;
         
         payable(makeShop[_name][_typeIs][_seller].owner).transfer(sendMoney);
+        emit TransferETH(msg.sender,_seller,_name, _num, _amount/(10**18), block.timestamp,"ETH");
     }
     // 유저가 과일 판매
     function sellFruit(string memory _name, uint _num,string memory _typeIs,address _seller) public payable {
         makeShop[_name][_typeIs][_seller].num -= _num;
         fruitWallet[_seller].num[_name] += _num;
         fruitWallet[msg.sender].num[_name] -= _num;
-
-        uint sendMoney = makeShop[_name][_typeIs][_seller].price * _num * 95 / 100;
+        uint _amount =  makeShop[_name][_typeIs][_seller].price * _num;
+        uint sendMoney = _amount * 95 / 100;
         payable(msg.sender).transfer(sendMoney);
+        emit TransferETH(_seller,msg.sender,_name, _num, _amount/(10**18) , block.timestamp, "ETH");
     }
     // 물건 조회
     function getSellerList(string memory _name, string memory _typeIs,address _seller) public view returns(SellFruit memory){
         return makeShop[_name][_typeIs][_seller];
     }
+
+
+    // 구매자 판매자 물건이름 수량 총가격
+    event TransferETH(address from, address to, string name, uint num, uint value, uint date, string pay);
+    event TransferFRT(address from, address to, string name, uint num, uint value, uint date, string pay);
 }
