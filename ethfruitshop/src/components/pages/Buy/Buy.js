@@ -14,10 +14,14 @@ const Buy = () => {
       let data = [];
       for (const value of fruitList) {
         for (const trader of fruitTrader) {
-          const temp = await deployed.methods
-            .getSellerList(value, "SELL", trader)
+          const temp1 = await deployed.methods
+            .getSellerListETH(value, "SELL", trader)
             .call();
-          if (temp.status === "on") data.push(temp);
+          if (temp1.status === "on") data.push(temp1);
+          const temp2 = await deployed.methods
+            .getSellerListFRT(value, "SELL", trader)
+            .call();
+          if (temp2.status === "on") data.push(temp2);
         }
       }
       data = data.sort((a, b) => b.date - a.date);
@@ -41,6 +45,7 @@ const Buy = () => {
               price={v.price}
               num={v.num}
               type={v.typeIs}
+              unit={v.unit}
             />
           ))
           .slice(pageIndex * 6, pageIndex * 6 + 6)}

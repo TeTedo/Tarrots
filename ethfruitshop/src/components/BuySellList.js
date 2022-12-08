@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DeployedContext } from "App";
-const BuySellList = ({ name, price, num, owner, type }) => {
+const BuySellList = ({ name, price, num, owner, type, unit }) => {
   const { deployed, account, web3, CA } = useContext(DeployedContext);
   const [count, setCount] = useState();
   const [sold, setSold] = useState(false);
@@ -9,24 +9,31 @@ const BuySellList = ({ name, price, num, owner, type }) => {
       alert("수량을 잘 입력해주세요");
       return;
     }
-    await deployed.methods.buyFruit(name, count, type, owner).send({
-      from: account,
-      to: CA,
-      value: count * price,
-    });
+    if (unit === "ETH") {
+      await deployed.methods.buyFruit(name, count, type, owner, unit).send({
+        from: account,
+        to: CA,
+        value: count * price,
+      });
+    } else {
+      await deployed.methods.buyFruit(name, count, type, owner, unit).send({
+        from: account,
+        to: CA,
+      });
+    }
   };
   const sell = async () => {
     if (+num < +count) {
       alert("수량을 잘 입력해주세요");
       return;
     }
-    await deployed.methods.sellFruit(name, count, type, owner).send({
+    await deployed.methods.sellFruit(name, count, type, owner, unit).send({
       from: account,
       to: CA,
     });
   };
   const deleteList = async () => {
-    await deployed.methods.deleteFruit(name, type).send({
+    await deployed.methods.deleteFruit(name, type, unit).send({
       from: account,
       to: CA,
     });
@@ -57,7 +64,8 @@ const BuySellList = ({ name, price, num, owner, type }) => {
         </div>
         <div>남은 수량 : {num}</div>
         <div>
-          {type === "BUY" ? "구매" : "판매"} 가격 : {price / 10 ** 18}ETH
+          {type === "BUY" ? "구매" : "판매"} 가격 : {price / 10 ** 18}
+          {unit === "ETH" ? "ETH" : "FRT"}
         </div>
         <div>
           {sold ? (

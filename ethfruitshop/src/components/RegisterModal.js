@@ -8,24 +8,28 @@ const RegisterModal = ({ setRegister }) => {
   const value2 = useRef();
   const value3 = useRef();
   const value4 = useRef();
+  const select = useRef();
   const register = async () => {
     const name = value1.current.value.toString();
     const price = value2.current.value;
     const num = value3.current.value;
     const typeIs = value4.current.checked ? "BUY" : "SELL";
+    const unit = select.current.value;
     if (!name || !price || !num) {
       alert("모든 값을 입력해주세요.");
       return;
     }
     if (typeIs === "BUY") {
-      await deployed.methods.registerFruit(name, price, num, typeIs).send({
-        from: account,
-        to: CA,
-        value: web3.utils.toWei(String(price * num), "ether"),
-      });
+      await deployed.methods
+        .registerFruit(name, price, num, typeIs, unit)
+        .send({
+          from: account,
+          to: CA,
+          value: web3.utils.toWei(String(price * num), "ether"),
+        });
     } else {
       await deployed.methods
-        .registerFruit(name, price, num, typeIs)
+        .registerFruit(name, price, num, typeIs, unit)
         .send({ from: account });
     }
 
@@ -58,15 +62,22 @@ const RegisterModal = ({ setRegister }) => {
       </div>
       <div className="registerDiv">
         과일 이름 :{" "}
-        <select ref={value1} style={{ width: 170 }}>
+        <select ref={value1} style={{ width: 177 }}>
           <option value="carrot">당근</option>
           <option value="apple-whole">사과</option>
           <option value="lemon">레몬</option>
         </select>
       </div>
       <div className="registerDiv">
-        {isChecked ? "구매" : "판매"} 수량 :{" "}
+        {isChecked ? "구매" : "판매"} 수량 :
         <input type="number" ref={value3} />
+      </div>
+      <div className="registerDiv">
+        가격 단위 :{" "}
+        <select ref={select} style={{ width: 177 }}>
+          <option value="ETH">ETH</option>
+          <option value="FRT">FRT</option>
+        </select>
       </div>
       <div className="registerDiv">
         {isChecked ? "구매" : "판매"} 가격 :{" "}
