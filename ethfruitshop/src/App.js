@@ -72,7 +72,6 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />}></Route>
-
               <Route path="/buy" element={<Buy />}></Route>
               <Route path="/sell" element={<Sell />}></Route>
               <Route path="/shop" element={<Shop />}></Route>

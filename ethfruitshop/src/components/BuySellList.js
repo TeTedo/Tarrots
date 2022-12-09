@@ -22,6 +22,7 @@ const BuySellList = ({ name, price, num, owner, type, unit }) => {
       });
     }
   };
+
   const sell = async () => {
     if (+num < +count) {
       alert("수량을 잘 입력해주세요");
@@ -79,10 +80,10 @@ const BuySellList = ({ name, price, num, owner, type, unit }) => {
               }}
             />
           )}
-          {type === "BUY" ? (
-            <button onClick={sell}>판매</button>
-          ) : sold ? (
+          {sold ? (
             <button>종료</button>
+          ) : type === "BUY" ? (
+            <button onClick={sell}>판매</button>
           ) : (
             <button onClick={buy}>구입</button>
           )}

@@ -19,6 +19,7 @@ const TransactionCom = ({ data }) => {
       <div>{data.name === "apple-whole" ? "apple" : data.name}</div>
       <div>{data.num}</div>
       <div>
+        {console.log(data.pay)}
         {data.value} {data.pay === "ETH" ? "ETH" : "FRT"}
       </div>
     </ComWrap>

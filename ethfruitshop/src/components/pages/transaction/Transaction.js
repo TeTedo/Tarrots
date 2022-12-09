@@ -1,6 +1,12 @@
 import React from "react";
 import TransactionCom from "./TransactionCom";
-import { Wrap, Header, PaginationWrap, Pagination } from "./styledComponents";
+import {
+  Wrap,
+  Header,
+  HeaderDiv,
+  PaginationWrap,
+  Pagination,
+} from "./styledComponents";
 import { DeployedContext } from "App";
 import { useContext } from "react";
 import { useState } from "react";
@@ -11,11 +17,11 @@ const Transaction = () => {
   return (
     <Wrap>
       <Header>
-        <div>구매자 주소</div>
-        <div>판매자 주소</div>
-        <div>과일</div>
-        <div>수량</div>
-        <div>가격</div>
+        <HeaderDiv>구매자 주소</HeaderDiv>
+        <HeaderDiv>판매자 주소</HeaderDiv>
+        <HeaderDiv>과일</HeaderDiv>
+        <HeaderDiv>수량</HeaderDiv>
+        <HeaderDiv>가격</HeaderDiv>
       </Header>
       {logs &&
         logs

@@ -20,13 +20,22 @@ const RegisterModal = ({ setRegister }) => {
       return;
     }
     if (typeIs === "BUY") {
-      await deployed.methods
-        .registerFruit(name, price, num, typeIs, unit)
-        .send({
-          from: account,
-          to: CA,
-          value: web3.utils.toWei(String(price * num), "ether"),
-        });
+      if (unit === "ETH") {
+        await deployed.methods
+          .registerFruit(name, price, num, typeIs, unit)
+          .send({
+            from: account,
+            to: CA,
+            value: web3.utils.toWei(String(price * num), "ether"),
+          });
+      } else {
+        await deployed.methods
+          .registerFruit(name, price, num, typeIs, unit)
+          .send({
+            from: account,
+            to: CA,
+          });
+      }
     } else {
       await deployed.methods
         .registerFruit(name, price, num, typeIs, unit)

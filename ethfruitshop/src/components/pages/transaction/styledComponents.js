@@ -9,12 +9,17 @@ const Wrap = styled.div`
 `;
 const Header = styled.div`
   width: 80%;
-  border: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   margin-top: 10px;
+`;
+const HeaderDiv = styled.div`
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 2px 2px 4px black;
 `;
 const ComWrap = styled.div`
   width: 80%;
@@ -45,4 +50,4 @@ const Pagination = styled.div`
   align-items: center;
   cursor: pointer;
 `;
-export { Wrap, ComWrap, Header, PaginationWrap, Pagination };
+export { Wrap, ComWrap, Header, PaginationWrap, Pagination, HeaderDiv };
